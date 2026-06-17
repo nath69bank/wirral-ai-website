@@ -27,8 +27,8 @@ export default function Hero() {
           </h1>
 
           <p className="animate-fade-up [animation-delay:320ms] mt-5 sm:mt-6 text-mist text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-            Wirral AI helps businesses streamline operations, capture more leads and convert more
-            customers with intelligent systems built around the way you already work.
+            AI staff to answer your calls and messages, and automated marketing to bring customers
+            back, built around your business from just £50.
           </p>
 
           <div className="animate-fade-up [animation-delay:440ms] mt-7 flex flex-wrap items-center justify-center gap-3">

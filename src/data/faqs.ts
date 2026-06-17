@@ -27,7 +27,7 @@ export const faqs: FAQ[] = [
     id: 'pricing',
     question: 'How much does it cost?',
     answer:
-      'It depends on which systems your business needs, but clients typically pay 40 to 60 percent less than they would for a traditional agency doing the same work. Start a free trial conversation on WhatsApp and we will give you a clear, specific quote.',
+      "It's a flat £50 one-off fee to build your website with AI staff and automated marketing set up, then £20 a month to keep it hosted, running and supported. No quotes, no contracts, no surprise invoices later.",
   },
   {
     id: 'industry-fit',

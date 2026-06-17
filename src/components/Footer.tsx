@@ -1,12 +1,13 @@
+import { Link } from 'react-router-dom'
 import wirralW from '../assets/wirral-w.png'
 import { buildWhatsAppLink, WHATSAPP_DEFAULT_MESSAGE } from '../lib/whatsapp'
 
 const serviceAreas = ['Wirral', 'Liverpool', 'Manchester', 'Chester']
 const footerLinks = [
-  { label: 'Services', href: '#services' },
-  { label: 'Benefits', href: '#benefits' },
-  { label: 'Results', href: '#proof' },
-  { label: 'FAQ', href: '#faq' },
+  { label: 'AI Staff', to: '/ai-staff' },
+  { label: 'Automated Marketing', to: '/automated-marketing' },
+  { label: 'Pricing', to: '/#pricing' },
+  { label: 'FAQ', to: '/#faq' },
 ]
 
 export default function Footer() {
@@ -15,14 +16,14 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-10">
           <div className="max-w-sm">
-            <a href="#top" className="flex items-center gap-2.5 mb-4">
+            <Link to="/" className="flex items-center gap-2.5 mb-4">
               <img src={wirralW} alt="Wirral AI" className="w-7 h-7 object-contain" />
               <span className="font-display font-semibold text-lg text-white">
                 Wirral<span className="text-gradient">ai</span>
               </span>
-            </a>
+            </Link>
             <p className="text-mist text-sm leading-relaxed">
-              Intelligent business systems for trades, healthcare, recruitment, property and professional
+              AI staff and automated marketing for trades, healthcare, hospitality and professional
               services across the North West.
             </p>
             <p className="text-mist/60 text-xs mt-4">
@@ -35,10 +36,10 @@ export default function Footer() {
               <p className="text-white text-sm font-medium mb-3">Explore</p>
               <ul className="space-y-2">
                 {footerLinks.map((link) => (
-                  <li key={link.href}>
-                    <a href={link.href} className="text-mist text-sm hover:text-white transition-colors">
+                  <li key={link.to}>
+                    <Link to={link.to} className="text-mist text-sm hover:text-white transition-colors">
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

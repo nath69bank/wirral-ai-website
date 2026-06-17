@@ -1,33 +1,28 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import ProblemSection from './components/ProblemSection'
-import SolutionSection from './components/SolutionSection'
-import ServicesSection from './components/ServicesSection'
-import BenefitsSection from './components/BenefitsSection'
-import FreeTrialSection from './components/FreeTrialSection'
-import SocialProofSection from './components/SocialProofSection'
-import FAQSection from './components/FAQSection'
-import FinalCTASection from './components/FinalCTASection'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
+import ScrollManager from './components/ScrollManager'
+import Home from './pages/Home'
+import AIStaffPage from './pages/AIStaffPage'
+import AutomatedMarketingPage from './pages/AutomatedMarketingPage'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-navy">
-      <Navbar />
-      <main>
-        <Hero />
-        <ProblemSection />
-        <SolutionSection />
-        <ServicesSection />
-        <BenefitsSection />
-        <FreeTrialSection />
-        <SocialProofSection />
-        <FAQSection />
-        <FinalCTASection />
-      </main>
-      <Footer />
-      <WhatsAppButton />
-    </div>
+    <BrowserRouter>
+      <ScrollManager />
+      <div className="min-h-screen bg-navy">
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/ai-staff" element={<AIStaffPage />} />
+            <Route path="/automated-marketing" element={<AutomatedMarketingPage />} />
+          </Routes>
+        </main>
+        <Footer />
+        <WhatsAppButton />
+      </div>
+    </BrowserRouter>
   )
 }
