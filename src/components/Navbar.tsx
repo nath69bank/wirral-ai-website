@@ -63,7 +63,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden absolute left-4 right-4 top-full rounded-2xl glass-panel-strong px-5 py-3 animate-fade-up">
+        <div className="md:hidden absolute left-4 right-4 top-full rounded-2xl bg-navy-deep/95 backdrop-blur-xl ring-1 ring-white/10 shadow-2xl px-5 py-3 animate-fade-up">
           {links.map((link) => (
             <a
               key={link.href}
