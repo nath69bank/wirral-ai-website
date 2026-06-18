@@ -5,6 +5,12 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- Preload the fonts used in the very first paint (body text + the big
+         display headline) so they start fetching immediately rather than
+         waiting on the CSS to be fetched and parsed first. -->
+    <link rel="preload" href="/fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/space-grotesk-600.woff2" as="font" type="font/woff2" crossorigin />
+
     <title>AI Staff & Automated Marketing Websites | Wirral AI</title>
     <meta
       name="description"

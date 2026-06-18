@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
-import wirralW from '../assets/wirral-w.png'
+import wirralW from '../assets/wirral-w.webp'
 import { buildWhatsAppLink, WHATSAPP_DEFAULT_MESSAGE } from '../lib/whatsapp'
 
 const links = [

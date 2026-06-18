@@ -13,7 +13,7 @@ import {
   CheckCircle2,
 } from 'lucide-react'
 import ScaledMockup from './ScaledMockup'
-import wirralW from '../assets/wirral-w.png'
+import wirralW from '../assets/wirral-w.webp'
 
 const stats = [
   { label: 'LEADS CAPTURED', value: '47', sub: 'This week' },

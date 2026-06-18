@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import wirralW from '../assets/wirral-w.png'
+import wirralW from '../assets/wirral-w.webp'
 import { buildWhatsAppLink, WHATSAPP_DEFAULT_MESSAGE } from '../lib/whatsapp'
 import { niches } from '../data/niches'
 

@@ -1,6 +1,6 @@
 import { ArrowRight, Phone, Globe, MessageSquare, Repeat, Zap, GitBranch, Send, BarChart3 } from 'lucide-react'
 import Reveal from './Reveal'
-import wirralW from '../assets/wirral-w.png'
+import wirralW from '../assets/wirral-w.webp'
 
 const inputs = [
   { label: 'Phone calls & enquiries', icon: Phone },
