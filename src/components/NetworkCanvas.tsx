@@ -15,6 +15,11 @@ interface Particle {
   driftAmp: number
 }
 
+interface LinkPair {
+  i: number
+  j: number
+}
+
 interface NetworkCanvasProps {
   className?: string
   /** Roughly how many nodes per 10,000px^2 of canvas area */
@@ -25,6 +30,10 @@ interface NetworkCanvasProps {
 
 const BLUE: [number, number, number] = [0, 183, 255]
 const GREEN: [number, number, number] = [124, 255, 79]
+// Once settled, the expensive all-pairs distance scan only re-runs every Nth
+// frame; positions still update every frame so motion stays smooth, but the
+// "which dots are linked" decision is cached in between to save CPU.
+const LINK_RECOMPUTE_EVERY = 10
 
 function lerpColor(t: number): string {
   const c = BLUE.map((b, i) => Math.round(b + (GREEN[i] - b) * t))
@@ -53,19 +62,25 @@ export default function NetworkCanvas({ className = '', density = 1, linkDistanc
     let height = 0
     let dpr = Math.min(window.devicePixelRatio || 1, 2)
     let rafId = 0
-    let startTime = performance.now()
+    let startTime = 0
+    let hasStarted = false
+    let isVisible = false
+    let frameCount = 0
+    let cachedLinks: LinkPair[] = []
     const LOAD_DURATION = 2200
+    // Lower cap than before — 140 pairwise-checked particles was real CPU cost
+    // on mobile for a purely decorative background.
+    const MAX_PARTICLES = 65
 
     function buildParticles() {
       const area = width * height
-      const count = Math.max(18, Math.min(140, Math.round((area / 10000) * density)))
+      const count = Math.max(16, Math.min(MAX_PARTICLES, Math.round((area / 10000) * density)))
       const next: Particle[] = []
       for (let i = 0; i < count; i++) {
         const targetX = Math.random() * width
         const targetY = Math.random() * height
-        // chaotic start: scattered further away with extra jitter, biased toward edges
         const angle = Math.random() * Math.PI * 2
-        const dist = (Math.min(width, height) * (0.25 + Math.random() * 0.45))
+        const dist = Math.min(width, height) * (0.25 + Math.random() * 0.45)
         const startX = Math.min(width, Math.max(0, targetX + Math.cos(angle) * dist))
         const startY = Math.min(height, Math.max(0, targetY + Math.sin(angle) * dist))
         next.push({
@@ -84,6 +99,7 @@ export default function NetworkCanvas({ className = '', density = 1, linkDistanc
         })
       }
       particles = next
+      cachedLinks = []
     }
 
     function resize() {
@@ -98,16 +114,33 @@ export default function NetworkCanvas({ className = '', density = 1, linkDistanc
       buildParticles()
     }
 
+    function recomputeLinks(): LinkPair[] {
+      const pairs: LinkPair[] = []
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i]
+          const b = particles[j]
+          const dx = a.x - b.x
+          const dy = a.y - b.y
+          if (dx * dx + dy * dy < linkDistance * linkDistance) {
+            pairs.push({ i, j })
+          }
+        }
+      }
+      return pairs
+    }
+
     function draw(now: number) {
       const elapsed = now - startTime
       const progress = prefersReducedMotion ? 1 : Math.min(1, elapsed / LOAD_DURATION)
       const eased = easeOutCubic(progress)
       const settleTime = (now - startTime - LOAD_DURATION) / 1000
+      const settled = progress >= 1
 
       ctx!.clearRect(0, 0, width, height)
 
       for (const p of particles) {
-        if (progress < 1) {
+        if (!settled) {
           p.x = p.startX + (p.targetX - p.startX) * eased
           p.y = p.startY + (p.targetY - p.startY) * eased
         } else if (!prefersReducedMotion) {
@@ -122,25 +155,31 @@ export default function NetworkCanvas({ className = '', density = 1, linkDistanc
       // links — only once the network has mostly organised itself
       const linkAlpha = Math.max(0, progress - 0.45) / 0.55
       if (linkAlpha > 0) {
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const a = particles[i]
-            const b = particles[j]
-            const dx = a.x - b.x
-            const dy = a.y - b.y
-            const dist = Math.sqrt(dx * dx + dy * dy)
-            if (dist < linkDistance) {
-              const proximity = 1 - dist / linkDistance
-              const midT = (a.x / width + b.x / width) / 2
-              ctx!.strokeStyle = lerpColor(midT)
-              ctx!.globalAlpha = proximity * 0.35 * linkAlpha
-              ctx!.lineWidth = 1
-              ctx!.beginPath()
-              ctx!.moveTo(a.x, a.y)
-              ctx!.lineTo(b.x, b.y)
-              ctx!.stroke()
-            }
-          }
+        // The all-pairs distance scan is the expensive part of this whole
+        // animation, so it only actually runs every Nth frame regardless of
+        // phase. Positions (and therefore line endpoints) still update every
+        // frame, so motion stays smooth — only the "which pairs are close
+        // enough to draw a line between" decision is cached in between.
+        if (cachedLinks.length === 0 || frameCount % LINK_RECOMPUTE_EVERY === 0) {
+          cachedLinks = recomputeLinks()
+        }
+
+        for (const { i, j } of cachedLinks) {
+          const a = particles[i]
+          const b = particles[j]
+          const dx = a.x - b.x
+          const dy = a.y - b.y
+          const dist = Math.sqrt(dx * dx + dy * dy)
+          if (dist >= linkDistance) continue
+          const proximity = 1 - dist / linkDistance
+          const midT = (a.x / width + b.x / width) / 2
+          ctx!.strokeStyle = lerpColor(midT)
+          ctx!.globalAlpha = proximity * 0.35 * linkAlpha
+          ctx!.lineWidth = 1
+          ctx!.beginPath()
+          ctx!.moveTo(a.x, a.y)
+          ctx!.lineTo(b.x, b.y)
+          ctx!.stroke()
         }
       }
 
@@ -160,17 +199,49 @@ export default function NetworkCanvas({ className = '', density = 1, linkDistanc
       }
       ctx!.globalAlpha = 1
 
+      frameCount++
+      if (isVisible) {
+        rafId = requestAnimationFrame(draw)
+      }
+    }
+
+    function startLoop() {
+      if (!hasStarted) {
+        hasStarted = true
+        startTime = performance.now()
+      }
+      cancelAnimationFrame(rafId)
       rafId = requestAnimationFrame(draw)
+    }
+
+    function stopLoop() {
+      cancelAnimationFrame(rafId)
     }
 
     const resizeObserver = new ResizeObserver(() => resize())
     resizeObserver.observe(container)
     resize()
-    rafId = requestAnimationFrame(draw)
+
+    // Don't burn CPU animating a background that's nowhere near the viewport
+    // (e.g. the final-CTA section's canvas before the visitor scrolls there).
+    const intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        isVisible = entry.isIntersecting
+        if (isVisible) {
+          startLoop()
+        } else {
+          stopLoop()
+        }
+      },
+      { threshold: 0.05 },
+    )
+    intersectionObserver.observe(container)
 
     return () => {
-      cancelAnimationFrame(rafId)
+      stopLoop()
       resizeObserver.disconnect()
+      intersectionObserver.disconnect()
     }
   }, [density, linkDistance])
 

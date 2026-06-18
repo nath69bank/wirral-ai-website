@@ -27,7 +27,7 @@ export default function Footer() {
               AI staff and automated marketing for trades, healthcare, hospitality and professional
               services across the North West.
             </p>
-            <p className="text-mist/60 text-xs mt-4">
+            <p className="text-mist text-xs mt-4">
               Serving {serviceAreas.join(', ')}.
             </p>
           </div>
@@ -72,8 +72,8 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 pt-6 border-t border-white/5 flex flex-col sm:flex-row gap-3 items-center justify-between">
-          <p className="text-mist/50 text-xs">&copy; {new Date().getFullYear()} Wirral AI. All rights reserved.</p>
-          <p className="text-mist/50 text-xs">UK-based team. No outsourcing. No contracts.</p>
+          <p className="text-mist text-xs">&copy; {new Date().getFullYear()} Wirral AI. All rights reserved.</p>
+          <p className="text-mist text-xs">UK-based team. No outsourcing. No contracts.</p>
         </div>
       </div>
     </footer>
