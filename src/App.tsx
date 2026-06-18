@@ -6,6 +6,7 @@ import ScrollManager from './components/ScrollManager'
 import Home from './pages/Home'
 import AIStaffPage from './pages/AIStaffPage'
 import AutomatedMarketingPage from './pages/AutomatedMarketingPage'
+import NichePage from './pages/NichePage'
 
 export default function App() {
   return (
@@ -18,6 +19,9 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/ai-staff" element={<AIStaffPage />} />
             <Route path="/automated-marketing" element={<AutomatedMarketingPage />} />
+            <Route path="/restaurants" element={<NichePage slug="restaurants" />} />
+            <Route path="/trades" element={<NichePage slug="trades" />} />
+            <Route path="/clinics-salons" element={<NichePage slug="clinics-salons" />} />
           </Routes>
         </main>
         <Footer />

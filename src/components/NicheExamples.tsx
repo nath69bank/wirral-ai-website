@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
 import { niches } from '../data/niches'
 import Reveal from './Reveal'
 
@@ -26,13 +28,17 @@ export default function NicheExamples({
         <div className="grid sm:grid-cols-3 gap-4 sm:gap-5">
           {niches.map((niche, i) => (
             <Reveal key={niche.id} delay={i * 90}>
-              <div className="h-full glass-panel rounded-2xl p-6">
+              <Link to={`/${niche.slug}`} className="group block h-full glass-panel rounded-2xl p-6 hover:shadow-glow-blue transition-shadow">
                 <div className="w-10 h-10 rounded-full bg-brand-gradient flex items-center justify-center mb-4">
                   <niche.icon className="w-5 h-5 text-navy" strokeWidth={1.75} />
                 </div>
                 <h3 className="text-white font-medium text-[15px] mb-2.5">{niche.name}</h3>
-                <p className="text-mist text-sm leading-relaxed">{niche[field]}</p>
-              </div>
+                <p className="text-mist text-sm leading-relaxed mb-3">{niche[field]}</p>
+                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-green group-hover:opacity-80 transition-opacity">
+                  More for {niche.name.toLowerCase()}
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </Link>
             </Reveal>
           ))}
         </div>

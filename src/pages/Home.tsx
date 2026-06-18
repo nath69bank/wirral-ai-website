@@ -1,3 +1,4 @@
+import Seo from '../components/Seo'
 import Hero from '../components/Hero'
 import PillarsSection from '../components/PillarsSection'
 import ProblemSection from '../components/ProblemSection'
@@ -13,6 +14,11 @@ import FinalCTASection from '../components/FinalCTASection'
 export default function Home() {
   return (
     <>
+      <Seo
+        title="AI Staff & Automated Marketing Websites"
+        description="Websites built and kept live from £50 for businesses across Wirral, Liverpool, Manchester and Chester, with AI staff and automated marketing available as add-ons."
+        path="/"
+      />
       <Hero />
       <PillarsSection />
       <ProblemSection />

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import wirralW from '../assets/wirral-w.png'
 import { buildWhatsAppLink, WHATSAPP_DEFAULT_MESSAGE } from '../lib/whatsapp'
+import { niches } from '../data/niches'
 
 const serviceAreas = ['Wirral', 'Liverpool', 'Manchester', 'Chester']
 const footerLinks = [
@@ -31,7 +32,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="flex gap-12 sm:gap-16">
+          <div className="flex flex-wrap gap-x-10 gap-y-8">
             <div>
               <p className="text-white text-sm font-medium mb-3">Explore</p>
               <ul className="space-y-2">
@@ -39,6 +40,18 @@ export default function Footer() {
                   <li key={link.to}>
                     <Link to={link.to} className="text-mist text-sm hover:text-white transition-colors">
                       {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="text-white text-sm font-medium mb-3">Industries</p>
+              <ul className="space-y-2">
+                {niches.map((niche) => (
+                  <li key={niche.slug}>
+                    <Link to={`/${niche.slug}`} className="text-mist text-sm hover:text-white transition-colors">
+                      {niche.name}
                     </Link>
                   </li>
                 ))}

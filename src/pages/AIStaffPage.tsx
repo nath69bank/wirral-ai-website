@@ -4,6 +4,7 @@ import ServiceCardGrid from '../components/ServiceCardGrid'
 import PricingSection from '../components/PricingSection'
 import FinalCTASection from '../components/FinalCTASection'
 import Reveal from '../components/Reveal'
+import Seo from '../components/Seo'
 import { getPillar } from '../data/pillars'
 
 export default function AIStaffPage() {
@@ -11,6 +12,11 @@ export default function AIStaffPage() {
 
   return (
     <>
+      <Seo
+        title="AI Staff — Receptionists & Chat Assistants"
+        description="An AI member of staff that answers calls and messages, books appointments and handles everyday questions for your business. Available as an add-on to any Wirral AI website."
+        path="/ai-staff"
+      />
       <PillarHero pillar={pillar} />
 
       <NicheExamples

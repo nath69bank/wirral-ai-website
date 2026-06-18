@@ -4,6 +4,7 @@ import ServiceCardGrid from '../components/ServiceCardGrid'
 import PricingSection from '../components/PricingSection'
 import FinalCTASection from '../components/FinalCTASection'
 import Reveal from '../components/Reveal'
+import Seo from '../components/Seo'
 import { getPillar } from '../data/pillars'
 
 export default function AutomatedMarketingPage() {
@@ -11,6 +12,11 @@ export default function AutomatedMarketingPage() {
 
   return (
     <>
+      <Seo
+        title="Automated Marketing — Email & WhatsApp Campaigns"
+        description="Email and WhatsApp campaigns that bring customers back automatically: win-back offers, booking reminders, review requests and stock alerts. Available as an add-on to any Wirral AI website."
+        path="/automated-marketing"
+      />
       <PillarHero pillar={pillar} />
 
       <NicheExamples
