@@ -1,0 +1,21 @@
+# Wirral AI
+
+> AI staff and automated marketing add-ons for business websites, built and kept live from £50 for businesses across Wirral, Liverpool, Manchester and Chester.
+
+Wirral AI builds and hosts business websites for a flat £50 one-off fee plus £20 a month, with no contracts. AI Staff (an AI receptionist and chat assistant) and Automated Marketing (email and WhatsApp campaigns) are available as optional add-ons on a separate monthly retainer, never bundled into the base price unless asked for. Contact is by WhatsApp only; there are no contact forms on this site.
+
+## Pages
+
+- [Homepage](https://wirral.ai/): Pricing, FAQ, and an overview of both add-ons.
+- [AI Staff](https://wirral.ai/ai-staff): An AI receptionist and chat assistant that answers calls and messages, books appointments, and handles common questions.
+- [Automated Marketing](https://wirral.ai/automated-marketing): Email and WhatsApp campaigns, win-back offers, booking reminders, review requests and stock alerts.
+
+## Industries
+
+- [Restaurants & Cafés](https://wirral.ai/restaurants): AI Staff and Automated Marketing examples for restaurants and cafés.
+- [Trades & Home Services](https://wirral.ai/trades): AI Staff and Automated Marketing examples for trades and home service businesses.
+- [Clinics & Salons](https://wirral.ai/clinics-salons): AI Staff and Automated Marketing examples for clinics and salons.
+
+## Optional
+
+- [Sitemap](https://wirral.ai/sitemap.xml): Full list of indexable pages.
