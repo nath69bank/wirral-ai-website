@@ -5,6 +5,7 @@ interface SeoProps {
   description: string
   path: string
   jsonLd?: Record<string, unknown>
+  noindex?: boolean
 }
 
 const SITE_NAME = 'Wirral AI'
@@ -53,13 +54,14 @@ function setJsonLd(data?: Record<string, unknown>) {
  * component. Also captured by the build-time prerender script so crawlers
  * get the correct tags in the static HTML, not just after JS executes.
  */
-export default function Seo({ title, description, path, jsonLd }: SeoProps) {
+export default function Seo({ title, description, path, jsonLd, noindex }: SeoProps) {
   useEffect(() => {
     const fullTitle = `${title} | ${SITE_NAME}`
     const url = `${SITE_URL}${path}`
 
     document.title = fullTitle
     setMeta('name', 'description', description)
+    setMeta('name', 'robots', noindex ? 'noindex, follow' : 'index, follow')
     setCanonical(url)
 
     setMeta('property', 'og:title', fullTitle)
@@ -73,7 +75,7 @@ export default function Seo({ title, description, path, jsonLd }: SeoProps) {
 
     setJsonLd(jsonLd)
     return () => setJsonLd(undefined)
-  }, [title, description, path, jsonLd])
+  }, [title, description, path, jsonLd, noindex])
 
   return null
 }

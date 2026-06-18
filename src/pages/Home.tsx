@@ -10,6 +10,7 @@ import FreeTrialSection from '../components/FreeTrialSection'
 import SocialProofSection from '../components/SocialProofSection'
 import FAQSection from '../components/FAQSection'
 import FinalCTASection from '../components/FinalCTASection'
+import { faqs } from '../data/faqs'
 
 export default function Home() {
   return (
@@ -18,6 +19,18 @@ export default function Home() {
         title="AI Staff & Automated Marketing Websites"
         description="Websites built and kept live from £50 for businesses across Wirral, Liverpool, Manchester and Chester, with AI staff and automated marketing available as add-ons."
         path="/"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqs.map((faq) => ({
+            '@type': 'Question',
+            name: faq.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: faq.answer,
+            },
+          })),
+        }}
       />
       <Hero />
       <PillarsSection />

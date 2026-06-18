@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import AIStaffPage from './pages/AIStaffPage'
 import AutomatedMarketingPage from './pages/AutomatedMarketingPage'
 import NichePage from './pages/NichePage'
+import NotFoundPage from './pages/NotFoundPage'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/restaurants" element={<NichePage slug="restaurants" />} />
             <Route path="/trades" element={<NichePage slug="trades" />} />
             <Route path="/clinics-salons" element={<NichePage slug="clinics-salons" />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer />
