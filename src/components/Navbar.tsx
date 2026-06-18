@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import wirralW from '../assets/wirral-w.webp'
-import { buildWhatsAppLink, WHATSAPP_DEFAULT_MESSAGE } from '../lib/whatsapp'
+import { useChat } from '../lib/chatContext'
 
 const links = [
   { label: 'AI Staff', to: '/ai-staff' },
@@ -14,6 +14,7 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const { openChat } = useChat()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -49,14 +50,12 @@ export default function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href={buildWhatsAppLink(WHATSAPP_DEFAULT_MESSAGE)}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={() => openChat('pricing')}
             className="hidden sm:inline-flex items-center bg-brand-gradient text-navy text-[13px] font-semibold px-4 sm:px-5 py-2 rounded-full hover:opacity-90 transition-opacity"
           >
-            Start Free Trial
-          </a>
+            Get Started
+          </button>
           <button
             onClick={() => setOpen((o) => !o)}
             className="md:hidden w-9 h-9 flex items-center justify-center rounded-full text-white hover:bg-white/10"
@@ -79,15 +78,15 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <a
-            href={buildWhatsAppLink(WHATSAPP_DEFAULT_MESSAGE)}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setOpen(false)}
-            className="mt-3 block text-center bg-brand-gradient text-navy text-sm font-semibold px-5 py-2.5 rounded-full"
+          <button
+            onClick={() => {
+              setOpen(false)
+              openChat('pricing')
+            }}
+            className="mt-3 block w-full text-center bg-brand-gradient text-navy text-sm font-semibold px-5 py-2.5 rounded-full"
           >
-            Start Free Trial
-          </a>
+            Get Started
+          </button>
         </div>
       )}
     </header>

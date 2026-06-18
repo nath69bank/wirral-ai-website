@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { painPoints } from '../data/painPoints'
-import { buildWhatsAppLink } from '../lib/whatsapp'
+import { useChat } from '../lib/chatContext'
 
 export default function PainPill() {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
-
+  const { openChat } = useChat()
   useEffect(() => {
     if (paused) return
     const id = setInterval(() => {
@@ -14,8 +14,6 @@ export default function PainPill() {
     }, 3400)
     return () => clearInterval(id)
   }, [paused])
-
-  const current = painPoints[index]
 
   return (
     <div
@@ -39,15 +37,13 @@ export default function PainPill() {
             </span>
           ))}
         </div>
-        <a
-          href={buildWhatsAppLink(current.whatsappMessage)}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={() => openChat('general')}
           className="shrink-0 inline-flex items-center gap-1.5 rounded-full bg-brand-gradient text-navy text-[13px] sm:text-sm font-semibold px-4 sm:px-5 py-2 hover:opacity-90 transition-opacity"
         >
           Fix this
           <ArrowRight className="w-3.5 h-3.5" />
-        </a>
+        </button>
       </div>
     </div>
   )

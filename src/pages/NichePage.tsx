@@ -6,10 +6,11 @@ import Seo from '../components/Seo'
 import PricingSection from '../components/PricingSection'
 import FinalCTASection from '../components/FinalCTASection'
 import { getNiche } from '../data/niches'
-import { buildWhatsAppLink } from '../lib/whatsapp'
+import { useChat, type ChatTopic } from '../lib/chatContext'
 
 export default function NichePage({ slug }: { slug: string }) {
   const niche = getNiche(slug)
+  const { openChat } = useChat()
   if (!niche) return null
 
   return (
@@ -52,17 +53,13 @@ export default function NichePage({ slug }: { slug: string }) {
             {niche.intro}
           </p>
           <div className="animate-fade-up [animation-delay:360ms] mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href={buildWhatsAppLink(
-                `Hi Wirral AI — I run a ${niche.name.toLowerCase()} business and I'd like to get a website built for £50.`,
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => openChat(niche.slug as ChatTopic)}
               className="inline-flex items-center gap-2 bg-brand-gradient text-navy text-sm font-semibold px-6 py-3 rounded-full hover:opacity-90 hover:shadow-glow-green transition-all"
             >
               Get Started for £50
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </button>
             <a
               href="#pricing"
               className="inline-flex items-center gap-2 text-white text-sm font-medium px-6 py-3 rounded-full ring-1 ring-white/20 hover:bg-white/5 transition-colors"

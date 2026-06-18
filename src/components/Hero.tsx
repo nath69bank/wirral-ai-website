@@ -2,9 +2,11 @@ import { ArrowRight, PlayCircle } from 'lucide-react'
 import NetworkCanvas from './NetworkCanvas'
 import PainPill from './PainPill'
 import OperationsSnapshot from './OperationsSnapshot'
-import { buildWhatsAppLink, WHATSAPP_DEFAULT_MESSAGE } from '../lib/whatsapp'
+import { useChat } from '../lib/chatContext'
 
 export default function Hero() {
+  const { openChat } = useChat()
+
   return (
     <section id="top" className="relative min-h-[100svh] overflow-hidden bg-navy flex flex-col">
       <div className="absolute inset-0">
@@ -32,15 +34,13 @@ export default function Hero() {
           </p>
 
           <div className="animate-fade-up [animation-delay:440ms] mt-7 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href={buildWhatsAppLink(WHATSAPP_DEFAULT_MESSAGE)}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => openChat('pricing')}
               className="inline-flex items-center gap-2 bg-brand-gradient text-navy text-sm font-semibold px-6 py-3 rounded-full hover:opacity-90 hover:shadow-glow-green transition-all"
             >
-              Start Your Free Trial
+              Get My Website Built
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </button>
             <a
               href="#solution"
               className="inline-flex items-center gap-2 text-white text-sm font-medium px-6 py-3 rounded-full ring-1 ring-white/20 hover:bg-white/5 transition-colors"

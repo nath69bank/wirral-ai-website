@@ -1,6 +1,6 @@
 import { Check, ArrowRight } from 'lucide-react'
 import Reveal from './Reveal'
-import { buildWhatsAppLink } from '../lib/whatsapp'
+import { useChat } from '../lib/chatContext'
 import { pillars } from '../data/pillars'
 
 const included = [
@@ -10,6 +10,8 @@ const included = [
 ]
 
 export default function PricingSection() {
+  const { openChat } = useChat()
+
   return (
     <section id="pricing" className="relative bg-navy-deep py-20 sm:py-28 px-5 sm:px-8">
       <div className="max-w-3xl mx-auto text-center">
@@ -44,16 +46,12 @@ export default function PricingSection() {
               ))}
             </ul>
 
-            <a
-              href={buildWhatsAppLink(
-                "Hi Wirral AI — I'd like to get a website built for my business for £50.",
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => openChat('pricing')}
               className="inline-flex items-center gap-2 bg-brand-gradient text-navy text-sm font-semibold px-7 py-3.5 rounded-full hover:opacity-90 hover:shadow-glow-green transition-all"
             >
               Get Started for £50
-            </a>
+            </button>
           </div>
         </Reveal>
 
@@ -76,17 +74,13 @@ export default function PricingSection() {
                 <p className="text-mist text-sm leading-relaxed mb-4">
                   Added on top of your website on a monthly retainer. {pillar.tagline}.
                 </p>
-                <a
-                  href={buildWhatsAppLink(
-                    `Hi Wirral AI — I'd like to ask about adding ${pillar.name} to my website, and what the retainer would cost.`,
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => openChat(pillar.id)}
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-green hover:opacity-80 transition-opacity"
                 >
                   Ask about pricing
                   <ArrowRight className="w-3.5 h-3.5" />
-                </a>
+                </button>
               </div>
             ))}
           </div>

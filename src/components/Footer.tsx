@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import wirralW from '../assets/wirral-w.webp'
-import { buildWhatsAppLink, WHATSAPP_DEFAULT_MESSAGE } from '../lib/whatsapp'
+import { useChat } from '../lib/chatContext'
 import { niches } from '../data/niches'
 
 const serviceAreas = ['Wirral', 'Liverpool', 'Manchester', 'Chester']
@@ -12,6 +12,8 @@ const footerLinks = [
 ]
 
 export default function Footer() {
+  const { openChat } = useChat()
+
   return (
     <footer className="relative bg-navy-deep border-t border-white/5 px-5 sm:px-8 py-12 sm:py-14">
       <div className="max-w-6xl mx-auto">
@@ -59,14 +61,12 @@ export default function Footer() {
             </div>
             <div>
               <p className="text-white text-sm font-medium mb-3">Get started</p>
-              <a
-                href={buildWhatsAppLink(WHATSAPP_DEFAULT_MESSAGE)}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => openChat('general')}
                 className="text-mist text-sm hover:text-white transition-colors"
               >
-                Message us on WhatsApp
-              </a>
+                Chat with us
+              </button>
             </div>
           </div>
         </div>
