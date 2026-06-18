@@ -27,7 +27,7 @@ export const faqs: FAQ[] = [
     id: 'pricing',
     question: 'How much does it cost?',
     answer:
-      "It's a flat £50 one-off fee to build your website with AI staff and automated marketing set up, then £20 a month to keep it hosted, running and supported. No quotes, no contracts, no surprise invoices later.",
+      "Your website is a flat £50 one-off to build, then £20 a month to keep it hosted, updated and supported. AI Staff and Automated Marketing are optional, added on top later as a separate monthly retainer once you're ready for them, never bundled into the £50 without you asking.",
   },
   {
     id: 'industry-fit',

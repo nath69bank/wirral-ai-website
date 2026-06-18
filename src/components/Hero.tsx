@@ -27,8 +27,8 @@ export default function Hero() {
           </h1>
 
           <p className="animate-fade-up [animation-delay:320ms] mt-5 sm:mt-6 text-mist text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-            AI staff to answer your calls and messages, and automated marketing to bring customers
-            back, built around your business from just £50.
+            We'll build and keep your website live from just £50, with AI staff and automated
+            marketing available as add-ons whenever you're ready for them.
           </p>
 
           <div className="animate-fade-up [animation-delay:440ms] mt-7 flex flex-wrap items-center justify-center gap-3">

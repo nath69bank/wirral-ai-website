@@ -15,7 +15,8 @@ export default function ServicesSection() {
           </h2>
           <p className="mt-3 text-mist max-w-xl mx-auto">
             No long list of buzzwords, just AI staff to handle the conversations and automated marketing
-            to bring customers back.
+            to bring customers back. Both are optional add-ons on top of your website, not included in
+            the base £50 build.
           </p>
         </Reveal>
 

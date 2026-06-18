@@ -1,12 +1,12 @@
-import { Check } from 'lucide-react'
+import { Check, ArrowRight } from 'lucide-react'
 import Reveal from './Reveal'
 import { buildWhatsAppLink } from '../lib/whatsapp'
+import { pillars } from '../data/pillars'
 
 const included = [
   'A complete website built around your business and your industry',
-  'AI staff to answer calls, messages and booking requests',
-  'Automated marketing campaigns set up and ready to send',
-  'Hosting, updates and support included every month',
+  'Hosted, updated and supported every month',
+  'No contracts, cancel any time',
 ]
 
 export default function PricingSection() {
@@ -16,21 +16,23 @@ export default function PricingSection() {
         <Reveal>
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist mb-3">Straightforward pricing</p>
           <h2 className="font-display text-2xl sm:text-4xl font-semibold text-white mb-4">
-            One simple price. No surprises.
+            One simple price for your website
           </h2>
           <p className="text-mist max-w-xl mx-auto mb-10">
-            No quotes that change halfway through, no contracts that lock you in.
+            This covers the website itself. AI Staff and Automated Marketing are optional extras you
+            can add on top whenever you're ready, never bundled in without you asking for them.
           </p>
         </Reveal>
 
         <Reveal delay={120}>
           <div className="glass-panel-strong rounded-3xl px-7 sm:px-12 py-10 sm:py-12">
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-blue mb-4">Your Website</p>
             <div className="flex items-end justify-center gap-2 mb-1">
               <span className="font-display text-5xl sm:text-6xl font-semibold text-white">£50</span>
               <span className="text-mist text-sm sm:text-base pb-2">one-off build</span>
             </div>
             <p className="text-mist text-sm mb-7">
-              then just <span className="text-white font-medium">£20/month</span> to keep everything running
+              then just <span className="text-white font-medium">£20/month</span> to keep it live
             </p>
 
             <ul className="text-left max-w-sm mx-auto space-y-3 mb-8">
@@ -44,7 +46,7 @@ export default function PricingSection() {
 
             <a
               href={buildWhatsAppLink(
-                "Hi Wirral AI — I'd like to get a website built with AI staff and automated marketing for my business.",
+                "Hi Wirral AI — I'd like to get a website built for my business for £50.",
               )}
               target="_blank"
               rel="noopener noreferrer"
@@ -52,6 +54,41 @@ export default function PricingSection() {
             >
               Get Started for £50
             </a>
+          </div>
+        </Reveal>
+
+        <Reveal delay={200} className="mt-12 sm:mt-16">
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist mb-2">Add when you're ready</p>
+          <p className="text-mist text-sm max-w-md mx-auto mb-7">
+            Layer either of these on top of your website later as a separate monthly retainer, no
+            need to decide now.
+          </p>
+
+          <div className="grid sm:grid-cols-2 gap-4 text-left">
+            {pillars.map((pillar) => (
+              <div key={pillar.id} className="glass-panel rounded-2xl p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 rounded-full bg-brand-gradient flex items-center justify-center shrink-0">
+                    <pillar.icon className="w-[18px] h-[18px] text-navy" strokeWidth={1.75} />
+                  </div>
+                  <h3 className="text-white font-medium text-[15px]">{pillar.name}</h3>
+                </div>
+                <p className="text-mist text-sm leading-relaxed mb-4">
+                  Added on top of your website on a monthly retainer. {pillar.tagline}.
+                </p>
+                <a
+                  href={buildWhatsAppLink(
+                    `Hi Wirral AI — I'd like to ask about adding ${pillar.name} to my website, and what the retainer would cost.`,
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-green hover:opacity-80 transition-opacity"
+                >
+                  Ask about pricing
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            ))}
           </div>
         </Reveal>
       </div>

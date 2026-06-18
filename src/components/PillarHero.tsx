@@ -20,7 +20,7 @@ export default function PillarHero({ pillar }: PillarHeroProps) {
           <pillar.icon className="w-7 h-7 text-navy" strokeWidth={1.75} />
         </div>
         <p className="animate-fade-up [animation-delay:80ms] font-mono text-[11px] uppercase tracking-[0.2em] text-mist mb-4">
-          {pillar.name}
+          {pillar.name} &middot; Website Add-on
         </p>
         <h1 className="animate-fade-up [animation-delay:160ms] font-display text-3xl sm:text-5xl font-semibold text-white leading-tight">
           {pillar.heroLine}
@@ -31,13 +31,13 @@ export default function PillarHero({ pillar }: PillarHeroProps) {
         <div className="animate-fade-up [animation-delay:360ms] mt-8 flex flex-wrap items-center justify-center gap-3">
           <a
             href={buildWhatsAppLink(
-              `Hi Wirral AI — I'd like to find out more about ${pillar.name} for my business.`,
+              `Hi Wirral AI — I'd like to find out more about adding ${pillar.name} to my website.`,
             )}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-brand-gradient text-navy text-sm font-semibold px-6 py-3 rounded-full hover:opacity-90 hover:shadow-glow-green transition-all"
           >
-            Start Your Free Trial
+            Ask About This Add-on
             <ArrowRight className="w-4 h-4" />
           </a>
           <a
