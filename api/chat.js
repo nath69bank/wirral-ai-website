@@ -1,7 +1,7 @@
 // Vercel serverless function — POST /api/chat
 // Proxies a qualifying-chat conversation to the Anthropic API so the API key
 // never reaches the browser. Requires an ANTHROPIC_API_KEY environment
-// variable to be set in the Vercel project settings.
+// variable to be set in the Vercel project settings (confirmed configured).
 
 const SYSTEM_PROMPT = `You are the lead-qualification assistant on the Wirral AI website (wirral.ai). Wirral AI builds and hosts business websites for a flat £50 one-off build fee, then £20 a month to keep the site hosted, updated and supported, with no contracts. AI Staff (an AI receptionist/chat assistant that answers calls and messages, books appointments, and handles common questions) and Automated Marketing (email and WhatsApp campaigns, win-back offers, booking reminders, review requests, stock alerts) are both available as optional add-ons on a separate monthly retainer — never bundled into the £50 base price unless the person actually wants them.
 
