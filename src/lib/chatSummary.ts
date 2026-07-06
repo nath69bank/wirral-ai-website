@@ -1,22 +1,27 @@
 const SUMMARY_RE = /\[SUMMARY_READY\]([\s\S]*?)\[\/SUMMARY_READY\]/
 
 export interface ParsedReply {
-  /** The conversational text, with the summary block removed */
   displayText: string
-  /** Present only once the assistant has signalled it's ready to hand off */
   summaryForWhatsApp: string | null
+  showBooking: boolean
 }
 
-export function parseAssistantReply(raw: string): ParsedReply {
-  const match = raw.match(SUMMARY_RE)
-  if (!match) {
-    return { displayText: raw.trim(), summaryForWhatsApp: null }
-  }
+export function parseAssistantReply(
+  raw: string,
+  apiMeta?: { showBooking?: boolean; summaryRaw?: string | null }
+): ParsedReply {
+  // If the API already parsed these server-side, use those values
+  const showBooking = apiMeta?.showBooking ?? raw.includes('[SHOW_BOOKING]')
+  const summaryRaw = apiMeta?.summaryRaw ?? null
 
-  const displayText = raw.replace(SUMMARY_RE, '').trim()
-  const fields = match[1].trim()
+  const displayText = raw
+    .replace('[SHOW_BOOKING]', '')
+    .replace(SUMMARY_RE, '')
+    .trim()
 
-  const summaryForWhatsApp = `New website enquiry from the site chatbot:\n\n${fields}`
+  const summaryForWhatsApp = summaryRaw
+    ? `New Wirral AI enquiry from the website chatbot:\n\n${summaryRaw}`
+    : null
 
-  return { displayText, summaryForWhatsApp }
+  return { displayText, summaryForWhatsApp, showBooking }
 }
