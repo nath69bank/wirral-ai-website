@@ -1,7 +1,8 @@
-import { ArrowRight, PlayCircle } from 'lucide-react'
+import { ArrowRight, MessageCircle } from 'lucide-react'
 import NetworkCanvas from './NetworkCanvas'
 import PainPill from './PainPill'
 import OperationsSnapshot from './OperationsSnapshot'
+import VoiceAgentWidget from './VoiceAgentWidget'
 import { useChat } from '../lib/chatContext'
 
 export default function Hero() {
@@ -22,15 +23,16 @@ export default function Hero() {
             Built for Wirral &middot; Liverpool &middot; Manchester &middot; Chester
           </p>
 
-          <h1 className="font-display text-white font-semibold leading-[1.05] tracking-tight text-[40px] min-[400px]:text-[44px] sm:text-6xl lg:text-7xl">
-            <span className="block animate-fade-up">Save Time.</span>
-            <span className="block animate-fade-up [animation-delay:100ms]">Reduce Costs.</span>
-            <span className="block animate-fade-up text-gradient [animation-delay:200ms]">Increase Revenue.</span>
+          <h1 className="font-display text-white font-semibold leading-[1.05] tracking-tight text-[38px] min-[400px]:text-[42px] sm:text-6xl lg:text-7xl">
+            <span className="block animate-fade-up">Your business.</span>
+            <span className="block animate-fade-up [animation-delay:100ms]">Running itself.</span>
+            <span className="block animate-fade-up text-gradient [animation-delay:200ms]">Around the clock.</span>
           </h1>
 
           <p className="animate-fade-up [animation-delay:320ms] mt-5 sm:mt-6 text-mist text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-            We'll build and keep your website live from just £50, with AI staff and automated
-            marketing available as add-ons whenever you're ready for them.
+            We build and manage your website from £50, then layer in AI staff that answer
+            your enquiries and automated marketing that brings customers back — so you can
+            focus on the work, not the admin.
           </p>
 
           <div className="animate-fade-up [animation-delay:440ms] mt-7 flex flex-wrap items-center justify-center gap-3">
@@ -41,13 +43,19 @@ export default function Hero() {
               Get My Website Built
               <ArrowRight className="w-4 h-4" />
             </button>
-            <a
-              href="#solution"
+            <button
+              onClick={() => openChat('general')}
               className="inline-flex items-center gap-2 text-white text-sm font-medium px-6 py-3 rounded-full ring-1 ring-white/20 hover:bg-white/5 transition-colors"
             >
-              <PlayCircle className="w-4 h-4" />
-              See It In Action
-            </a>
+              <MessageCircle className="w-4 h-4" />
+              Ask a question
+            </button>
+          </div>
+
+          {/* Voice agent */}
+          <div className="animate-fade-up [animation-delay:520ms] mt-8 flex flex-col items-center gap-1">
+            <p className="text-mist text-xs mb-3">Or speak to our AI directly</p>
+            <VoiceAgentWidget />
           </div>
 
           <div className="animate-fade-up [animation-delay:560ms]">

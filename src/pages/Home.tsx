@@ -1,5 +1,6 @@
 import Seo from '../components/Seo'
 import Hero from '../components/Hero'
+import AIStatsBar from '../components/AIStatsBar'
 import PillarsSection from '../components/PillarsSection'
 import ProblemSection from '../components/ProblemSection'
 import SolutionSection from '../components/SolutionSection'
@@ -7,7 +8,8 @@ import ServicesSection from '../components/ServicesSection'
 import BenefitsSection from '../components/BenefitsSection'
 import PricingSection from '../components/PricingSection'
 import HowItWorksSection from '../components/HowItWorksSection'
-import SocialProofSection from '../components/SocialProofSection'
+import ReviewsSection from '../components/ReviewsSection'
+import MasterclassBridge from '../components/MasterclassBridge'
 import FAQSection from '../components/FAQSection'
 import FinalCTASection from '../components/FinalCTASection'
 import { faqs } from '../data/faqs'
@@ -33,6 +35,7 @@ export default function Home() {
         }}
       />
       <Hero />
+      <AIStatsBar />
       <PillarsSection />
       <ProblemSection />
       <SolutionSection />
@@ -40,7 +43,8 @@ export default function Home() {
       <BenefitsSection />
       <PricingSection />
       <HowItWorksSection />
-      <SocialProofSection />
+      <ReviewsSection />
+      <MasterclassBridge />
       <FAQSection />
       <FinalCTASection />
     </>

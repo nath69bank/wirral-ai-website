@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { ArrowRight, Calendar } from 'lucide-react'
 import wirralW from '../assets/wirral-w.webp'
 import { useChat } from '../lib/chatContext'
 import { niches } from '../data/niches'
@@ -9,71 +10,141 @@ const footerLinks = [
   { label: 'Automated Marketing', to: '/automated-marketing' },
   { label: 'Pricing', to: '/#pricing' },
   { label: 'FAQ', to: '/#faq' },
+  { label: 'Reviews', to: '/#reviews' },
 ]
 
 export default function Footer() {
   const { openChat } = useChat()
 
   return (
-    <footer className="relative bg-navy-deep border-t border-white/5 px-5 sm:px-8 py-12 sm:py-14">
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-10">
-          <div className="max-w-sm">
-            <Link to="/" className="flex items-center gap-2.5 mb-4">
-              <img src={wirralW} alt="Wirral AI" className="w-7 h-7 object-contain" />
-              <span className="font-display font-semibold text-lg text-white">
-                Wirral<span className="text-gradient">ai</span>
-              </span>
-            </Link>
-            <p className="text-mist text-sm leading-relaxed">
-              AI staff and automated marketing for trades, healthcare, hospitality and professional
-              services across the North West.
-            </p>
-            <p className="text-mist text-xs mt-4">
-              Serving {serviceAreas.join(', ')}.
-            </p>
-          </div>
+    <footer className="relative bg-navy-deep border-t border-white/5 px-5 sm:px-8">
 
-          <div className="flex flex-wrap gap-x-10 gap-y-8">
-            <div>
-              <p className="text-white text-sm font-medium mb-3">Explore</p>
-              <ul className="space-y-2">
-                {footerLinks.map((link) => (
-                  <li key={link.to}>
-                    <Link to={link.to} className="text-mist text-sm hover:text-white transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+      {/* Masterclass CTA strip */}
+      <div className="border-b border-white/5 py-8 sm:py-10">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-full bg-brand-gradient flex items-center justify-center shrink-0">
+              <Calendar className="w-5 h-5 text-navy" strokeWidth={1.75} />
             </div>
             <div>
-              <p className="text-white text-sm font-medium mb-3">Industries</p>
-              <ul className="space-y-2">
-                {niches.map((niche) => (
-                  <li key={niche.slug}>
-                    <Link to={`/${niche.slug}`} className="text-mist text-sm hover:text-white transition-colors">
-                      {niche.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="text-white text-sm font-medium mb-3">Get started</p>
-              <button
-                onClick={() => openChat('general')}
-                className="text-mist text-sm hover:text-white transition-colors"
-              >
-                Chat with us
-              </button>
+              <p className="text-white font-semibold text-sm">Free Masterclass — Every Friday 10PM</p>
+              <p className="text-mist text-xs mt-0.5">
+                Learn how Nathan builds AI systems for local businesses. Limited to 100 seats.
+              </p>
             </div>
           </div>
+          <a
+            href="https://calendly.com/wirral-ai/masterclass"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-brand-gradient text-navy text-xs font-semibold px-5 py-2.5 rounded-full hover:opacity-90 hover:shadow-glow-green transition-all shrink-0"
+          >
+            Reserve My Free Seat
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
         </div>
+      </div>
 
-        <div className="mt-10 pt-6 border-t border-white/5 flex flex-col sm:flex-row gap-3 items-center justify-between">
-          <p className="text-mist text-xs">&copy; {new Date().getFullYear()} Wirral AI. All rights reserved.</p>
-          <p className="text-mist text-xs">UK-based team. No outsourcing. No contracts.</p>
+      {/* Main footer */}
+      <div className="py-12 sm:py-14">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-10">
+            <div className="max-w-sm">
+              <Link to="/" className="flex items-center gap-2.5 mb-4">
+                <img src={wirralW} alt="Wirral AI" className="w-7 h-7 object-contain" />
+                <span className="font-display font-semibold text-lg text-white">
+                  Wirral<span className="text-gradient">ai</span>
+                </span>
+              </Link>
+              <p className="text-mist text-sm leading-relaxed">
+                AI staff and automated marketing for trades, healthcare, hospitality and
+                professional services across the North West.
+              </p>
+              <p className="text-mist text-xs mt-4">
+                Serving {serviceAreas.join(', ')}.
+              </p>
+              <a
+                href="https://wa.me/447368349702"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-green text-xs font-medium mt-4 hover:opacity-80 transition-opacity"
+              >
+                WhatsApp Nathan directly →
+              </a>
+            </div>
+
+            <div className="flex flex-wrap gap-x-10 gap-y-8">
+              <div>
+                <p className="text-white text-sm font-medium mb-3">Explore</p>
+                <ul className="space-y-2">
+                  {footerLinks.map((link) => (
+                    <li key={link.to}>
+                      <Link to={link.to} className="text-mist text-sm hover:text-white transition-colors">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-white text-sm font-medium mb-3">Industries</p>
+                <ul className="space-y-2">
+                  {niches.map((niche) => (
+                    <li key={niche.slug}>
+                      <Link
+                        to={`/${niche.slug}`}
+                        className="text-mist text-sm hover:text-white transition-colors"
+                      >
+                        {niche.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-white text-sm font-medium mb-3">Learn for free</p>
+                <ul className="space-y-2">
+                  <li>
+                    <a
+                      href="https://masterclass.wirral.ai"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-mist text-sm hover:text-white transition-colors"
+                    >
+                      Masterclass
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://calendly.com/wirral-ai/masterclass"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-mist text-sm hover:text-white transition-colors"
+                    >
+                      Book a session
+                    </a>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => openChat('general')}
+                      className="text-mist text-sm hover:text-white transition-colors text-left"
+                    >
+                      Chat with our AI
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 pt-6 border-t border-white/5 flex flex-col sm:flex-row gap-3 items-center justify-between">
+            <p className="text-mist text-xs">
+              &copy; {new Date().getFullYear()} Wirral AI. All rights reserved.
+            </p>
+            <p className="text-mist text-xs">
+              UK-based · No outsourcing · No contracts · 5.0 ⭐ on Google
+            </p>
+          </div>
         </div>
       </div>
     </footer>
