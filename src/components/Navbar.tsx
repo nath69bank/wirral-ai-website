@@ -9,6 +9,7 @@ const links = [
   { label: 'Automated Marketing', to: '/automated-marketing' },
   { label: 'Pricing', to: '/#pricing' },
   { label: 'FAQ', to: '/#faq' },
+  { label: 'Masterclass', to: 'https://masterclass.wirral.ai', external: true },
 ]
 
 export default function Navbar() {
@@ -38,15 +39,27 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-7">
-          {links.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="text-[13px] text-mist hover:text-white transition-colors whitespace-nowrap"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map((link) =>
+            link.external ? (
+              <a
+                key={link.to}
+                href={link.to}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[13px] text-mist hover:text-white transition-colors whitespace-nowrap"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-[13px] text-mist hover:text-white transition-colors whitespace-nowrap"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
         </nav>
 
         <div className="flex items-center gap-2">
@@ -68,16 +81,29 @@ export default function Navbar() {
 
       {open && (
         <div className="md:hidden absolute left-4 right-4 top-full rounded-2xl bg-navy-deep/95 backdrop-blur-xl ring-1 ring-white/10 shadow-2xl px-5 py-3 animate-fade-up">
-          {links.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              onClick={() => setOpen(false)}
-              className="block text-[15px] text-white/85 hover:text-white py-2.5 border-b border-white/10 last:border-b-0"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map((link) =>
+            link.external ? (
+              <a
+                key={link.to}
+                href={link.to}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="block text-[15px] text-white/85 hover:text-white py-2.5 border-b border-white/10 last:border-b-0"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setOpen(false)}
+                className="block text-[15px] text-white/85 hover:text-white py-2.5 border-b border-white/10 last:border-b-0"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
           <button
             onClick={() => {
               setOpen(false)
