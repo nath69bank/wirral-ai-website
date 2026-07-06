@@ -63,7 +63,9 @@ For people who want to learn how to use AI and automation themselves.
 
 ## SIGNALS TO OUTPUT
 
-When ready to show the booking calendar (Path A, they said yes to a call):
+IMPORTANT: Do NOT output any signal until at least 3 back-and-forth exchanges have happened. You must know their name (or they have declined to give it), their business type, and what they actually want before signalling. If you do not have those three things, keep asking conversationally.
+
+When ready to show the booking calendar (Path A, they have confirmed they want a call):
 Output this on its own line at the very end of your message:
 [SHOW_BOOKING]
 

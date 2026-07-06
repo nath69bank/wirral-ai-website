@@ -3,11 +3,14 @@ import { X, Send, ArrowRight, MessageCircle, Calendar } from 'lucide-react'
 import wirralW from '../assets/wirral-w.webp'
 import { useChat } from '../lib/chatContext'
 import { CHAT_OPENERS } from '../lib/chatOpeners'
-import { parseAssistantReply } from '../lib/chatSummary'
 import { buildWhatsAppLink } from '../lib/whatsapp'
 
-// ── IMPORTANT: paste your GHL calendar booking link here once you have it ──
+// GHL calendar booking URL
 const GHL_CALENDAR_URL = 'https://link.gohighlevel.com/widget/booking/N3VjOqWz4rks3tHK5HRp'
+
+// How many user messages must be exchanged before a summary/booking can fire.
+// Prevents the bot handing off after a single "hi" before it's learned anything.
+const MIN_EXCHANGES_BEFORE_HANDOFF = 3
 
 interface Message {
   role: 'user' | 'assistant'
@@ -22,9 +25,12 @@ export default function ChatWidget() {
   const [error, setError] = useState(false)
   const [summary, setSummary] = useState<string | null>(null)
   const [showBooking, setShowBooking] = useState(false)
+  const [userTurns, setUserTurns] = useState(0)
   const scrollRef = useRef<HTMLDivElement | null>(null)
+  const inputRef = useRef<HTMLInputElement | null>(null)
   const initializedTopic = useRef<string | null>(null)
 
+  // Initialise with topic-specific opener
   useEffect(() => {
     if (isOpen && initializedTopic.current !== topic && messages.length === 0) {
       initializedTopic.current = topic
@@ -32,7 +38,7 @@ export default function ChatWidget() {
     }
   }, [isOpen, topic, messages.length])
 
-  // Reset state when chat closes
+  // Reset everything when chat closes
   useEffect(() => {
     if (!isOpen) {
       setMessages([])
@@ -41,14 +47,17 @@ export default function ChatWidget() {
       setError(false)
       setSummary(null)
       setShowBooking(false)
+      setUserTurns(0)
       initializedTopic.current = null
     }
   }, [isOpen])
 
+  // Scroll to bottom on new messages
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
   }, [messages, loading, showBooking])
 
+  // Lock body scroll while open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -58,6 +67,10 @@ export default function ChatWidget() {
 
   async function sendMessage(text: string) {
     if (!text.trim() || loading || summary || showBooking) return
+
+    const newTurns = userTurns + 1
+    setUserTurns(newTurns)
+
     const next: Message[] = [...messages, { role: 'user', content: text.trim() }]
     setMessages(next)
     setInput('')
@@ -72,23 +85,37 @@ export default function ChatWidget() {
       })
       if (!res.ok) throw new Error('Request failed')
       const data = await res.json()
-      const { displayText, summaryForWhatsApp, showBooking: doShowBooking } = parseAssistantReply(
-        data.reply || '',
-        { showBooking: data.showBooking, summaryRaw: data.summaryRaw }
-      )
+
+      const rawReply: string = data.reply || ''
+
+      // Strip any signals from display text
+      const displayText = rawReply
+        .replace('[SHOW_BOOKING]', '')
+        .replace(/\[SUMMARY_READY\][\s\S]*?\[\/SUMMARY_READY\]/, '')
+        .trim()
+
       setMessages((prev) => [...prev, { role: 'assistant', content: displayText }])
-      if (summaryForWhatsApp) setSummary(summaryForWhatsApp)
-      if (doShowBooking) setShowBooking(true)
+
+      // Only allow handoff signals after minimum exchanges
+      if (newTurns >= MIN_EXCHANGES_BEFORE_HANDOFF) {
+        if (data.showBooking) {
+          setShowBooking(true)
+        } else if (data.summaryRaw) {
+          setSummary(`New Wirral AI enquiry from the website chatbot:\n\n${data.summaryRaw}`)
+        }
+      }
+
     } catch {
       setError(true)
     } finally {
       setLoading(false)
+      // Refocus input on desktop after send
+      inputRef.current?.focus()
     }
   }
 
   if (!isOpen) return null
 
-  // Expanded height when showing the booking calendar
   const widgetHeight = showBooking ? 'h-[95vh] sm:h-[780px]' : 'h-[88vh] sm:h-[640px]'
 
   return (
@@ -123,7 +150,7 @@ export default function ChatWidget() {
                 <Calendar className="w-4 h-4 text-green" />
                 <p className="text-white text-sm font-semibold">Book your free strategy call</p>
               </div>
-              <p className="text-mist text-xs">20 minutes with Nathan — no fluff, no hard sell. Pick a time below.</p>
+              <p className="text-mist text-xs">20 minutes with Nathan. Pick a time below.</p>
             </div>
             <iframe
               src={GHL_CALENDAR_URL}
@@ -153,7 +180,7 @@ export default function ChatWidget() {
               {messages.map((m, i) => (
                 <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div
-                    className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-[14px] leading-relaxed ${
+                    className={`max-w-[80%] rounded-2xl px-4 py-2.5 leading-relaxed text-[15px] ${
                       m.role === 'user'
                         ? 'bg-brand-gradient text-navy font-medium'
                         : 'glass-panel text-white/90'
@@ -175,8 +202,8 @@ export default function ChatWidget() {
               )}
 
               {error && (
-                <div className="glass-panel rounded-2xl px-4 py-3 text-[13px] text-white/80">
-                  Something went wrong on our end. You can message Nathan directly instead:{' '}
+                <div className="glass-panel rounded-2xl px-4 py-3 text-[14px] text-white/80">
+                  Something went wrong. Message Nathan directly:{' '}
                   <a
                     href={buildWhatsAppLink("Hi Wirral AI — I'd like to find out more about getting a website built.")}
                     target="_blank"
@@ -185,14 +212,13 @@ export default function ChatWidget() {
                   >
                     open WhatsApp
                   </a>
-                  .
                 </div>
               )}
 
               {summary && !showBooking && (
                 <div className="glass-panel-strong rounded-2xl p-4 mt-2">
                   <p className="text-white text-sm font-medium mb-3">
-                    Everything Nathan needs is ready to send.
+                    Ready to send to Nathan.
                   </p>
                   <a
                     href={buildWhatsAppLink(summary)}
@@ -208,7 +234,7 @@ export default function ChatWidget() {
               )}
             </div>
 
-            {/* Input */}
+            {/* Input — font-size MUST be 16px+ to prevent iOS auto-zoom */}
             {!summary && (
               <form
                 onSubmit={(e) => {
@@ -218,11 +244,13 @@ export default function ChatWidget() {
                 className="flex items-center gap-2 px-4 py-3 border-t border-white/10 bg-navy-panel shrink-0"
               >
                 <input
+                  ref={inputRef}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Type your reply..."
                   disabled={loading}
-                  className="flex-1 bg-white/5 rounded-full px-4 py-2.5 text-sm text-white placeholder-mist outline-none ring-1 ring-white/10 focus:ring-white/25 disabled:opacity-50"
+                  style={{ fontSize: '16px' }}
+                  className="flex-1 bg-white/5 rounded-full px-4 py-2.5 text-white placeholder-mist outline-none ring-1 ring-white/10 focus:ring-white/25 disabled:opacity-50"
                 />
                 <button
                   type="submit"
