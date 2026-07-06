@@ -67,7 +67,7 @@ export default async function handler(req, res) {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
+        model: 'claude-haiku-4-5',
         max_tokens: 500,
         system: SYSTEM_PROMPT,
         messages: trimmedMessages,
@@ -77,7 +77,12 @@ export default async function handler(req, res) {
     if (!response.ok) {
       const errText = await response.text()
       console.error('Anthropic API error:', response.status, errText)
-      res.status(502).json({ error: 'Chat service error' })
+      // Surface the specific error type to help diagnose issues
+      let userMessage = 'Chat service error'
+      if (response.status === 401) userMessage = 'Invalid API key'
+      if (response.status === 429) userMessage = 'Rate limit reached'
+      if (response.status === 404) userMessage = 'Model not found'
+      res.status(502).json({ error: userMessage, detail: response.status })
       return
     }
 
