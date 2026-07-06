@@ -1,12 +1,13 @@
-import { Check, ArrowRight } from 'lucide-react'
+import { Check, ArrowRight, AlertCircle } from 'lucide-react'
 import Reveal from './Reveal'
 import { useChat } from '../lib/chatContext'
 import { pillars } from '../data/pillars'
 
 const included = [
-  'A complete website built around your business and your industry',
-  'Hosted, updated and supported every month',
-  'No contracts, cancel any time',
+  'Professionally built website tailored to your business',
+  'Hosted, maintained and updated every month',
+  'You own it — no contracts, cancel any time',
+  'Strategy call with Nathan included in the process',
 ]
 
 export default function PricingSection() {
@@ -18,23 +19,29 @@ export default function PricingSection() {
         <Reveal>
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist mb-3">Straightforward pricing</p>
           <h2 className="font-display text-2xl sm:text-4xl font-semibold text-white mb-4">
-            One simple price for your website
+            One price. Everything included.
           </h2>
           <p className="text-mist max-w-xl mx-auto mb-10">
-            This covers the website itself. AI Staff and Automated Marketing are optional extras you
-            can add on top whenever you're ready, never bundled in without you asking for them.
+            No upsells hidden in the small print. AI Staff and Automated Marketing are optional extras — 
+            available when you want them, never pushed on you.
           </p>
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="glass-panel-strong rounded-3xl px-7 sm:px-12 py-10 sm:py-12">
+          <div className="glass-panel-strong rounded-3xl px-7 sm:px-12 py-10 sm:py-12 relative overflow-hidden">
+            {/* Scarcity banner */}
+            <div className="flex items-center justify-center gap-2 bg-blue/10 border border-blue/20 rounded-full px-4 py-2 mb-6 text-[12px] text-blue font-medium">
+              <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+              Nathan takes on a limited number of new websites each month
+            </div>
+
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-blue mb-4">Your Website</p>
             <div className="flex items-end justify-center gap-2 mb-1">
               <span className="font-display text-5xl sm:text-6xl font-semibold text-white">£50</span>
               <span className="text-mist text-sm sm:text-base pb-2">one-off build</span>
             </div>
             <p className="text-mist text-sm mb-7">
-              then just <span className="text-white font-medium">£20/month</span> to keep it live
+              then just <span className="text-white font-medium">£20/month</span> to keep it live, updated and supported
             </p>
 
             <ul className="text-left max-w-sm mx-auto space-y-3 mb-8">
@@ -50,16 +57,18 @@ export default function PricingSection() {
               onClick={() => openChat('pricing')}
               className="inline-flex items-center gap-2 bg-brand-gradient text-navy text-sm font-semibold px-7 py-3.5 rounded-full hover:opacity-90 hover:shadow-glow-green transition-all"
             >
-              Get Started for £50
+              Claim Your Spot
+              <ArrowRight className="w-4 h-4" />
             </button>
+            <p className="mt-3 text-mist/70 text-xs">Takes two minutes to get started</p>
           </div>
         </Reveal>
 
         <Reveal delay={200} className="mt-12 sm:mt-16">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist mb-2">Add when you're ready</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist mb-2">Ready to scale further?</p>
           <p className="text-mist text-sm max-w-md mx-auto mb-7">
-            Layer either of these on top of your website later as a separate monthly retainer, no
-            need to decide now.
+            Once your website is live, layer either of these on top whenever you're ready. 
+            Both priced on enquiry — tell Aria what you're after and she'll get Nathan to walk you through it.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-4 text-left">
@@ -72,7 +81,7 @@ export default function PricingSection() {
                   <h3 className="text-white font-medium text-[15px]">{pillar.name}</h3>
                 </div>
                 <p className="text-mist text-sm leading-relaxed mb-4">
-                  Added on top of your website on a monthly retainer. {pillar.tagline}.
+                  {pillar.tagline}. Added on top of your website on a monthly retainer.
                 </p>
                 <button
                   onClick={() => openChat(pillar.id)}

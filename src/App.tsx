@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ChatLauncherButton from './components/ChatLauncherButton'
 import ChatWidget from './components/ChatWidget'
+import ExitIntent from './components/ExitIntent'
 import ScrollManager from './components/ScrollManager'
 import { ChatProvider } from './lib/chatContext'
 import Home from './pages/Home'
@@ -32,6 +33,7 @@ export default function App() {
           <Footer />
           <ChatLauncherButton />
           <ChatWidget />
+          <ExitIntent />
         </div>
       </ChatProvider>
     </BrowserRouter>

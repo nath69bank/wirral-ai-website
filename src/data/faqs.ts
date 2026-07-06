@@ -6,39 +6,51 @@ export interface FAQ {
 
 export const faqs: FAQ[] = [
   {
+    id: 'what-exactly',
+    question: 'What exactly do I get for £50?',
+    answer:
+      "A complete, professionally built website tailored to your business. Nathan builds it, hosts it, and maintains it. The £50 is a one-off build fee. The £20 a month covers hosting, updates, security and support. No hidden extras.",
+  },
+  {
     id: 'setup-time',
-    question: 'How long does it take to get set up?',
+    question: 'How long does it take to go live?',
     answer:
-      'Most businesses are live within one to two weeks. We start with the systems that will save you the most time first, then build out from there, so you see results early rather than waiting months for a "big launch".',
+      "Most businesses are live within one week. Nathan starts with a 20-minute strategy call to understand your business, then builds around what he learns. You review it, he makes any changes, and it goes live.",
   },
   {
-    id: 'support',
-    question: 'What kind of support do I get?',
+    id: 'ai-staff-what',
+    question: 'What does AI Staff actually do day to day?',
     answer:
-      'You work with a UK-based team who already understand your setup, not a rotating help desk. If something needs changing or a process stops fitting how you work, you message us and we sort it.',
+      "It acts like a receptionist that never clocks off. When someone messages your website at 11pm asking for a quote, it replies straight away, asks the right questions, and notifies you with a proper lead summary. It handles booking requests, common questions, and follow-ups automatically.",
   },
   {
-    id: 'customisation',
-    question: 'Will this be built around how my business actually works?',
+    id: 'marketing-what',
+    question: 'What does Automated Marketing actually send?',
     answer:
-      'Yes. We start by mapping how leads, bookings and follow-ups currently move through your business, then build systems around that, rather than forcing you into a rigid template.',
+      "Typically: win-back messages to customers who have not booked in a while, appointment reminders that cut no-shows, review requests sent automatically after a completed job, and re-engagement offers when stock or availability changes. Nathan sets it up once and it runs in the background.",
   },
   {
-    id: 'pricing',
-    question: 'How much does it cost?',
+    id: 'limited-spots',
+    question: 'Why are spots limited?',
     answer:
-      "Your website is a flat £50 one-off to build, then £20 a month to keep it hosted, updated and supported. AI Staff and Automated Marketing are optional, added on top later as a separate monthly retainer once you're ready for them, never bundled into the £50 without you asking.",
+      "Nathan builds every website himself rather than outsourcing it. That means the quality is consistent but the capacity is finite. He takes on a set number of new builds each month so every client gets his full attention.",
+  },
+  {
+    id: 'masterclass',
+    question: 'What is the Masterclass and who is it for?',
+    answer:
+      "The free Friday Masterclass is for business owners who want to understand how AI and automated marketing work before committing to anything. Nathan builds a real system live on screen in 90 minutes. No slides, no pitch. Most people leave knowing exactly what their business needs.",
+  },
+  {
+    id: 'contracts',
+    question: 'What happens if I want to stop?',
+    answer:
+      "You cancel and that is it. No notice period, no exit fees, no awkward conversations. Your website files belong to you and Nathan will hand them over if you want to take hosting elsewhere.",
   },
   {
     id: 'industry-fit',
-    question: 'Will this work for my industry?',
+    question: 'Does this work for my type of business?',
     answer:
-      'We work with trades, healthcare practices, recruitment firms, property businesses, agencies, consultants and other professional and service businesses across Wirral, Liverpool, Manchester and Chester. If you deal with enquiries, bookings or repeat customers, this is built for you.',
-  },
-  {
-    id: 'migration',
-    question: 'What happens to the software I already use?',
-    answer:
-      'In most cases, nothing changes on your end. We connect your existing tools rather than ripping them out, and where a switch genuinely makes things simpler, we handle the migration so nothing gets lost.',
+      "If you deal with enquiries, bookings or repeat customers, it works. Wirral AI builds for trades, restaurants and cafes, clinics and salons, recruitment, property and professional services across Wirral, Liverpool, Manchester and Chester. If you are not sure, open the chat and Aria will tell you honestly whether it is a fit.",
   },
 ]

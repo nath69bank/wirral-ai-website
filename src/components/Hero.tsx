@@ -1,8 +1,7 @@
-import { ArrowRight, MessageCircle } from 'lucide-react'
+import { ArrowRight, Calendar } from 'lucide-react'
 import NetworkCanvas from './NetworkCanvas'
 import PainPill from './PainPill'
 import OperationsSnapshot from './OperationsSnapshot'
-import VoiceAgentWidget from './VoiceAgentWidget'
 import { useChat } from '../lib/chatContext'
 
 export default function Hero() {
@@ -24,38 +23,33 @@ export default function Hero() {
           </p>
 
           <h1 className="font-display text-white font-semibold leading-[1.05] tracking-tight text-[38px] min-[400px]:text-[42px] sm:text-6xl lg:text-7xl">
-            <span className="block animate-fade-up">Your business.</span>
-            <span className="block animate-fade-up [animation-delay:100ms]">Running itself.</span>
-            <span className="block animate-fade-up text-gradient [animation-delay:200ms]">Around the clock.</span>
+            <span className="block animate-fade-up">A proper website</span>
+            <span className="block animate-fade-up [animation-delay:100ms]">for <span className="text-gradient">£50.</span></span>
+            <span className="block animate-fade-up text-white/70 text-[28px] min-[400px]:text-[32px] sm:text-4xl lg:text-5xl [animation-delay:200ms] mt-2">
+              AI staff & marketing when you're ready.
+            </span>
           </h1>
 
-          <p className="animate-fade-up [animation-delay:320ms] mt-5 sm:mt-6 text-mist text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-            We build and manage your website from £50, then layer in AI staff that answer
-            your enquiries and automated marketing that brings customers back — so you can
-            focus on the work, not the admin.
+          <p className="animate-fade-up [animation-delay:320ms] mt-6 sm:mt-7 text-mist text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+            We build, host and maintain your website for a flat £50 then £20 a month.
+            No contracts. Nathan takes on a limited number of new builds each month — if you're interested, grab a slot now.
           </p>
 
           <div className="animate-fade-up [animation-delay:440ms] mt-7 flex flex-wrap items-center justify-center gap-3">
             <button
               onClick={() => openChat('pricing')}
-              className="inline-flex items-center gap-2 bg-brand-gradient text-navy text-sm font-semibold px-6 py-3 rounded-full hover:opacity-90 hover:shadow-glow-green transition-all"
+              className="inline-flex items-center gap-2 bg-brand-gradient text-navy text-sm font-semibold px-6 py-3.5 rounded-full hover:opacity-90 hover:shadow-glow-green transition-all"
             >
               Get My Website Built
               <ArrowRight className="w-4 h-4" />
             </button>
             <button
               onClick={() => openChat('general')}
-              className="inline-flex items-center gap-2 text-white text-sm font-medium px-6 py-3 rounded-full ring-1 ring-white/20 hover:bg-white/5 transition-colors"
+              className="inline-flex items-center gap-2 text-white text-sm font-medium px-6 py-3.5 rounded-full ring-1 ring-white/20 hover:bg-white/5 transition-colors"
             >
-              <MessageCircle className="w-4 h-4" />
-              Ask a question
+              <Calendar className="w-4 h-4" />
+              Book a free strategy call
             </button>
-          </div>
-
-          {/* Voice agent */}
-          <div className="animate-fade-up [animation-delay:520ms] mt-8 flex flex-col items-center gap-1">
-            <p className="text-mist text-xs mb-3">Or speak to our AI directly</p>
-            <VoiceAgentWidget />
           </div>
 
           <div className="animate-fade-up [animation-delay:560ms]">

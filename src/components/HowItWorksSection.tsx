@@ -1,22 +1,25 @@
-import { MessageCircle, ClipboardCheck, Rocket } from 'lucide-react'
+import { MessageCircle, Calendar, Rocket } from 'lucide-react'
 import Reveal from './Reveal'
 import { useChat } from '../lib/chatContext'
 
 const steps = [
   {
     icon: MessageCircle,
-    title: 'Chat for two minutes',
-    text: 'Our assistant asks a few quick questions about your business so Nathan has everything he needs before you even speak.',
+    step: '01',
+    title: 'Chat with Aria',
+    text: 'Tell our AI assistant about your business in two minutes. She works out what you need and which path is right for you.',
   },
   {
-    icon: ClipboardCheck,
-    title: 'It goes straight to Nathan',
-    text: 'No generic enquiry, no waiting around. He gets a clear summary of exactly what you need on WhatsApp.',
+    icon: Calendar,
+    step: '02',
+    title: 'Book a strategy call',
+    text: 'Pick a 20-minute slot with Nathan directly from the chat. He shows you exactly how it would work for your specific business — no fluff, no hard sell.',
   },
   {
     icon: Rocket,
-    title: 'We get you live',
-    text: 'Nathan follows up to confirm the details, and your website gets built for a flat £50, then £20 a month.',
+    step: '03',
+    title: 'Go live',
+    text: 'Nathan builds your website for a flat £50. Most businesses are live within a week. Add AI Staff or automated marketing any time after.',
   },
 ]
 
@@ -29,23 +32,25 @@ export default function HowItWorksSection() {
         <Reveal className="text-center mb-12 sm:mb-16">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist mb-3">How it works</p>
           <h2 className="font-display text-2xl sm:text-4xl font-semibold text-white">
-            From chat to live website
+            From first message to live website
           </h2>
           <p className="mt-3 text-mist max-w-xl mx-auto">
-            No long forms, no sales calls you didn't ask for. Just a quick chat that gets the right
-            information to Nathan straight away.
+            The whole thing takes less than 20 minutes of your time before Nathan handles the rest.
           </p>
         </Reveal>
 
-        <div className="grid sm:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
           {steps.map((step, i) => (
             <Reveal key={step.title} delay={i * 90}>
-              <div className="h-full glass-panel rounded-2xl p-6 text-center flex flex-col items-center">
-                <div className="w-10 h-10 rounded-full bg-brand-gradient flex items-center justify-center mb-4">
-                  <step.icon className="w-5 h-5 text-navy" strokeWidth={1.75} />
+              <div className="h-full glass-panel rounded-2xl p-6 flex flex-col">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-brand-gradient flex items-center justify-center shrink-0">
+                    <step.icon className="w-5 h-5 text-navy" strokeWidth={1.75} />
+                  </div>
+                  <span className="font-mono text-xs text-mist">{step.step}</span>
                 </div>
                 <h3 className="text-white font-medium text-[15px] mb-2">{step.title}</h3>
-                <p className="text-mist text-sm leading-relaxed">{step.text}</p>
+                <p className="text-mist text-sm leading-relaxed flex-1">{step.text}</p>
               </div>
             </Reveal>
           ))}
@@ -56,8 +61,9 @@ export default function HowItWorksSection() {
             onClick={() => openChat('pricing')}
             className="inline-flex items-center gap-2 bg-brand-gradient text-navy text-sm font-semibold px-7 py-3.5 rounded-full hover:opacity-90 hover:shadow-glow-green transition-all"
           >
-            Get My Website Built
+            Get Started — Book Your Call
           </button>
+          <p className="mt-3 text-mist text-xs">Nathan takes on a limited number of new builds each month</p>
         </Reveal>
       </div>
     </section>

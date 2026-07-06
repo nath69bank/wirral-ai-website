@@ -2,17 +2,17 @@ import type { ChatTopic } from './chatContext'
 
 export const CHAT_OPENERS: Record<ChatTopic, string> = {
   general:
-    "Hi! I'm here to help get your website sorted with Wirral AI. Mind if I ask a couple of quick questions so Nathan has everything he needs?",
+    "What kind of business are you looking to get a website for?",
   'ai-staff':
-    "Hi! Looks like you're interested in AI Staff. Let's get a few quick details sorted so Nathan can give you the full picture — what kind of business do you run?",
+    "Good choice — AI Staff is one of our most popular add-ons. What kind of business do you run? I'll explain exactly how it would work for you.",
   'automated-marketing':
-    "Hi! Looks like you're interested in Automated Marketing. Let's grab a few quick details so Nathan can give you the full picture — what kind of business do you run?",
+    "Automated marketing is a game changer when it's set up right. What kind of business do you run?",
   pricing:
-    "Hi! Ready to get your website built for £50? Let's grab a few quick details first so Nathan has everything he needs to get started.",
+    "At £50 to build and £20 a month to keep live, it's the most straightforward offer we have. What kind of business are we building for?",
   restaurants:
-    "Hi! Looks like you're after a website for a restaurant or café. What's it called, and is this your first website or are you replacing one?",
+    "Restaurants and cafés are one of our specialities. What's it called, and are you starting fresh or replacing an existing site?",
   trades:
-    "Hi! Looks like you're after a website for a trade or home service business. What's it called, and is this your first website or are you replacing one?",
+    "Trades businesses are a great fit for what we do — missed calls cost real money. What's the business called?",
   'clinics-salons':
-    "Hi! Looks like you're after a website for a clinic or salon. What's it called, and is this your first website or are you replacing one?",
+    "Clinics and salons are one of our most popular niches. What's the business called, and is this a new website or a replacement?",
 }

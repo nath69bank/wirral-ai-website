@@ -1,66 +1,60 @@
 import { useEffect, useRef, useState } from 'react'
-import { Zap, Users, Star, Clock } from 'lucide-react'
+import { Zap, Users, Star, TrendingUp } from 'lucide-react'
 import Reveal from './Reveal'
 
 interface Stat {
   icon: React.ElementType
-  value: string
+  display: string
   animateTo: number
   suffix: string
   prefix?: string
   label: string
+  sublabel: string
   color: string
 }
 
 const stats: Stat[] = [
   {
-    icon: Clock,
-    value: '< 30s',
-    animateTo: 28,
-    suffix: 's',
-    prefix: '',
-    label: 'Average AI response time',
-    color: 'text-blue',
-  },
-  {
     icon: Users,
-    value: '40+',
+    display: '40+',
     animateTo: 40,
     suffix: '+',
-    prefix: '',
-    label: 'Businesses automated',
-    color: 'text-green',
+    label: 'Businesses served',
+    sublabel: 'across the North West',
+    color: 'text-blue',
   },
   {
     icon: Star,
-    value: '5.0',
+    display: '5.0',
     animateTo: 5,
     suffix: '.0',
-    prefix: '',
-    label: 'Google rating · 8 reviews',
-    color: 'text-blue',
+    label: 'Google rating',
+    sublabel: '8 verified five-star reviews',
+    color: 'text-green',
   },
   {
     icon: Zap,
-    value: '94%',
-    animateTo: 94,
-    suffix: '%',
-    prefix: '',
-    label: 'Lead response rate',
+    display: '< 30s',
+    animateTo: 28,
+    suffix: 's',
+    label: 'AI response time',
+    sublabel: 'average first reply to enquiries',
+    color: 'text-blue',
+  },
+  {
+    icon: TrendingUp,
+    display: '£50',
+    animateTo: 50,
+    suffix: '',
+    prefix: '£',
+    label: 'To get your site live',
+    sublabel: 'then just £20 a month',
     color: 'text-green',
   },
 ]
 
-function AnimatedNumber({
-  to,
-  suffix,
-  prefix = '',
-  duration = 1800,
-}: {
-  to: number
-  suffix: string
-  prefix?: string
-  duration?: number
+function AnimatedNumber({ to, suffix, prefix = '', duration = 1800 }: {
+  to: number; suffix: string; prefix?: string; duration?: number
 }) {
   const [current, setCurrent] = useState(0)
   const [started, setStarted] = useState(false)
@@ -68,11 +62,7 @@ function AnimatedNumber({
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started) {
-          setStarted(true)
-        }
-      },
+      ([entry]) => { if (entry.isIntersecting && !started) setStarted(true) },
       { threshold: 0.5 }
     )
     if (ref.current) observer.observe(ref.current)
@@ -91,50 +81,29 @@ function AnimatedNumber({
     requestAnimationFrame(frame)
   }, [started, to, duration])
 
-  // Special display for 5.0 rating
-  if (to === 5) {
-    return (
-      <span ref={ref}>
-        {started ? (current >= 5 ? '5.0' : `${current}.0`) : '0.0'}
-      </span>
-    )
-  }
-
-  return (
-    <span ref={ref}>
-      {prefix}{current}{suffix}
-    </span>
-  )
+  if (to === 5) return <span ref={ref}>{started ? (current >= 5 ? '5.0' : `${current}.0`) : '0.0'}</span>
+  if (to === 28) return <span ref={ref}>{started ? `< ${current}s` : '< 0s'}</span>
+  return <span ref={ref}>{prefix}{current}{suffix}</span>
 }
 
 export default function AIStatsBar() {
   return (
     <section className="relative bg-navy-deep border-y border-white/5 py-10 sm:py-12 px-5 sm:px-8 overflow-hidden">
-      {/* Subtle gradient sweep */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue/5 via-transparent to-green/5 pointer-events-none" />
 
       <div className="relative max-w-5xl mx-auto">
-        <Reveal className="text-center mb-8">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist">
-            AI working right now
-          </p>
-        </Reveal>
-
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {stats.map((stat, i) => (
             <Reveal key={stat.label} delay={i * 80}>
-              <div className="glass-panel rounded-2xl p-5 text-center group hover:glass-panel-strong transition-all">
+              <div className="glass-panel rounded-2xl p-5 text-center">
                 <div className={`flex justify-center mb-3 ${stat.color}`}>
                   <stat.icon className="w-5 h-5" strokeWidth={1.75} />
                 </div>
                 <p className={`font-display text-2xl sm:text-3xl font-semibold ${stat.color} mb-1`}>
-                  <AnimatedNumber
-                    to={stat.animateTo}
-                    suffix={stat.suffix}
-                    prefix={stat.prefix}
-                  />
+                  <AnimatedNumber to={stat.animateTo} suffix={stat.suffix} prefix={stat.prefix} />
                 </p>
-                <p className="text-mist text-[11px] leading-snug">{stat.label}</p>
+                <p className="text-white text-xs font-medium">{stat.label}</p>
+                <p className="text-mist text-[10px] mt-0.5">{stat.sublabel}</p>
               </div>
             </Reveal>
           ))}
