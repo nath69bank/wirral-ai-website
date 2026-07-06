@@ -7,7 +7,7 @@ import { parseAssistantReply } from '../lib/chatSummary'
 import { buildWhatsAppLink } from '../lib/whatsapp'
 
 // ── IMPORTANT: paste your GHL calendar booking link here once you have it ──
-const GHL_CALENDAR_URL = 'https://link.gohighlevel.com/widget/booking/REPLACE_WITH_YOUR_GHL_CALENDAR_LINK'
+const GHL_CALENDAR_URL = 'https://link.gohighlevel.com/widget/booking/N3VjOqWz4rks3tHK5HRp'
 
 interface Message {
   role: 'user' | 'assistant'
