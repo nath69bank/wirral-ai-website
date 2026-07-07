@@ -5,6 +5,7 @@ export interface PortfolioItem {
   outcome: string
   tags: string[]
   color: string
+  url?: string
 }
 
 export const portfolioItems: PortfolioItem[] = [
@@ -15,6 +16,7 @@ export const portfolioItems: PortfolioItem[] = [
     outcome: 'New website generating walk-ins and repair bookings from organic search',
     tags: ['Website Build', 'Local SEO', 'Mobile'],
     color: '#22C55E',
+    url: 'https://mobiuk.co.uk',
   },
   {
     id: 'vapouk',
@@ -23,6 +25,7 @@ export const portfolioItems: PortfolioItem[] = [
     outcome: 'Brand-led site driving in-store footfall and product enquiries',
     tags: ['Website Build', 'Brand', 'E-commerce'],
     color: '#EC008C',
+    url: 'https://vapouk.co.uk',
   },
   {
     id: 'nine-dragons',
@@ -31,6 +34,7 @@ export const portfolioItems: PortfolioItem[] = [
     outcome: 'Members portal with authentication, bookings and class management',
     tags: ['Advanced Build', 'Membership', 'Bookings'],
     color: '#F59E0B',
+    url: 'https://ninedragons.co.uk',
   },
   {
     id: 'gene23',
@@ -44,9 +48,10 @@ export const portfolioItems: PortfolioItem[] = [
     id: 'lahori-lane',
     client: 'Lahori Lane',
     category: 'Hospitality',
-    outcome: 'Online presence that drives table bookings and handles enquiries automatically',
+    outcome: 'Online presence driving table bookings and handling enquiries automatically',
     tags: ['Website Build', 'Bookings', 'AI'],
     color: '#F97316',
+    url: 'https://lahorilane.co.uk',
   },
   {
     id: 'jc-paint',
@@ -55,5 +60,6 @@ export const portfolioItems: PortfolioItem[] = [
     outcome: 'Professional website capturing and following up quote requests automatically',
     tags: ['Website Build', 'Lead Gen', 'Trades'],
     color: '#7C3AED',
+    url: 'https://jcpainting.co.uk',
   },
 ]

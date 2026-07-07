@@ -41,6 +41,10 @@ export default function PricingPhilosophy() {
             <div className="grid sm:grid-cols-2 gap-8 items-start">
               <div>
                 <p className="font-mono text-[11px] uppercase tracking-wider text-blue mb-3">Starter Website</p>
+                <div className="inline-flex items-center gap-2 bg-blue/10 border border-blue/20 rounded-full px-3 py-1.5 mb-4 text-[11px] text-blue font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue animate-pulse-slow shrink-0" />
+                  3 discovery call slots available this month
+                </div>
                 <div className="flex items-end gap-3 mb-2">
                   <span className="font-display text-5xl sm:text-6xl font-semibold text-white">£50</span>
                   <span className="text-mist pb-2">one-off build fee</span>
@@ -102,8 +106,16 @@ export default function PricingPhilosophy() {
               </thead>
               <tbody>
                 {compare.map((row, i) => (
-                  <tr key={row.label} className={`border-b border-white/5 ${i === 2 ? 'text-white' : 'text-white/60'}`}>
-                    <td className={`py-3.5 pr-6 font-medium ${i === 2 ? 'text-gradient font-semibold' : ''}`}>{row.label}</td>
+                  <tr key={row.label} className={`border-b border-white/5 ${i === 2 ? 'text-white' : 'text-white/60'}`}
+                      style={i === 2 ? { background: 'rgba(0,183,255,0.05)' } : {}}>
+                    <td className={`py-3.5 pr-6 font-medium rounded-l-lg ${i === 2 ? '' : ''}`}>
+                      {i === 2
+                        ? <span className="flex items-center gap-2">
+                            <span className="text-gradient font-semibold">{row.label}</span>
+                            <span className="text-[10px] bg-brand-gradient text-navy font-bold rounded-full px-2 py-0.5 shrink-0">Best value</span>
+                          </span>
+                        : row.label}
+                    </td>
                     <td className="py-3.5 pr-6">{row.price}</td>
                     <td className="py-3.5 pr-6">{row.monthly}</td>
                     <td className="py-3.5 pr-6">

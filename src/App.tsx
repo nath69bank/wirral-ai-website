@@ -4,6 +4,7 @@ import Footer from './components/Footer'
 import ChatLauncherButton from './components/ChatLauncherButton'
 import ChatWidget from './components/ChatWidget'
 import ExitIntent from './components/ExitIntent'
+import StickyMobileCTA from './components/StickyMobileCTA'
 import ScrollManager from './components/ScrollManager'
 import { ChatProvider } from './lib/chatContext'
 import Home from './pages/Home'
@@ -34,6 +35,7 @@ export default function App() {
           <ChatLauncherButton />
           <ChatWidget />
           <ExitIntent />
+          <StickyMobileCTA />
         </div>
       </ChatProvider>
     </BrowserRouter>

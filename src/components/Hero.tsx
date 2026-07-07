@@ -58,10 +58,14 @@ export default function Hero() {
           ))}
         </div>
 
-        {/* ElevenLabs voice agent */}
-        <div className="animate-fade-up [animation-delay:560ms] mt-10 flex flex-col items-start gap-2">
-          <p className="text-mist text-xs font-mono uppercase tracking-widest mb-1">Or talk to our AI now</p>
-          <VoiceAgentWidget />
+        {/* ElevenLabs voice agent — prominent third option */}
+        <div className="animate-fade-up [animation-delay:560ms] mt-10">
+          <div className="inline-flex flex-col items-center gap-3">
+            <div className="flex items-center gap-3 text-mist text-xs before:content-[''] before:w-10 before:h-px before:bg-white/20 after:content-[''] after:w-10 after:h-px after:bg-white/20">
+              or speak to our AI right now
+            </div>
+            <VoiceAgentWidget />
+          </div>
         </div>
       </div>
     </section>
