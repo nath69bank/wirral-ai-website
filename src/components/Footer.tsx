@@ -29,7 +29,7 @@ export default function Footer() {
             <div>
               <p className="text-white font-semibold text-sm">Free Masterclass — Every Friday 10PM</p>
               <p className="text-mist text-xs mt-0.5">
-                Learn how Nathan builds AI systems for local businesses. Limited to 100 seats.
+                Free live sessions every Friday. See how AI systems get built from scratch. Limited to 100 seats.
               </p>
             </div>
           </div>
@@ -69,7 +69,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-green text-xs font-medium mt-4 hover:opacity-80 transition-opacity"
               >
-                WhatsApp Nathan directly →
+                Message the team on WhatsApp →
               </a>
             </div>
 

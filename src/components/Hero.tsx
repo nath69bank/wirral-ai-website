@@ -32,7 +32,8 @@ export default function Hero() {
 
           <p className="animate-fade-up [animation-delay:320ms] mt-6 sm:mt-7 text-mist text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
             We build, host and maintain your website for a flat £50 then £20 a month.
-            No contracts. Nathan takes on a limited number of new builds each month — if you're interested, grab a slot now.
+            AI staff, automated marketing and intelligent systems ready to layer on when you are.
+            No contracts. Capacity is intentionally limited — we only take on what we can do properly.
           </p>
 
           <div className="animate-fade-up [animation-delay:440ms] mt-7 flex flex-wrap items-center justify-center gap-3">
@@ -43,13 +44,15 @@ export default function Hero() {
               Get My Website Built
               <ArrowRight className="w-4 h-4" />
             </button>
-            <button
-              onClick={() => openChat('general')}
+            <a
+              href="https://masterclass.wirral.ai"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-white text-sm font-medium px-6 py-3.5 rounded-full ring-1 ring-white/20 hover:bg-white/5 transition-colors"
             >
               <Calendar className="w-4 h-4" />
               Book a free strategy call
-            </button>
+            </a>
           </div>
 
           <div className="animate-fade-up [animation-delay:560ms]">

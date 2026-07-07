@@ -19,8 +19,8 @@ export default function FinalCTASection() {
           <span className="text-gradient">Will they find you?</span>
         </h2>
         <p className="mt-5 text-mist text-base sm:text-lg max-w-lg mx-auto">
-          Nathan takes on a limited number of new websites each month. 
-          If you're thinking about it, now is the time.
+          Wirral AI keeps capacity limited so every build gets proper attention.
+          If you are thinking about it, now is the right time.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button

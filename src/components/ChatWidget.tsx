@@ -150,26 +150,26 @@ export default function ChatWidget() {
                 <Calendar className="w-4 h-4 text-green" />
                 <p className="text-white text-sm font-semibold">Book your free strategy call</p>
               </div>
-              <p className="text-mist text-xs">20 minutes with Nathan. Pick a time below.</p>
+              <p className="text-mist text-xs">Book a slot with the Wirral AI team below.</p>
             </div>
             <iframe
               src={GHL_CALENDAR_URL}
               className="flex-1 w-full border-0 bg-white"
-              title="Book a strategy call with Nathan"
+              title="Book a call with Wirral AI"
               loading="lazy"
             />
             <div className="px-4 py-3 border-t border-white/10 bg-navy-panel shrink-0 flex justify-between items-center">
               <p className="text-mist text-xs">Prefer WhatsApp instead?</p>
               <a
                 href={buildWhatsAppLink(
-                  "Hi Nathan — I've just been chatting with Aria on wirral.ai and I'd like to book a strategy call."
+                  "Hi Wirral AI — I've been chatting with Aria on the website and I'd like to book a strategy call."
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-medium text-green hover:opacity-80 transition-opacity"
               >
                 <MessageCircle className="w-3.5 h-3.5" />
-                Message Nathan
+                Message the team
               </a>
             </div>
           </div>
@@ -203,7 +203,7 @@ export default function ChatWidget() {
 
               {error && (
                 <div className="glass-panel rounded-2xl px-4 py-3 text-[14px] text-white/80">
-                  Something went wrong. Message Nathan directly:{' '}
+                  Something went wrong. Message the team directly:{' '}
                   <a
                     href={buildWhatsAppLink("Hi Wirral AI — I'd like to find out more about getting a website built.")}
                     target="_blank"
@@ -218,7 +218,7 @@ export default function ChatWidget() {
               {summary && !showBooking && (
                 <div className="glass-panel-strong rounded-2xl p-4 mt-2">
                   <p className="text-white text-sm font-medium mb-3">
-                    Ready to send to Nathan.
+                    Ready to send to the Wirral AI team.
                   </p>
                   <a
                     href={buildWhatsAppLink(summary)}
@@ -227,7 +227,7 @@ export default function ChatWidget() {
                     className="inline-flex items-center gap-2 bg-brand-gradient text-navy text-sm font-semibold px-5 py-3 rounded-full hover:opacity-90 transition-opacity w-full justify-center"
                   >
                     <MessageCircle className="w-4 h-4" />
-                    Send to Nathan on WhatsApp
+                    Send to the Wirral AI Team
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>

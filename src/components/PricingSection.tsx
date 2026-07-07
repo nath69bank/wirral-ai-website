@@ -7,7 +7,7 @@ const included = [
   'Professionally built website tailored to your business',
   'Hosted, maintained and updated every month',
   'You own it — no contracts, cancel any time',
-  'Strategy call with Nathan included in the process',
+  'Free 20-minute strategy call included before we build',
 ]
 
 export default function PricingSection() {
@@ -22,17 +22,16 @@ export default function PricingSection() {
             One price. Everything included.
           </h2>
           <p className="text-mist max-w-xl mx-auto mb-10">
-            No upsells hidden in the small print. AI Staff and Automated Marketing are optional extras — 
+            No upsells hidden in the small print. AI Staff and Automated Marketing are optional extras —
             available when you want them, never pushed on you.
           </p>
         </Reveal>
 
         <Reveal delay={120}>
           <div className="glass-panel-strong rounded-3xl px-7 sm:px-12 py-10 sm:py-12 relative overflow-hidden">
-            {/* Scarcity banner */}
             <div className="flex items-center justify-center gap-2 bg-blue/10 border border-blue/20 rounded-full px-4 py-2 mb-6 text-[12px] text-blue font-medium">
               <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-              Nathan takes on a limited number of new websites each month
+              We keep capacity limited so every build gets our full attention
             </div>
 
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-blue mb-4">Your Website</p>
@@ -67,8 +66,8 @@ export default function PricingSection() {
         <Reveal delay={200} className="mt-12 sm:mt-16">
           <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-mist mb-2">Ready to scale further?</p>
           <p className="text-mist text-sm max-w-md mx-auto mb-7">
-            Once your website is live, layer either of these on top whenever you're ready. 
-            Both priced on enquiry — tell Aria what you're after and she'll get Nathan to walk you through it.
+            Once your website is live, layer either of these on top whenever you're ready.
+            Both priced on enquiry — chat with Aria to find out what's right for your business.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-4 text-left">

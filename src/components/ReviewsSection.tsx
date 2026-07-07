@@ -7,7 +7,7 @@ const reviews = [
     name: 'Tayyab Sarwar',
     initials: 'TS',
     badge: 'Local Guide',
-    text: 'Used Nathan for my businesses and had great success and improvement on my online platforms. Strongly recommend.',
+    text: 'Used Wirral AI for my businesses and had great success and improvement on my online platforms. Strongly recommend.',
   },
   {
     name: 'Jack Clayton',
@@ -17,7 +17,7 @@ const reviews = [
   {
     name: 'Max',
     initials: 'M',
-    text: 'Recently worked with Nathan and his team on my ecom brand, he knows his stuff about marketing which has helped me massively. Couldn\'t recommend Wirral AI enough.',
+    text: "Recently worked with the Wirral AI team on my ecom brand — they know their stuff about marketing and it has helped me massively. Could not recommend them enough.",
   },
   {
     name: 'Max Holmes',

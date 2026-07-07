@@ -67,8 +67,8 @@ export default function ExitIntent() {
           Before you go —
         </h3>
         <p className="text-mist text-sm leading-relaxed mb-6">
-          The free Friday Masterclass takes 90 minutes and most people leave knowing exactly 
-          what their business needs. It costs nothing and you can ask Nathan anything live.
+          The free Friday Masterclass takes 90 minutes and most people leave knowing exactly
+          what their business needs. It costs nothing and you can ask the Wirral AI team anything live.
         </p>
 
         <div className="flex flex-col gap-3">

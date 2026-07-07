@@ -7,19 +7,19 @@ const steps = [
     icon: MessageCircle,
     step: '01',
     title: 'Chat with Aria',
-    text: 'Tell our AI assistant about your business in two minutes. She works out what you need and which path is right for you.',
+    text: 'Tell our AI assistant about your business in a couple of minutes. She works out exactly what you need and which path makes sense.',
   },
   {
     icon: Calendar,
     step: '02',
     title: 'Book a strategy call',
-    text: 'Pick a 20-minute slot with Nathan directly from the chat. He shows you exactly how it would work for your specific business — no fluff, no hard sell.',
+    text: 'Grab a free 20-minute slot at masterclass.wirral.ai. We show you exactly how it would work for your specific business — no fluff, no hard sell.',
   },
   {
     icon: Rocket,
     step: '03',
     title: 'Go live',
-    text: 'Nathan builds your website for a flat £50. Most businesses are live within a week. Add AI Staff or automated marketing any time after.',
+    text: 'Your website gets built for a flat £50. Most businesses are live within a week. AI Staff and automated marketing can be added any time after.',
   },
 ]
 
@@ -35,7 +35,7 @@ export default function HowItWorksSection() {
             From first message to live website
           </h2>
           <p className="mt-3 text-mist max-w-xl mx-auto">
-            The whole thing takes less than 20 minutes of your time before Nathan handles the rest.
+            The whole thing takes less than 20 minutes of your time — Wirral AI handles the rest.
           </p>
         </Reveal>
 
@@ -63,7 +63,7 @@ export default function HowItWorksSection() {
           >
             Get Started — Book Your Call
           </button>
-          <p className="mt-3 text-mist text-xs">Nathan takes on a limited number of new builds each month</p>
+          <p className="mt-3 text-mist text-xs">We keep capacity limited so every build gets our full attention</p>
         </Reveal>
       </div>
     </section>

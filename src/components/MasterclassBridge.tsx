@@ -2,8 +2,8 @@ import { Calendar, Users, ArrowRight, Clock, Lock } from 'lucide-react'
 import Reveal from './Reveal'
 
 const perks = [
-  { icon: Clock, text: 'Nathan builds a real AI system live on screen — start to finish in 90 minutes' },
-  { icon: Users, text: 'Limited to 100 seats per session — sells out most weeks' },
+  { icon: Clock, text: 'Watch a real AI business system get built live on screen — start to finish in 90 minutes' },
+  { icon: Users, text: 'Limited to 100 seats per session — fills up most weeks' },
   { icon: Calendar, text: 'Every Friday at 10PM · Free · Hosted live on Zoom' },
 ]
 
@@ -25,18 +25,18 @@ export default function MasterclassBridge() {
 
             <h2 className="font-display text-2xl sm:text-[38px] font-semibold text-white leading-tight mb-4">
               Not ready to hand it over?
-              <span className="block text-gradient">Come and see how it's done first.</span>
+              <span className="block text-gradient">Come and see how it works first.</span>
             </h2>
 
             <p className="text-mist text-base sm:text-lg max-w-2xl mx-auto mb-3 leading-relaxed">
-              Every Friday, Nathan runs a free 90-minute live Zoom session where he builds a real AI 
-              business system from scratch — on screen, in real time. No slides, no theory. 
+              Every Friday, Wirral AI runs a free 90-minute live session where we build a real AI
+              business system from scratch — on screen, in real time. No slides. No theory.
               Just the actual process most agencies charge thousands to keep secret.
             </p>
 
             <p className="text-white/70 text-sm max-w-lg mx-auto mb-8">
-              Most people leave knowing exactly what they need to do next. Some book a call with Nathan 
-              to get it built for them. Either way, you leave with more than you came with.
+              Most people leave knowing exactly what their business needs next. Some go on to
+              get it built for them. Either way, you leave ahead of where you started.
             </p>
 
             <div className="grid sm:grid-cols-3 gap-4 mb-10 text-left">
