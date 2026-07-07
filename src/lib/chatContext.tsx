@@ -2,6 +2,8 @@ import { createContext, useContext, useState, type ReactNode } from 'react'
 
 export type ChatTopic =
   | 'general'
+  | 'starter'
+  | 'advanced'
   | 'ai-staff'
   | 'automated-marketing'
   | 'pricing'

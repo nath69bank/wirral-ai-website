@@ -1,16 +1,13 @@
 import Seo from '../components/Seo'
 import Hero from '../components/Hero'
-import AIStatsBar from '../components/AIStatsBar'
-import PillarsSection from '../components/PillarsSection'
 import ProblemSection from '../components/ProblemSection'
-import SolutionSection from '../components/SolutionSection'
-import ServicesSection from '../components/ServicesSection'
-import BenefitsSection from '../components/BenefitsSection'
-import PricingSection from '../components/PricingSection'
-import HowItWorksSection from '../components/HowItWorksSection'
-import ReviewsSection from '../components/ReviewsSection'
-import MasterclassBridge from '../components/MasterclassBridge'
+import ServicesPathways from '../components/ServicesPathways'
+import PortfolioSection from '../components/PortfolioSection'
+import SocialProofSection from '../components/SocialProofSection'
+import ProcessSection from '../components/ProcessSection'
+import PricingPhilosophy from '../components/PricingPhilosophy'
 import FAQSection from '../components/FAQSection'
+import MasterclassBridge from '../components/MasterclassBridge'
 import FinalCTASection from '../components/FinalCTASection'
 import { faqs } from '../data/faqs'
 
@@ -18,8 +15,8 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="AI Staff & Automated Marketing Websites"
-        description="Websites built and kept live from £50 for businesses across Wirral, Liverpool, Manchester and Chester, with AI staff and automated marketing available as add-ons."
+        title="Professional Web Design Wirral, Liverpool & Manchester"
+        description="Wirral AI builds professional websites for UK businesses that generate enquiries and win customers. Starter sites from £50. Advanced custom builds. Free discovery call."
         path="/"
         jsonLd={{
           '@context': 'https://schema.org',
@@ -27,25 +24,19 @@ export default function Home() {
           mainEntity: faqs.map((faq) => ({
             '@type': 'Question',
             name: faq.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: faq.answer,
-            },
+            acceptedAnswer: { '@type': 'Answer', text: faq.answer },
           })),
         }}
       />
       <Hero />
-      <AIStatsBar />
-      <PillarsSection />
       <ProblemSection />
-      <SolutionSection />
-      <ServicesSection />
-      <BenefitsSection />
-      <PricingSection />
-      <HowItWorksSection />
-      <ReviewsSection />
-      <MasterclassBridge />
+      <ServicesPathways />
+      <PortfolioSection />
+      <SocialProofSection />
+      <ProcessSection />
+      <PricingPhilosophy />
       <FAQSection />
+      <MasterclassBridge />
       <FinalCTASection />
     </>
   )

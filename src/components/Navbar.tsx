@@ -5,11 +5,12 @@ import wirralW from '../assets/wirral-w.webp'
 import { useChat } from '../lib/chatContext'
 
 const links = [
-  { label: 'AI Staff', to: '/ai-staff' },
-  { label: 'Automated Marketing', to: '/automated-marketing' },
+  { label: 'Services', to: '/#services' },
+  { label: 'Our Work', to: '/#portfolio' },
   { label: 'Pricing', to: '/#pricing' },
+  { label: 'Reviews', to: '/#reviews' },
   { label: 'FAQ', to: '/#faq' },
-  { label: 'Masterclass', to: 'https://masterclass.wirral.ai', external: true },
+  { label: 'AI Masterclass', to: 'https://masterclass.wirral.ai', external: true },
 ]
 
 export default function Navbar() {
@@ -25,11 +26,7 @@ export default function Navbar() {
   }, [])
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 animate-fade-down transition-colors duration-300 ${
-        scrolled ? 'bg-navy/80 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'
-      }`}
-    >
+    <header className={`fixed top-0 left-0 right-0 z-50 animate-fade-down transition-colors duration-300 ${scrolled ? 'bg-navy/85 backdrop-blur-xl border-b border-white/5' : 'bg-transparent'}`}>
       <div className="flex items-center justify-between px-5 sm:px-8 lg:px-10 py-3.5 sm:py-4 max-w-7xl mx-auto">
         <Link to="/" className="flex items-center gap-2.5 shrink-0">
           <img src={wirralW} alt="Wirral AI" className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
@@ -38,24 +35,16 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-7">
+        <nav className="hidden lg:flex items-center gap-6">
           {links.map((link) =>
             link.external ? (
-              <a
-                key={link.to}
-                href={link.to}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[13px] text-mist hover:text-white transition-colors whitespace-nowrap"
-              >
+              <a key={link.to} href={link.to} target="_blank" rel="noopener noreferrer"
+                 className="text-[13px] text-mist hover:text-white transition-colors whitespace-nowrap">
                 {link.label}
               </a>
             ) : (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="text-[13px] text-mist hover:text-white transition-colors whitespace-nowrap"
-              >
+              <Link key={link.to} to={link.to}
+                    className="text-[13px] text-mist hover:text-white transition-colors whitespace-nowrap">
                 {link.label}
               </Link>
             )
@@ -64,14 +53,14 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2">
           <button
-            onClick={() => openChat('pricing')}
-            className="hidden sm:inline-flex items-center bg-brand-gradient text-navy text-[13px] font-semibold px-4 sm:px-5 py-2 rounded-full hover:opacity-90 transition-opacity"
+            onClick={() => openChat('starter')}
+            className="hidden sm:inline-flex items-center bg-brand-gradient text-navy text-[13px] font-semibold px-5 py-2 rounded-full hover:opacity-90 transition-opacity"
           >
-            Get Started
+            Book a free call
           </button>
           <button
             onClick={() => setOpen((o) => !o)}
-            className="md:hidden w-9 h-9 flex items-center justify-center rounded-full text-white hover:bg-white/10"
+            className="lg:hidden w-9 h-9 flex items-center justify-center rounded-full text-white hover:bg-white/10"
             aria-label={open ? 'Close menu' : 'Open menu'}
           >
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -80,38 +69,26 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden absolute left-4 right-4 top-full rounded-2xl bg-navy-deep/95 backdrop-blur-xl ring-1 ring-white/10 shadow-2xl px-5 py-3 animate-fade-up">
+        <div className="lg:hidden absolute left-4 right-4 top-full rounded-2xl bg-navy-deep/95 backdrop-blur-xl ring-1 ring-white/10 shadow-2xl px-5 py-3 animate-fade-up">
           {links.map((link) =>
             link.external ? (
-              <a
-                key={link.to}
-                href={link.to}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setOpen(false)}
-                className="block text-[15px] text-white/85 hover:text-white py-2.5 border-b border-white/10 last:border-b-0"
-              >
-                {link.label}
+              <a key={link.to} href={link.to} target="_blank" rel="noopener noreferrer"
+                 onClick={() => setOpen(false)}
+                 className="block text-[15px] text-green py-2.5 border-b border-white/10 last:border-b-0">
+                {link.label} ↗
               </a>
             ) : (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setOpen(false)}
-                className="block text-[15px] text-white/85 hover:text-white py-2.5 border-b border-white/10 last:border-b-0"
-              >
+              <Link key={link.to} to={link.to} onClick={() => setOpen(false)}
+                    className="block text-[15px] text-white/85 hover:text-white py-2.5 border-b border-white/10 last:border-b-0">
                 {link.label}
               </Link>
             )
           )}
           <button
-            onClick={() => {
-              setOpen(false)
-              openChat('pricing')
-            }}
+            onClick={() => { setOpen(false); openChat('starter') }}
             className="mt-3 block w-full text-center bg-brand-gradient text-navy text-sm font-semibold px-5 py-2.5 rounded-full"
           >
-            Get Started
+            Book a free discovery call
           </button>
         </div>
       )}

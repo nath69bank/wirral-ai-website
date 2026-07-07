@@ -1,12 +1,14 @@
 import type { ChatTopic } from './chatContext'
 
-// These openers are ONLY shown to Done For You (agency) customers.
-// Masterclass / strategy call visitors go directly to masterclass.wirral.ai.
 export const CHAT_OPENERS: Record<ChatTopic, string> = {
   general:
     "What kind of business are we building a website for?",
+  starter:
+    "A Starter website at £50 is one of the most straightforward projects we do. What kind of business is it for?",
+  advanced:
+    "Advanced builds are scoped individually so everything is priced correctly from the start. What does the project involve — bookings, payments, memberships, something else?",
   'ai-staff':
-    "Good choice — AI Staff is one of the most popular things we build. What kind of business is it for?",
+    "Good choice — AI Staff is one of our most popular add-ons. What kind of business do you run?",
   'automated-marketing':
     "Automated marketing works best when it is built around how the business already works. What kind of business is it?",
   pricing:
