@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import NetworkCanvas from './NetworkCanvas'
+import VoiceAgentWidget from './VoiceAgentWidget'
 import { useChat } from '../lib/chatContext'
 
 export default function Hero() {
@@ -55,6 +56,12 @@ export default function Hero() {
               {trust}
             </div>
           ))}
+        </div>
+
+        {/* ElevenLabs voice agent */}
+        <div className="animate-fade-up [animation-delay:560ms] mt-10 flex flex-col items-start gap-2">
+          <p className="text-mist text-xs font-mono uppercase tracking-widest mb-1">Or talk to our AI now</p>
+          <VoiceAgentWidget />
         </div>
       </div>
     </section>
