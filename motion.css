@@ -1,0 +1,870 @@
+/* ==========================================================================
+   wirral.ai — motion layer, richer surfaces and signature moments
+   Loaded after style.css. Every rule degrades to a static, legible page.
+   ========================================================================== */
+
+:root {
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* -------------------------------------------- reveal system (no layout shift)
+   Hidden states apply only once motion.js has flagged <html class="anim">, so a
+   script failure can never leave the page blank. */
+
+.reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.anim .reveal {
+  opacity: 0;
+  transform: none;
+  clip-path: inset(0 0 12% 0);
+  transition:
+    opacity 820ms var(--ease-out),
+    clip-path 820ms var(--ease-out);
+}
+
+.anim .reveal.is-in {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+/* The clip is applied to the inner media, never the observed element itself —
+   clip-path on an observed node zeroes its IntersectionObserver rect. */
+.anim .wipe > img {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1200ms var(--ease-out);
+}
+
+.anim .wipe.is-in > img {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Capability copper edge */
+.cap.is-edged::before {
+  transform: scaleX(1);
+  transition: transform 900ms var(--ease-out) 120ms;
+}
+
+/* ---------------------------------------------------------- scroll progress */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  z-index: 90;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  pointer-events: none;
+}
+
+/* --------------------------------------------------- word-level type reveals */
+
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.word {
+  display: inline-block;
+  white-space: pre;
+}
+
+.word > i {
+  display: inline-block;
+  font-style: inherit;
+  will-change: transform, opacity;
+}
+
+/* Before JS splits the text, headings are simply visible. */
+.js-split:not(.is-split) {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------- hairline rule draws */
+
+.rule-draw {
+  transform-origin: 0 50%;
+}
+
+/* --------------------------------------------------------------- hero rebuild */
+
+.hero {
+  padding-block: clamp(var(--space-16), 10vw, var(--space-32)) clamp(var(--space-16), 8vw, var(--space-32));
+}
+
+.hero-grid {
+  align-items: center;
+}
+
+.hero .h-hero {
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+@media (min-width: 1100px) {
+  .hero .h-hero {
+    font-size: clamp(3rem, 1rem + 5.2vw, 5.25rem);
+    max-width: 15ch;
+  }
+}
+
+/* Eyebrow gets an animated leading rule */
+.eyebrow--anim::before {
+  content: '';
+  display: inline-block;
+  width: 2.5rem;
+  height: 1px;
+  margin-right: var(--space-3);
+  vertical-align: middle;
+  background: currentColor;
+  transform-origin: 0 50%;
+  animation: rule-in 900ms var(--ease-out) 200ms both;
+}
+
+@keyframes rule-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Ambient generative field across the whole hero */
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-field {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.5;
+  pointer-events: auto;
+  mask-image: linear-gradient(180deg, transparent, #000 14%, #000 62%, transparent 92%);
+}
+
+[data-theme='dark'] .hero-field {
+  opacity: 0.5;
+}
+
+/* Hero visual — a single offset outline frame behind one clean plate */
+.hero-visual {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  margin: 0;
+}
+
+.hero-visual::before {
+  content: '';
+  position: absolute;
+  inset: 5% -4% -5% 4%;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-strong);
+  z-index: -1;
+}
+
+.hero-plate {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-border-strong);
+  box-shadow: var(--shadow-lg);
+  background: var(--color-surface);
+  aspect-ratio: 4 / 5;
+}
+
+.hero-plate img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+  will-change: transform;
+}
+
+@media (max-width: 1020px) {
+  .hero-plate {
+    aspect-ratio: 16 / 10;
+  }
+  .hero-visual::before {
+    display: none;
+  }
+}
+
+.hero-visual-caption {
+  position: absolute;
+  left: var(--space-4);
+  right: var(--space-4);
+  bottom: var(--space-4);
+  z-index: 3;
+}
+
+/* Full-width trust band under the hero */
+.hero-trust {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-top: clamp(var(--space-12), 6vw, var(--space-20));
+  border-top: 1px solid var(--color-border);
+}
+
+.hero-trust .trust-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-6) var(--space-6) 0 0;
+  border-right: 1px solid var(--color-border);
+}
+
+.hero-trust .trust-item:not(:first-child) {
+  padding-left: var(--space-6);
+}
+
+.hero-trust .trust-item:last-child {
+  border-right: 0;
+}
+
+.hero-trust .trust-item b {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.hero-trust .trust-item span {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 780px) {
+  .hero-trust {
+    grid-template-columns: 1fr;
+  }
+  .hero-trust .trust-item {
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-5) 0;
+  }
+  .hero-trust .trust-item:not(:first-child) {
+    padding-left: 0;
+  }
+  .hero-trust .trust-item:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* Scroll cue */
+.hero-cue {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-12);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.hero-cue span:last-child {
+  position: relative;
+  display: block;
+  width: 3.5rem;
+  height: 1px;
+  background: var(--color-border-strong);
+  overflow: hidden;
+}
+
+.hero-cue span:last-child::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform-origin: 0 50%;
+  animation: cue 2.4s var(--ease-in-out) infinite;
+}
+
+@keyframes cue {
+  0% {
+    transform: translateX(-100%);
+  }
+  60%,
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 1020px) {
+  .hero-cue {
+    display: none;
+  }
+}
+
+/* -------------------------------------------------------- client strip marquee */
+
+.client-strip {
+  padding-block: clamp(var(--space-8), 4vw, var(--space-12));
+}
+
+.client-strip p.client-strip-label {
+  max-width: none;
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  font-weight: 600;
+  margin-bottom: var(--space-6);
+}
+
+.marquee {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0;
+  animation: marquee 42s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--space-8), 5vw, var(--space-16));
+  padding-right: clamp(var(--space-8), 5vw, var(--space-16));
+  flex: none;
+}
+
+.marquee-group a,
+.marquee-group span {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.375rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--transition-interactive), opacity var(--transition-interactive);
+}
+
+.marquee-group a:hover {
+  color: var(--color-primary);
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* --------------------------------------------------------------- stat counters */
+
+.trust-item b {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------- capability card media */
+
+.cap {
+  position: relative;
+  overflow: hidden;
+}
+
+.cap-media {
+  position: relative;
+  margin: 0 0 var(--space-6);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  aspect-ratio: 16 / 7;
+  background: var(--color-surface-offset);
+}
+
+.cap-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.06);
+  will-change: transform;
+  transition: transform 900ms var(--ease-out);
+}
+
+.cap:hover .cap-media img {
+  transform: scale(1.12);
+}
+
+.cap--wide .cap-media {
+  aspect-ratio: 21 / 8;
+}
+
+@media (max-width: 760px) {
+  .cap-media,
+  .cap--wide .cap-media {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Copper accent edge that draws in on reveal */
+.cap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+/* ------------------------------------------------------------- statement rebuild */
+
+.statement-figure {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.statement-figure img {
+  will-change: transform;
+  transform: scale(1.12);
+}
+
+.statement-quote {
+  text-wrap: balance;
+}
+
+/* ------------------------------------------------------------ approach section */
+
+.section--deep {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.section-bg {
+  position: absolute;
+  inset: -12% 0 -12%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.section-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+  will-change: transform;
+}
+
+.section-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--color-surface-deep) 0%,
+    oklch(0.18 0.02 150 / 0.82) 35%,
+    oklch(0.18 0.02 150 / 0.82) 65%,
+    var(--color-surface-deep) 100%
+  );
+}
+
+/* Progress spine down the five steps */
+.steps {
+  position: relative;
+}
+
+.steps::before {
+  content: '';
+  position: absolute;
+  left: calc(1.25rem - 0.5px);
+  top: 2.5rem;
+  bottom: 2.5rem;
+  width: 1px;
+  background: oklch(0.95 0.01 120 / 0.18);
+}
+
+.steps-spine {
+  position: absolute;
+  left: calc(1.25rem - 0.5px);
+  top: 2.5rem;
+  bottom: 2.5rem;
+  width: 1px;
+  background: var(--color-accent);
+  transform-origin: 50% 0;
+  transform: scaleY(0);
+}
+
+.step-dot {
+  position: relative;
+  z-index: 2;
+  transition: background var(--transition-interactive), color var(--transition-interactive),
+    border-color var(--transition-interactive);
+}
+
+.step.is-active .step-dot {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #14180f;
+}
+
+@media (max-width: 620px) {
+  .steps::before,
+  .steps-spine {
+    display: none;
+  }
+}
+
+.steps-figure img {
+  will-change: transform;
+}
+
+/* --------------------------------------------------------- live tools spotlight */
+
+#live {
+  position: relative;
+  isolation: isolate;
+}
+
+#live::before {
+  content: '';
+  position: absolute;
+  width: 34rem;
+  height: 34rem;
+  border-radius: 50%;
+  left: var(--spot-x, 50%);
+  top: var(--spot-y, 40%);
+  translate: -50% -50%;
+  background: radial-gradient(circle, var(--color-primary-soft), transparent 68%);
+  opacity: 0;
+  transition: opacity 500ms var(--ease-out);
+  pointer-events: none;
+  z-index: -1;
+}
+
+#live.is-lit::before {
+  opacity: 1;
+}
+
+.panel {
+  transition: box-shadow 400ms var(--ease-out), border-color 400ms var(--ease-out);
+}
+
+.panel:focus-within {
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Live dot gets a real pulse ring */
+.panel-head .dot,
+.pulse {
+  position: relative;
+}
+
+.panel-head .dot::after,
+.pulse::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  opacity: 0.5;
+  animation: ping 2.2s var(--ease-out) infinite;
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.6;
+  }
+  70%,
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+/* ------------------------------------------------------------ magnetic buttons */
+
+.btn--primary,
+.btn--wa {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn--primary::after,
+.btn--wa::after {
+  content: '';
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  border-radius: 50%;
+  left: var(--mx, 50%);
+  top: var(--my, 50%);
+  translate: -50% -50%;
+  background: radial-gradient(circle, oklch(1 0 0 / 0.22), transparent 62%);
+  opacity: 0;
+  transition: opacity 260ms var(--ease-out);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.btn--primary:hover::after,
+.btn--wa:hover::after {
+  opacity: 1;
+}
+
+.btn--ghost {
+  position: relative;
+}
+
+.btn--ghost svg {
+  transition: transform var(--transition-interactive);
+}
+
+.btn--ghost:hover svg {
+  transform: translateX(3px);
+}
+
+/* --------------------------------------------------------------- why-us cells */
+
+.why > div,
+.why-cell {
+  position: relative;
+  overflow: hidden;
+}
+
+.why-cell::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 520ms var(--ease-out);
+}
+
+.why-cell:hover::after {
+  transform: scaleX(1);
+}
+
+/* --------------------------------------------------------------- reality rows */
+
+.reality-row {
+  position: relative;
+  transition: background var(--transition-interactive);
+}
+
+.reality-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--color-accent);
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  transition: transform 420ms var(--ease-out);
+}
+
+.reality-row:hover::after {
+  transform: scaleY(1);
+}
+
+/* ----------------------------------------------------------------- FAQ motion */
+
+details[open] > div,
+details[open] > p {
+  animation: faq-in 380ms var(--ease-out) both;
+}
+
+@keyframes faq-in {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ---------------------------------------------------------------- final CTA */
+
+#final {
+  position: relative;
+  overflow: hidden;
+}
+
+#final .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.final-orbit {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .word > i,
+  .cap::before,
+  .steps-spine,
+  .why-cell::after {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .wipe,
+  .line {
+    clip-path: none !important;
+  }
+  .marquee-track {
+    animation: none !important;
+  }
+  .hero-plate img,
+  .statement-figure img,
+  .section-bg img {
+    transform: none !important;
+  }
+}
+
+/* Wide capability cards: media sits beside the copy, no trailing margin */
+.cap--wide .cap-media {
+  margin-bottom: 0;
+  aspect-ratio: 4 / 3;
+}
+
+@media (max-width: 760px) {
+  .cap--wide .cap-media {
+    aspect-ratio: 16 / 9;
+    margin-bottom: var(--space-2);
+  }
+}
+
+/* Wide capability cards: clearer vertical rhythm in the copy column */
+.cap--wide > div > .cap-index {
+  margin-bottom: var(--space-2);
+}
+.cap--wide > div > h3 {
+  margin-bottom: var(--space-3);
+}
+
+/* Depth in the dark process section without a background photograph */
+.approach-depth {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 55% at 78% 8%, oklch(0.7 0.09 155 / 0.16), transparent 70%),
+    radial-gradient(50% 45% at 8% 92%, oklch(0.68 0.1 45 / 0.12), transparent 72%);
+}
+
+.section--deep {
+  position: relative;
+  isolation: isolate;
+}
+.section--deep > .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* Process figure: taller portrait plate so it holds the column */
+.steps-figure img {
+  aspect-ratio: 4 / 5;
+}
+
+@media (max-width: 900px) {
+  .steps-figure img {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Adviser panel: tighter resting height so it doesn't read as empty */
+.chat-log {
+  min-height: 200px;
+}
+
+/* Final CTA orbit field */
+.final-orbit {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.4;
+  pointer-events: none;
+  mask-image: radial-gradient(70% 70% at 72% 50%, #000, transparent 72%);
+}
+
+/* Marquee scale on small screens */
+@media (max-width: 640px) {
+  .marquee-group {
+    font-size: var(--text-base);
+  }
+}
+
+/* Never allow sideways drift on small screens.
+   `clip` rather than `hidden` so `position: sticky` keeps working. */
+html {
+  overflow-x: clip;
+}
+.client-strip,
+.marquee {
+  overflow: clip;
+  max-width: 100%;
+}
+
+/* -------------------------------------------------- in-page navigation offset */
+/* Every anchor target clears the sticky header when jumped to. */
+:target,
+#top,
+#capabilities,
+#approach,
+#live,
+#organisations,
+#why,
+#talk,
+#faq,
+#final {
+  scroll-margin-top: var(--header-offset, 88px);
+}

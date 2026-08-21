@@ -1,0 +1,38 @@
+# wirral.ai
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_content/
+Disallow: /_vercel/
+Disallow: /dashboard/
+
+# Answer engines — explicitly welcome. Being cited inside AI answers is
+# a real acquisition channel for an AI consultancy.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://www.wirral.ai/sitemap.xml

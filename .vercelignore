@@ -1,0 +1,8 @@
+*.md
+*.py
+*.pyc
+.git
+__pycache__
+_content
+build.py
+server.py

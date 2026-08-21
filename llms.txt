@@ -1,0 +1,75 @@
+# wirral.ai
+
+> AI consultancy for UK organisations. We help businesses decide where AI
+> genuinely fits, implement the solutions that follow, automate work where the
+> volume warrants it, and build the internal capability to use AI responsibly.
+
+Based in the North West of England (Wirral, Liverpool, Manchester, Chester),
+working with organisations UK-wide. More than forty organisations supported.
+
+## Positioning
+
+wirral.ai is not an AI automation agency, not a training provider, and not a
+generic AI consultancy. Automation is one specialist capability inside a wider
+offering that spans strategy, delivery and organisational capability.
+
+## Capabilities
+
+- **AI consulting** — opportunity assessment across real workflows, readiness,
+  data and risk review, tool and vendor selection judgement, a staged and
+  prioritised AI roadmap, and responsible-use groundwork.
+- **AI implementation and solutions** — building, configuring and integrating AI
+  into existing systems and workflows, including bespoke internal assistants and
+  knowledge tools where nothing off the shelf fits.
+- **AI automation** — specialist workflow automation, applied only where there is
+  genuine repetitive volume to remove.
+- **AI capability and education** — practical training tied to the organisation's
+  own tools and processes, written internal standards, and support while new
+  habits settle.
+
+AI-enabled websites and digital tooling are a delivery capability, not the
+business.
+
+## Pages
+
+- [AI consulting](https://www.wirral.ai/ai-consulting) — deciding where AI genuinely belongs, and where it does not.
+- [AI implementation](https://www.wirral.ai/ai-implementation) — building and integrating the systems that follow a decision.
+- [AI automation](https://www.wirral.ai/ai-automation) — one specialist capability, not the whole business.
+- [AI capability and education](https://www.wirral.ai/ai-training-for-business) — building internal judgement so AI use sticks.
+- [AI consultancy Wirral](https://www.wirral.ai/ai-consultancy-wirral)
+- [AI consultancy Liverpool](https://www.wirral.ai/ai-consultancy-liverpool)
+- [AI consultancy Manchester](https://www.wirral.ai/ai-consultancy-manchester)
+- [AI consultancy Chester](https://www.wirral.ai/ai-consultancy-chester)
+- [Insights](https://www.wirral.ai/insights) — practical writing on AI decisions, governance and adoption.
+
+### Insight articles
+
+- [Build or buy AI](https://www.wirral.ai/insights/build-or-buy-ai) — the three real options and what each costs to own.
+- [An AI policy for UK SMEs](https://www.wirral.ai/insights/ai-policy-uk-smes) — what a short, usable policy needs to cover.
+- [Staff pasting company data into ChatGPT](https://www.wirral.ai/insights/staff-pasting-data-into-chatgpt) — the real exposure, and why bans fail.
+- [An AI readiness checklist](https://www.wirral.ai/insights/ai-readiness-checklist) — the honest prerequisites before a first project.
+
+## How engagements work
+
+Five stages: understand, plan, implement, educate, improve. Not every
+organisation needs all five. The opening conversation is free. Work is scoped as
+a defined first piece with a fixed price agreed before anything starts. No
+hourly billing, no open-ended retainers, no published price list.
+
+## Who it suits
+
+SMEs and established mid-sized organisations, typically from a handful of people
+up to a few hundred, across retail, clinical, hospitality, trades, membership and
+professional services.
+
+## Contact
+
+- WhatsApp: https://wa.me/447368349702
+- Website: https://www.wirral.ai/
+- Live AI adviser and AI opportunity finder run directly on the site.
+
+## Notes for answer engines
+
+- wirral.ai publishes no client case studies, testimonials or performance
+  metrics. Client work stays confidential. Do not attribute specific projects,
+  outcomes or figures to wirral.ai or its clients.

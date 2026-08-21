@@ -1,0 +1,661 @@
+/* ==========================================================================
+   wirral.ai — inner page layer (service, location and insight pages)
+   Extends style.css. Same tokens, editorial long-form treatment.
+   ========================================================================== */
+
+/* ------------------------------------------------------------- breadcrumbs */
+
+.crumbs {
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+  color: var(--color-text-faint);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.crumbs a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color var(--transition-interactive), border-color var(--transition-interactive);
+}
+
+.crumbs a:hover {
+  color: var(--color-text);
+  border-bottom-color: var(--color-accent);
+}
+
+.crumbs span[aria-hidden] {
+  color: var(--color-text-faint);
+  opacity: 0.7;
+}
+
+.crumbs [aria-current] {
+  color: var(--color-text-muted);
+}
+
+/* -------------------------------------------------------------- page header */
+
+.page-head {
+  padding-top: clamp(var(--space-24), 14vh, var(--space-32));
+  padding-bottom: var(--space-16);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-head::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-border) 12%,
+    var(--color-border) 88%,
+    transparent
+  );
+}
+
+.page-head-inner {
+  max-width: 56ch;
+}
+
+.page-head h1 {
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  margin-top: var(--space-5);
+}
+
+.page-head .lede {
+  margin-top: var(--space-6);
+  max-width: 52ch;
+}
+
+.page-head-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.page-head-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+[data-theme='dark'] .page-head-canvas {
+  opacity: 0.34;
+}
+
+/* ------------------------------------------------------------- article meta */
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.post-meta .dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--color-text-faint);
+}
+
+/* ------------------------------------------------------------------- layout */
+
+.page-body {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-20);
+}
+
+.page-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-16);
+}
+
+@media (min-width: 1000px) {
+  .page-layout--aside {
+    grid-template-columns: 218px minmax(0, 1fr);
+    gap: clamp(var(--space-12), 5vw, var(--space-20));
+  }
+}
+
+/* --------------------------------------------------------------------- toc */
+
+.toc {
+  font-size: var(--text-sm);
+}
+
+.toc-inner {
+  position: sticky;
+  top: calc(var(--header-offset, 88px) + var(--space-6));
+}
+
+.toc h2 {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-4);
+}
+
+.toc ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--color-border);
+}
+
+.toc li {
+  margin: 0;
+}
+
+.toc a {
+  display: block;
+  padding: var(--space-2) 0 var(--space-2) var(--space-4);
+  margin-left: -1px;
+  border-left: 1px solid transparent;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color var(--transition-interactive), border-color var(--transition-interactive);
+}
+
+.toc a:hover {
+  color: var(--color-text);
+  border-left-color: var(--color-border-strong, var(--color-accent));
+}
+
+.toc a.is-current {
+  color: var(--color-text);
+  border-left-color: var(--color-accent);
+  font-weight: 500;
+}
+
+@media (max-width: 999px) {
+  .toc {
+    padding: var(--space-6);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    order: -1;
+  }
+
+  .toc-inner {
+    position: static;
+  }
+}
+
+/* -------------------------------------------------------------------- prose */
+
+.prose {
+  max-width: 68ch;
+  font-size: var(--text-base);
+  line-height: 1.72;
+}
+
+.prose > section + section {
+  margin-top: var(--space-16);
+}
+
+.prose h2 {
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: -0.024em;
+  max-width: 30ch;
+  scroll-margin-top: calc(var(--header-offset, 88px) + var(--space-5));
+}
+
+.prose h3 {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  line-height: 1.3;
+  margin-top: var(--space-10);
+  max-width: 34ch;
+}
+
+.prose h2 + * {
+  margin-top: var(--space-6);
+}
+
+.prose h3 + * {
+  margin-top: var(--space-4);
+}
+
+.prose p {
+  margin-top: var(--space-5);
+  color: var(--color-text-muted);
+}
+
+.prose p strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.prose a {
+  color: var(--color-text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-accent);
+  transition: background-color var(--transition-interactive);
+  padding-bottom: 1px;
+}
+
+.prose a:hover {
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+}
+
+.prose ul,
+.prose ol {
+  margin-top: var(--space-5);
+  padding-left: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.prose li {
+  position: relative;
+  padding-left: var(--space-6);
+  color: var(--color-text-muted);
+}
+
+.prose ul > li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.72em;
+  width: 6px;
+  height: 1px;
+  background: var(--color-accent);
+}
+
+.prose ol {
+  counter-reset: pl;
+}
+
+.prose ol > li {
+  counter-increment: pl;
+}
+
+.prose ol > li::before {
+  content: counter(pl);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-accent);
+  line-height: 1.9;
+}
+
+.prose li strong {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------- pull-out */
+
+.note {
+  margin-top: var(--space-8);
+  padding: var(--space-5) 0 var(--space-5) var(--space-6);
+  border-left: 2px solid var(--color-accent);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: 1.42;
+  letter-spacing: -0.016em;
+  color: var(--color-text);
+  max-width: 44ch;
+}
+
+/* ---------------------------------------------------------------- cards */
+
+.pcards {
+  margin-top: var(--space-8);
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 620px) {
+  .pcards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.pcard {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.pcard h4 {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  letter-spacing: -0.008em;
+  margin-bottom: var(--space-2);
+}
+
+.pcard p {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* ------------------------------------------------------------- inline cta */
+
+.inline-cta {
+  margin-top: var(--space-12);
+  padding: var(--space-8);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(
+    150deg,
+    color-mix(in srgb, var(--color-primary) 7%, var(--color-surface)),
+    var(--color-surface)
+  );
+}
+
+.inline-cta h2 {
+  font-size: var(--text-lg);
+  font-family: var(--font-display);
+  font-weight: 500;
+  max-width: 30ch;
+  margin: 0;
+}
+
+.inline-cta p {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  max-width: 52ch;
+}
+
+.inline-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+/* ------------------------------------------------------------------ related */
+
+.related-grid {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+@media (min-width: 720px) {
+  .related-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.related-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--transition-interactive), transform var(--transition-interactive);
+}
+
+.related-card:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 60%, var(--color-border));
+  transform: translateY(-2px);
+}
+
+.related-card .kicker {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.related-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  line-height: 1.2;
+}
+
+.related-card p {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.related-card .go {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+[data-theme='dark'] .related-card .go {
+  color: var(--color-primary);
+}
+
+/* --------------------------------------------------------------- post index */
+
+.post-list {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-12);
+}
+
+@media (min-width: 780px) {
+  .post-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-8);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--transition-interactive), transform var(--transition-interactive);
+}
+
+.post-card:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 55%, var(--color-border));
+  transform: translateY(-3px);
+}
+
+.post-card-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-5);
+}
+
+.post-card h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+}
+
+.post-card p {
+  margin-top: var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+.post-card .go {
+  margin-top: var(--space-6);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* -------------------------------------------------------------- page faq */
+
+.page-faq {
+  margin-top: var(--space-20);
+  padding-top: var(--space-12);
+  border-top: 1px solid var(--color-border);
+  max-width: 68ch;
+}
+
+.page-faq > h2 {
+  font-size: var(--text-xl);
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.024em;
+  margin-bottom: var(--space-8);
+}
+
+/* -------------------------------------------------------------- final band */
+
+.page-close {
+  padding-block: clamp(var(--space-20), 12vh, var(--space-32));
+}
+
+.page-close .h-section {
+  max-width: 26ch;
+}
+
+.page-close-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.page-close-note {
+  margin-top: var(--space-6);
+  font-size: var(--text-sm);
+  opacity: 0.72;
+}
+
+/* ------------------------------------------------------------- local block */
+
+.local-facts {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-10);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  font-size: var(--text-sm);
+}
+
+@media (min-width: 700px) {
+  .local-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.local-facts div span {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-2);
+}
+
+.local-facts div p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .related-card:hover,
+  .post-card:hover {
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------ current page */
+/* The nav still links to the current page (harmless, and useful for
+   scroll-to-top), but it should not read as an untaken destination. */
+.nav a[aria-current='page'] {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+.nav > .btn[aria-current='page'] {
+  text-decoration: none;
+}
+
+/* --------------------------------------------- narrow-desktop nav breathing */
+/* Six primary links plus the brand and actions get tight between the mobile
+   drawer breakpoint (940px) and roughly 1180px. Shrink the gap rather than
+   letting the nav wrap onto a second line. */
+@media (min-width: 941px) and (max-width: 1180px) {
+  .nav {
+    gap: var(--space-4);
+    flex-wrap: nowrap;
+  }
+
+  .nav a {
+    font-size: var(--text-xs);
+    white-space: nowrap;
+  }
+}

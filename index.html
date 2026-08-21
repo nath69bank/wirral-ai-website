@@ -1,53 +1,1771 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Preload the fonts used in the very first paint (body text + the big
-         display headline) so they start fetching immediately rather than
-         waiting on the CSS to be fetched and parsed first. -->
-    <link rel="preload" href="/fonts/ibm-plex-sans-400.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/space-grotesk-600.woff2" as="font" type="font/woff2" crossorigin />
-
-    <title>AI Staff & Automated Marketing Websites | Wirral AI</title>
+    <title>AI Consultancy &amp; AI Implementation for UK Business | wirral.ai</title>
     <meta
       name="description"
-      content="Websites built and kept live from £50 for businesses across Wirral, Liverpool, Manchester and Chester, with AI staff and automated marketing available as add-ons."
+      content="AI consultancy for UK organisations. We help you decide where AI genuinely fits, implement what follows, and build the capability to run it well."
     />
-    <meta name="keywords" content="AI receptionist, AI staff, automated marketing, business website, Wirral, Liverpool, Manchester, Chester" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://wirral.ai/" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://www.wirral.ai/" />
+    <meta name="author" content="wirral.ai" />
+    <meta name="theme-color" content="#F5F3EE" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#101210" media="(prefers-color-scheme: dark)" />
+    <meta name="format-detection" content="telephone=no" />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Wirral AI" />
-    <meta property="og:title" content="AI Staff & Automated Marketing Websites | Wirral AI" />
-    <meta property="og:description" content="Websites built and kept live from £50, with AI staff and automated marketing available as add-ons whenever you're ready." />
-    <meta property="og:url" content="https://wirral.ai/" />
-    <meta property="og:image" content="https://wirral.ai/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-
+    <meta property="og:site_name" content="wirral.ai" />
+    <meta property="og:locale" content="en_GB" />
+    <meta
+      property="og:title"
+      content="AI Consultancy &amp; AI Implementation for UK Business | wirral.ai"
+    />
+    <meta
+      property="og:description"
+      content="AI consulting, implementation, automation and education for UK organisations. Practical AI adoption, built around how your business actually works."
+    />
+    <meta property="og:url" content="https://www.wirral.ai/" />
+    <meta property="og:image" content="https://www.wirral.ai/assets/hero.webp" />
+    <meta property="og:image:width" content="1448" />
+    <meta property="og:image:height" content="1086" />
+    <meta
+      property="og:image:alt"
+      content="Precisely cut cream, deep green and copper panels assembled into a layered architectural relief."
+    />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="AI Staff & Automated Marketing Websites | Wirral AI" />
-    <meta name="twitter:description" content="Websites built and kept live from £50, with AI staff and automated marketing available as add-ons." />
-    <meta name="twitter:image" content="https://wirral.ai/og-image.png" />
+    <meta
+      name="twitter:title"
+      content="AI Consultancy &amp; AI Implementation for UK Business | wirral.ai"
+    />
+    <meta
+      name="twitter:description"
+      content="AI consulting, implementation, automation and education for UK organisations. Practical AI adoption, built around how your business actually works."
+    />
+    <meta name="twitter:image" content="https://www.wirral.ai/assets/hero.webp" />
+
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./assets/favicon.svg" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&f[]=cabinet-grotesk@500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preload" as="image" href="./assets/hero.webp" type="image/webp" fetchpriority="high" />
+    <link rel="stylesheet" href="./base.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./motion.css" />
+    <link rel="stylesheet" href="./assistant.css" />
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Wirral AI",
-        "description": "AI staff and automated marketing add-ons for business websites across Wirral, Liverpool, Manchester and Chester, built and kept live from £50.",
-        "areaServed": ["Wirral", "Liverpool", "Manchester", "Chester"],
-        "url": "https://wirral.ai/"
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.wirral.ai/#organisation",
+            "name": "wirral.ai",
+            "url": "https://www.wirral.ai/",
+            "description": "AI consultancy for UK organisations, covering AI consulting, implementation and solutions, specialist AI automation, and organisational AI capability and education.",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.wirral.ai/assets/favicon.svg"
+            },
+            "image": "https://www.wirral.ai/assets/hero.webp",
+            "telephone": "+447368349702",
+            "areaServed": [
+              {
+                "@type": "Place",
+                "name": "Wirral"
+              },
+              {
+                "@type": "Place",
+                "name": "Liverpool"
+              },
+              {
+                "@type": "Place",
+                "name": "Manchester"
+              },
+              {
+                "@type": "Place",
+                "name": "Chester"
+              },
+              {
+                "@type": "Place",
+                "name": "North West England"
+              },
+              {
+                "@type": "Country",
+                "name": "United Kingdom"
+              }
+            ],
+            "knowsAbout": [
+              "AI consulting",
+              "AI consultancy",
+              "AI implementation",
+              "AI solutions",
+              "AI automation",
+              "AI education",
+              "AI training",
+              "AI capability",
+              "responsible AI",
+              "AI adoption",
+              "AI strategy",
+              "business AI",
+              "AI for small and medium businesses",
+              "AI governance",
+              "AI policy",
+              "shadow AI",
+              "AI readiness",
+              "AI consultancy Wirral",
+              "AI consultancy Liverpool",
+              "AI consultancy Manchester",
+              "AI consultancy Chester"
+            ],
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "contactType": "sales",
+                "telephone": "+447368349702",
+                "availableLanguage": [
+                  "en-GB"
+                ],
+                "areaServed": "GB"
+              }
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Widnes",
+              "addressRegion": "Cheshire",
+              "addressCountry": "GB"
+            },
+            "slogan": "Make AI a capability your business owns."
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://www.wirral.ai/#service",
+            "name": "wirral.ai — AI consulting, implementation and education",
+            "url": "https://www.wirral.ai/",
+            "parentOrganization": {
+              "@id": "https://www.wirral.ai/#organisation"
+            },
+            "description": "AI consultancy working with UK organisations to decide where AI genuinely belongs, implement the solutions that follow, automate work where the volume warrants it, and build lasting internal AI capability.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Widnes",
+              "addressRegion": "Cheshire",
+              "addressCountry": "GB"
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "United Kingdom"
+            },
+            "serviceType": [
+              "AI consulting",
+              "AI implementation",
+              "AI automation",
+              "AI training and education"
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "AI capability, consulting, implementation and education",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "AI consulting",
+                    "description": "Assessment of where AI genuinely fits an organisation's operations, opportunity sizing, vendor and tool selection judgement, and a staged, prioritised AI roadmap.",
+                    "provider": {
+                      "@id": "https://www.wirral.ai/#organisation"
+                    },
+                    "areaServed": {
+                      "@type": "Country",
+                      "name": "United Kingdom"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "AI implementation and solutions",
+                    "description": "Building, configuring and integrating AI solutions into existing systems and workflows, including bespoke internal assistants and knowledge tools where nothing off the shelf fits.",
+                    "provider": {
+                      "@id": "https://www.wirral.ai/#organisation"
+                    },
+                    "areaServed": {
+                      "@type": "Country",
+                      "name": "United Kingdom"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "AI automation",
+                    "description": "Specialist workflow automation applied where there is genuine repetitive volume to remove, designed around the process rather than the tool.",
+                    "provider": {
+                      "@id": "https://www.wirral.ai/#organisation"
+                    },
+                    "areaServed": {
+                      "@type": "Country",
+                      "name": "United Kingdom"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "AI capability and education",
+                    "description": "Practical AI training, written internal standards and responsible-use guidance so teams can use AI confidently without depending on an external supplier.",
+                    "provider": {
+                      "@id": "https://www.wirral.ai/#organisation"
+                    },
+                    "areaServed": {
+                      "@type": "Country",
+                      "name": "United Kingdom"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.wirral.ai/#website",
+            "url": "https://www.wirral.ai/",
+            "name": "wirral.ai",
+            "inLanguage": "en-GB",
+            "publisher": {
+              "@id": "https://www.wirral.ai/#organisation"
+            }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://www.wirral.ai/#webpage",
+            "url": "https://www.wirral.ai/",
+            "name": "AI Consultancy, Implementation & AI Training for UK Businesses",
+            "isPartOf": {
+              "@id": "https://www.wirral.ai/#website"
+            },
+            "about": {
+              "@id": "https://www.wirral.ai/#organisation"
+            },
+            "primaryImageOfPage": {
+              "@type": "ImageObject",
+              "url": "https://www.wirral.ai/assets/hero.webp"
+            },
+            "inLanguage": "en-GB",
+            "description": "AI consulting, implementation, automation and education for UK organisations. Practical AI adoption built around how your business actually works.",
+            "significantLink": [
+              "https://www.wirral.ai/ai-consulting",
+              "https://www.wirral.ai/ai-implementation",
+              "https://www.wirral.ai/ai-automation",
+              "https://www.wirral.ai/ai-training-for-business",
+              "https://www.wirral.ai/ai-consultancy-wirral",
+              "https://www.wirral.ai/ai-consultancy-liverpool",
+              "https://www.wirral.ai/ai-consultancy-manchester",
+              "https://www.wirral.ai/ai-consultancy-chester",
+              "https://www.wirral.ai/insights"
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://www.wirral.ai/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "We don't know where to start. Is that too early to talk?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "That's the most common starting point and the one we're built for. The first piece of work is usually understanding your operations well enough to say where AI would and wouldn't help — which is a very different exercise to picking a tool."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do we need a custom AI system built?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Usually not. For most organisations the gain comes from selecting capable platforms, configuring them properly, redesigning the workflow around them and training people to use them well. We build bespoke when nothing existing fits the requirement, and we'll say so either way."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is this just automation with an AI label on it?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Automation is a specialist capability we bring in when there's genuine repetitive volume to remove. A large share of our work is consulting, solution design and building internal capability — often with no automation involved at all."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do you handle our data and the risk side?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It's part of the design work rather than a separate exercise. We look at what data a tool would see, where it goes, what should never be shared, where a human has to stay in the loop, and what your people need to be told in writing. Responsible use is a practical constraint, not a policy document nobody reads."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you train our staff as well?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes — building capability is part of how we work rather than a product sold separately. Sessions are practical and tied to your tools and processes, so people leave able to do the work rather than able to describe the technology."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What size of organisation do you work with?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Mostly SMEs and established mid-sized organisations — typically from a handful of people up to a few hundred. What matters more than headcount is whether there's a decision-maker who wants a straight answer and a team willing to change how something is done."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does an engagement usually start?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "A short conversation, no charge, to understand your position and whether we're the right fit. If it makes sense to continue, we'll scope a defined first piece of work with a fixed price agreed before anything begins."
+                }
+              }
+            ],
+            "isPartOf": {
+              "@id": "https://www.wirral.ai/#website"
+            }
+          },
+          {
+            "@type": "HowTo",
+            "@id": "https://www.wirral.ai/#how-we-work",
+            "name": "How wirral.ai delivers an AI engagement",
+            "description": "The five-stage sequence wirral.ai uses to take an organisation from uncertainty to owned AI capability.",
+            "step": [
+              {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Understand",
+                "text": "Spend time in the detail of how the organisation runs — the processes, bottlenecks, systems and constraints nobody writes down."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Plan",
+                "text": "Size, rank and stress-test opportunities against effort, risk and appetite, producing a short honest plan including the ideas to drop."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Implement",
+                "text": "Build, configure and integrate — starting with something narrow enough to prove and useful enough to matter, then widening it."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Educate",
+                "text": "Bring the team up to speed on what has changed, how to use it well and where the boundaries sit, with written standards in plain English."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Improve",
+                "text": "Review adoption against what was expected, adjust, extend what works and retire what does not."
+              }
+            ]
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "@id": "https://www.wirral.ai/#nav",
+            "name": [
+              "AI consulting",
+              "AI implementation",
+              "AI automation",
+              "AI capability and education",
+              "AI consultancy Wirral",
+              "AI consultancy Liverpool",
+              "AI consultancy Manchester",
+              "AI consultancy Chester",
+              "Insights"
+            ],
+            "url": [
+              "https://www.wirral.ai/ai-consulting",
+              "https://www.wirral.ai/ai-implementation",
+              "https://www.wirral.ai/ai-automation",
+              "https://www.wirral.ai/ai-training-for-business",
+              "https://www.wirral.ai/ai-consultancy-wirral",
+              "https://www.wirral.ai/ai-consultancy-liverpool",
+              "https://www.wirral.ai/ai-consultancy-manchester",
+              "https://www.wirral.ai/ai-consultancy-chester",
+              "https://www.wirral.ai/insights"
+            ]
+          }
+        ]
       }
     </script>
   </head>
-  <body class="bg-navy text-white font-body antialiased">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+  <body>
+    <a href="#main" class="sr-only">Skip to content</a>
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <!-- ================================================================ HEADER -->
+    <header class="site-header" id="siteHeader">
+      <div class="wrap header-inner">
+        <a class="brand" href="#top" aria-label="wirral.ai home">
+          <svg
+            width="26"
+            height="26"
+            viewBox="0 0 28 28"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path d="M2 9.5V5a3 3 0 0 1 3-3h4.5" />
+            <path d="M18.5 2H23a3 3 0 0 1 3 3v4.5" />
+            <path d="M26 18.5V23a3 3 0 0 1-3 3h-4.5" />
+            <path d="M9.5 26H5a3 3 0 0 1-3-3v-4.5" />
+            <circle cx="14" cy="14" r="3.4" fill="currentColor" stroke="none" />
+          </svg>
+          <span class="brand-word">wirral<span>.ai</span></span>
+        </a>
+
+        <nav class="nav" id="nav" aria-label="Primary">
+          <a href="/ai-consulting">AI consulting</a>
+          <a href="/ai-implementation">Implementation</a>
+          <a href="/ai-automation">Automation</a>
+          <a href="/ai-training-for-business">Capability</a>
+          <a href="#live" data-scroll>Live tools</a>
+          <a href="/insights">Insights</a>
+          <a class="btn btn--primary btn--sm" href="/build-with-us">Build with us</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="icon-btn" data-theme-toggle aria-label="Switch to dark mode">
+            <svg
+              width="19"
+              height="19"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+          <a class="btn btn--primary btn--sm header-desktop-cta" href="/build-with-us">Build with us</a>
+          <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 7h18M3 12h18M3 17h18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <span id="top"></span>
+
+      <!-- ================================================================ HERO -->
+      <section class="hero">
+        <canvas id="heroCanvas" class="hero-field" aria-hidden="true"></canvas>
+        <div class="wrap hero-grid">
+          <div>
+            <p class="eyebrow eyebrow--anim">AI consulting · implementation · capability</p>
+            <h1 class="h-hero js-split">Make AI a capability your business owns.</h1>
+            <p class="lede">
+              wirral.ai works with UK organisations to decide where AI genuinely belongs, build the
+              solutions that follow, and give teams the confidence to use it well. Practical work,
+              not predictions.
+            </p>
+            <div class="hero-cta">
+              <a class="btn btn--primary" href="/build-with-us">Start your project</a>
+              <a class="btn btn--ghost" href="#live">
+                Try our AI adviser
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h13M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+            <div class="hero-cue" aria-hidden="true">
+              <span>Scroll</span>
+              <span></span>
+            </div>
+          </div>
+
+          <figure class="hero-visual">
+            <div class="hero-plate">
+              <img
+                src="./assets/hero.webp" fetchpriority="high"
+                alt="Precisely cut cream, deep green and copper panels assembled into a layered architectural relief"
+                width="1448"
+                height="1086"
+                decoding="async"
+                fetchpriority="high"
+              />
+            </div>
+            <figcaption class="hero-visual-caption">
+              <span class="pulse" aria-hidden="true"></span>
+              This site runs live AI tools — try them further down the page
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="wrap">
+          <div class="hero-trust">
+
+              <div class="trust-item">
+                <b class="mono" data-count>40+</b><span>Organisations supported</span>
+              </div>
+              <div class="trust-item">
+                <b>North West &amp; UK-wide</b><span>Wirral · Liverpool · Manchester · Chester</span>
+              </div>
+              <div class="trust-item">
+                <b>Advice to delivery</b><span>Strategy, build and training in one team</span>
+              </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= CLIENT STRIP -->
+      <section class="client-strip" aria-label="Organisations we have worked with">
+        <div class="wrap">
+          <p class="client-strip-label">Organisations we've worked with</p>
+        </div>
+        <div class="marquee">
+          <div class="marquee-track">
+            <div class="marquee-group" role="list">
+              <a href="https://mobiuk.co.uk" target="_blank" rel="noopener noreferrer">mobiUK</a>
+              <a href="https://vapouk.co.uk" target="_blank" rel="noopener noreferrer">Vapo UK</a>
+              <a href="https://ninedragons.co.uk" target="_blank" rel="noopener noreferrer">Nine Dragons Martial Arts</a>
+              <span>Gene23 Health Clinic</span>
+              <a href="https://lahorilane.co.uk" target="_blank" rel="noopener noreferrer">Lahori Lane</a>
+              <a href="https://jcpainting.co.uk" target="_blank" rel="noopener noreferrer">JC Paint</a>
+            </div>
+            <div class="marquee-group" aria-hidden="true">
+              <span>mobiUK</span>
+              <span>Vapo UK</span>
+              <span>Nine Dragons Martial Arts</span>
+              <span>Gene23 Health Clinic</span>
+              <span>Lahori Lane</span>
+              <span>JC Paint</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================== REALITY -->
+      <section class="section" id="reality">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <p class="eyebrow">The starting position</p>
+              <h2 class="h-section js-split">Most organisations aren't short of AI opinions. They're short of decisions.</h2>
+            </div>
+            <p class="lede">
+              The technology has moved faster than the guidance around it. That leaves leadership
+              teams carrying a question they were never given time to answer properly: what should we
+              actually do about this?
+            </p>
+          </div>
+
+          <div class="reality reveal">
+            <div class="reality-row">
+              <span class="mono">01</span>
+              <h3>Expectation has arrived ahead of readiness</h3>
+              <p>
+                Boards, clients and tender documents now ask where you stand on AI. Very few
+                organisations have a position they could defend in detail, and fewer still have one
+                written down.
+              </p>
+            </div>
+            <div class="reality-row">
+              <span class="mono">02</span>
+              <h3>Your people are already using it</h3>
+              <p>
+                Staff are pasting work into AI tools every day, usually without a policy, a
+                standard, or anyone to ask. That is a capability gap and an information risk sitting
+                in the same place.
+              </p>
+            </div>
+            <div class="reality-row">
+              <span class="mono">03</span>
+              <h3>Trials that never become the way work gets done</h3>
+              <p>
+                There is no shortage of experimentation. What tends to be missing is the step where
+                something is chosen, embedded into a real process, and handed to a team who
+                understand it.
+              </p>
+            </div>
+            <div class="reality-row">
+              <span class="mono">04</span>
+              <h3>Advice that never touches your operations</h3>
+              <p>
+                Generic AI thinking is everywhere. Judgement about your workflows, your data, your
+                sector rules and your appetite for risk is considerably harder to come by.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================== STATEMENT -->
+      <section class="section section--tight" id="statement">
+        <div class="wrap statement reveal">
+          <figure class="statement-figure wipe">
+            <img
+              src="./assets/statement.webp"
+              alt="An open sketchbook on cream paper with a fine copper technical line drawing laid over deep green card"
+              width="1920"
+              height="1072"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <blockquote>
+            <p class="statement-quote">
+              AI has stopped being a technology to keep trialling. It is turning into a capability an
+              organisation either has or doesn't.
+            </p>
+            <p class="muted">
+              The businesses getting real value from it are not the ones with the most tools. They are
+              the ones who decided deliberately where it belonged, built the few things that mattered
+              properly, and made sure their people knew how to use what they'd been given. That is the
+              work we do.
+            </p>
+          </blockquote>
+        </div>
+      </section>
+
+      <!-- ========================================================= CAPABILITIES -->
+      <section class="section section--surface" id="capabilities">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <p class="eyebrow">What we do</p>
+              <h2 class="h-section js-split">Four capabilities, one engagement.</h2>
+            </div>
+            <p class="lede">
+              We deliberately keep the offer narrow. Most organisations need clear thinking, working
+              solutions, and people who know how to use them — and they need those things to arrive
+              together rather than from three different suppliers.
+            </p>
+          </div>
+
+          <div class="caps reveal">
+            <article class="cap">
+              <figure class="cap-media wipe"><img src="./assets/consulting.webp" alt="Overhead arrangement of layered cream and pine-green paper sheets with fine copper rules" width="1200" height="525" loading="lazy" decoding="async" /></figure>
+              <p class="cap-index">01 — AI Consulting</p>
+              <h3>Decide before you build</h3>
+              <p>
+                We work through your operations with you to find where AI would earn its place,
+                where it wouldn't, and what has to be true before you commit. You finish with a
+                prioritised, costed view of what to do next — and permission to say no to the rest.
+              </p>
+              <ul role="list">
+                <li>Opportunity assessment across real workflows</li>
+                <li>Readiness, data and risk review</li>
+                <li>Tool and vendor selection judgement</li>
+                <li>A staged, prioritised AI roadmap</li>
+                <li>Policy and responsible-use groundwork</li>
+              </ul>
+              <a class="link-arrow cap-more" href="/ai-consulting">More on AI consulting<span aria-hidden="true">&rarr;</span></a>
+            </article>
+
+            <article class="cap">
+              <figure class="cap-media wipe"><img src="./assets/implementation.webp" alt="Interlocking geometric paper and timber forms precisely joined in cream, green and copper" width="1200" height="525" loading="lazy" decoding="async" /></figure>
+              <p class="cap-index">02 — AI Implementation &amp; Solutions</p>
+              <h3>From decision to something that works</h3>
+              <p>
+                Plenty of AI advice stops at the recommendation. We stay for delivery. Often the
+                right answer is configuring capable tools properly and redesigning the workflow
+                around them — bespoke builds are an option, not a default.
+              </p>
+              <ul role="list">
+                <li>Solution design around existing processes</li>
+                <li>AI assistants and internal knowledge tools</li>
+                <li>Integration with the systems you already run</li>
+                <li>Custom builds where nothing off-the-shelf fits</li>
+                <li>Handover, documentation and support</li>
+              </ul>
+              <a class="link-arrow cap-more" href="/ai-implementation">More on AI implementation<span aria-hidden="true">&rarr;</span></a>
+            </article>
+
+            <article class="cap cap--wide">
+              <figure class="cap-media wipe"><img src="./assets/automation.webp" alt="A receding row of identical cream paper pleats with a single copper thread running through them" width="1400" height="533" loading="lazy" decoding="async" /></figure>
+              <div>
+                <p class="cap-index">
+                  03 — AI Automation <span class="tag">Specialist capability</span>
+                </p>
+                <h3>Automation where the work genuinely warrants it</h3>
+                <p>
+                  Automation is a specialism we're known for rather than the whole of what we do. We
+                  apply it when there is real, repetitive volume to remove — and we'll tell you
+                  plainly when a process is better fixed than automated.
+                </p>
+                <p class="muted">
+                  Judged in business terms: hours returned to the team, fewer handoffs between
+                  systems, faster response to customers, and less of the administrative work that
+                  quietly consumes capacity.
+                </p>
+              </div>
+              <ul role="list">
+                <li>Repetitive administration removed from the day</li>
+                <li>Enquiry handling, routing and follow-up</li>
+                <li>Systems connected so data stops being retyped</li>
+                <li>Document and reporting workflows</li>
+                <li>Scheduling, reminders and confirmations</li>
+                <li>Human review kept where the stakes require it</li>
+              </ul>
+              <a class="link-arrow cap-more" href="/ai-automation">More on AI automation<span aria-hidden="true">&rarr;</span></a>
+            </article>
+
+            <article class="cap cap--wide">
+              <figure class="cap-media wipe"><img src="./assets/capability.webp" alt="Hand-loomed textile in cream, pine green and copper with visible warp and weft" width="1400" height="533" loading="lazy" decoding="async" /></figure>
+              <div>
+                <p class="cap-index">
+                  04 — AI Capability &amp; Education <span class="tag tag--primary">Core to every engagement</span>
+                </p>
+                <h3>Capability that stays with your people</h3>
+                <p>
+                  Technology that only one supplier understands is a liability. We build
+                  organisational AI literacy alongside whatever we deliver, so your team can use it
+                  confidently, safely and without waiting on us.
+                </p>
+                <p class="muted">
+                  This runs through consulting and delivery rather than sitting in a separate course
+                  catalogue — practical sessions, written standards, and support while new habits
+                  settle.
+                </p>
+              </div>
+              <ul role="list">
+                <li>AI literacy for leadership and teams</li>
+                <li>Safe, responsible use of AI tools at work</li>
+                <li>Internal standards people will actually follow</li>
+                <li>Confidence with the tools you've chosen</li>
+                <li>What to share, what never to share</li>
+                <li>Ongoing support as adoption spreads</li>
+              </ul>
+              <a class="link-arrow cap-more" href="/ai-training-for-business">More on AI capability &amp; education<span aria-hidden="true">&rarr;</span></a>
+            </article>
+          </div>
+
+          <p class="notice reveal" style="margin-top: var(--space-8)">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+              style="flex: none; margin-top: 2px"
+            >
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 8h.01M11 12h1v4h1" />
+            </svg>
+            We also design and build AI-enabled websites and digital tooling for clients where it
+            supports the wider work. It's a delivery capability, not the business.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============================================================= APPROACH -->
+      <section class="section section--deep" id="approach">
+        <div class="approach-depth" aria-hidden="true"></div>
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <p class="eyebrow">How we work</p>
+              <h2 class="h-section js-split">Understand, plan, implement, educate, improve.</h2>
+            </div>
+            <p class="lede">
+              A sequence rather than a package. Some organisations need all five stages. Others
+              already know what they want and need one of them done properly.
+            </p>
+          </div>
+
+          <div class="steps-layout">
+            <ol class="steps reveal" role="list">
+              <span class="steps-spine" aria-hidden="true"></span>
+              <li class="step">
+                <span class="step-dot mono">01</span>
+                <div>
+                  <h3>Understand</h3>
+                  <p>
+                    We spend time in the detail of how your organisation runs — the processes, the
+                    bottlenecks, the systems, the constraints nobody writes down. No AI decision
+                    made before this is worth much.
+                  </p>
+                </div>
+              </li>
+              <li class="step">
+                <span class="step-dot mono">02</span>
+                <div>
+                  <h3>Plan</h3>
+                  <p>
+                    Opportunities are sized, ranked and stress-tested against effort, risk and
+                    appetite. You get a short, honest plan — including the ideas we recommend
+                    dropping.
+                  </p>
+                </div>
+              </li>
+              <li class="step">
+                <span class="step-dot mono">03</span>
+                <div>
+                  <h3>Implement</h3>
+                  <p>
+                    We build, configure and integrate — starting with something narrow enough to
+                    prove and useful enough to matter. Then we widen it once it holds up in real
+                    use.
+                  </p>
+                </div>
+              </li>
+              <li class="step">
+                <span class="step-dot mono">04</span>
+                <div>
+                  <h3>Educate</h3>
+                  <p>
+                    Your team is brought up to speed on what has changed, how to use it well, and
+                    where the boundaries sit. Written standards, practical sessions, plain English.
+                  </p>
+                </div>
+              </li>
+              <li class="step">
+                <span class="step-dot mono">05</span>
+                <div>
+                  <h3>Improve</h3>
+                  <p>
+                    Adoption is reviewed against what you expected to gain. We adjust, extend where
+                    it's working, and retire what isn't. AI capability compounds; one project
+                    doesn't.
+                  </p>
+                </div>
+              </li>
+            </ol>
+
+            <figure class="steps-figure reveal wipe">
+              <img
+                src="./assets/approach.webp"
+                alt="Deep green card panels marked with fine vertical copper rules"
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================= LIVE -->
+      <section class="section" id="live">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <p class="eyebrow">Live on this page</p>
+              <h2 class="h-section js-split">Rather than describe it, we'd sooner show you.</h2>
+            </div>
+            <p class="lede">
+              Both tools below are running now. The adviser answers questions about AI in your
+              organisation; the opportunity finder gives you a first read on where it could apply.
+              Neither is a gate — no email required.
+            </p>
+          </div>
+
+          <div class="proof-grid">
+            <!-- CHAT -->
+            <section class="panel reveal" aria-labelledby="chatTitle">
+              <div class="panel-head">
+                <span class="pulse" aria-hidden="true"></span>
+                <h3 id="chatTitle">AI adviser</h3>
+                <span class="panel-note">Live · answers in seconds</span>
+              </div>
+              <div class="panel-body">
+                <div class="chat-log" id="chatLog" role="log" aria-live="polite" aria-label="Conversation"></div>
+                <div class="chips" id="chatChips"></div>
+                <form class="composer" id="chatForm">
+                  <label class="sr-only" for="chatInput">Ask about AI in your organisation</label>
+                  <textarea
+                    id="chatInput"
+                    rows="1"
+                    placeholder="Ask about AI in your organisation…"
+                  ></textarea>
+                  <button class="send-btn" type="submit" id="chatSend" aria-label="Send message">
+                    <svg
+                      width="17"
+                      height="17"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                    >
+                      <path d="M5 12h13M13 6l6 6-6 6" />
+                    </svg>
+                  </button>
+                </form>
+                <p class="notice">
+                  General guidance only. When it's useful, the adviser will offer to pass a summary
+                  of your situation straight to us.
+                </p>
+              </div>
+            </section>
+
+            <!-- FINDER -->
+            <section class="panel reveal" aria-labelledby="finderTitle">
+              <div class="panel-head">
+                <span class="pulse" aria-hidden="true"></span>
+                <h3 id="finderTitle">AI opportunity finder</h3>
+                <span class="panel-note">Three fields · no sign-up</span>
+              </div>
+              <div class="panel-body">
+                <form id="finderForm" style="display: grid; gap: var(--space-4)">
+                  <div class="field-row">
+                    <div class="field">
+                      <label for="fSector">Sector or trade</label>
+                      <input id="fSector" name="sector" placeholder="e.g. professional services" required />
+                    </div>
+                    <div class="field">
+                      <label for="fSize">Team size</label>
+                      <select id="fSize" name="size">
+                        <option>1–5</option>
+                        <option selected>6–25</option>
+                        <option>26–75</option>
+                        <option>76–250</option>
+                        <option>250+</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label for="fDrain">Where does the time go?</label>
+                    <textarea
+                      id="fDrain"
+                      name="drain"
+                      placeholder="e.g. quoting takes two days, enquiries get missed at weekends, reports are rebuilt by hand every month"
+                      required
+                    ></textarea>
+                  </div>
+                  <button class="btn btn--primary btn--block" type="submit" id="finderBtn">
+                    Show me where AI could apply
+                  </button>
+                </form>
+                <div class="finder-out" id="finderOut" aria-live="polite"></div>
+                <p class="notice notice--foot">
+                  A starting read, not a plan. If any of it looks close to the mark, the four
+                  questions below are the quickest way to get a considered answer from us.
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================= ORGANISATIONS -->
+      <section class="section section--surface" id="organisations">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <p class="eyebrow">Organisations</p>
+              <h2 class="h-section js-split">Experience across sectors, without the case-study theatre.</h2>
+            </div>
+            <p class="lede">
+              We've supported more than forty organisations across the North West and beyond —
+              retail, clinical, hospitality, trades, membership and professional services. We don't
+              publish the detail of individual engagements. Client work stays between us and the
+              client, and we're happy to talk through relevant experience on a call.
+            </p>
+          </div>
+
+          <ul class="client-names reveal" role="list" style="gap: var(--space-6) var(--space-12)">
+            <li><a href="https://mobiuk.co.uk" target="_blank" rel="noopener noreferrer">mobiUK</a></li>
+            <li><a href="https://vapouk.co.uk" target="_blank" rel="noopener noreferrer">Vapo UK</a></li>
+            <li>
+              <a href="https://ninedragons.co.uk" target="_blank" rel="noopener noreferrer"
+                >Nine Dragons Martial Arts</a
+              >
+            </li>
+            <li><span>Gene23 Health Clinic</span></li>
+            <li>
+              <a href="https://lahorilane.co.uk" target="_blank" rel="noopener noreferrer">Lahori Lane</a>
+            </li>
+            <li><a href="https://jcpainting.co.uk" target="_blank" rel="noopener noreferrer">JC Paint</a></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================================================================== WHY -->
+      <!-- ====================================================== WHERE WE WORK -->
+      <section class="section section--tight" id="where">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <p class="eyebrow">Where we work</p>
+              <h2 class="h-section">On site across the North West, remote UK-wide.</h2>
+            </div>
+            <p class="lede">
+              We are based in Widnes, which puts most of the region inside an hour. The four
+              capabilities are the same wherever you are — what changes is the local context.
+            </p>
+          </div>
+
+          <div class="places">
+            <a class="place reveal" href="/ai-consultancy-wirral">
+              <h3>Wirral</h3>
+              <p>Maritime and offshore, chemicals and pharma, professional services, hospitality.</p>
+              <span class="go">AI consultancy in Wirral &rarr;</span>
+            </a>
+            <a class="place reveal" href="/ai-consultancy-liverpool">
+              <h3>Liverpool</h3>
+              <p>Life sciences, higher education, port and logistics, digital, public sector.</p>
+              <span class="go">AI consultancy in Liverpool &rarr;</span>
+            </a>
+            <a class="place reveal" href="/ai-consultancy-manchester">
+              <h3>Manchester</h3>
+              <p>Professional and financial services, technology, media, advanced manufacturing.</p>
+              <span class="go">AI consultancy in Manchester &rarr;</span>
+            </a>
+            <a class="place reveal" href="/ai-consultancy-chester">
+              <h3>Chester</h3>
+              <p>Financial services and insurance, professional services, tourism, food and farming.</p>
+              <span class="go">AI consultancy in Chester &rarr;</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================== INSIGHTS -->
+      <section class="section section--surface" id="insights-teaser">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <p class="eyebrow">Insights</p>
+              <h2 class="h-section">The questions we get asked, answered properly.</h2>
+            </div>
+            <p class="lede">
+              Written for people who have to make the decision, not for search engines. No
+              predictions about the next five years.
+            </p>
+          </div>
+
+          <div class="teaser-grid">
+            <a class="teaser reveal" href="/insights/build-or-buy-ai">
+              <span class="chip">Decision-making</span>
+              <h3>Build or buy AI</h3>
+              <p>Three real options, what each actually costs to own, and how to choose between them.</p>
+            </a>
+            <a class="teaser reveal" href="/insights/ai-policy-uk-smes">
+              <span class="chip">Governance</span>
+              <h3>An AI policy for UK SMEs</h3>
+              <p>What a two-page policy needs to cover, and why the long ones never get read.</p>
+            </a>
+            <a class="teaser reveal" href="/insights/staff-pasting-data-into-chatgpt">
+              <span class="chip">Data &amp; security</span>
+              <h3>Staff pasting data into ChatGPT</h3>
+              <p>What the real exposure is, why bans fail, and what to do in the first month.</p>
+            </a>
+            <a class="teaser reveal" href="/insights/ai-readiness-checklist">
+              <span class="chip">Getting started</span>
+              <h3>An AI readiness checklist</h3>
+              <p>The honest prerequisites, and what a &ldquo;not yet&rdquo; result should lead to instead.</p>
+            </a>
+          </div>
+
+          <p class="reveal" style="margin-top: var(--space-8)">
+            <a class="link-arrow" href="/insights">All insights<span aria-hidden="true">&rarr;</span></a>
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="why">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div>
+              <p class="eyebrow">Why wirral.ai</p>
+              <h2 class="h-section js-split">A partner you can actually get hold of.</h2>
+            </div>
+            <p class="lede">
+              We're not a research house and we don't sell a point of view about the future. We help
+              organisations make defensible decisions and then do the work.
+            </p>
+          </div>
+
+          <div class="why reveal">
+            <div class="why-cell">
+              <span class="why-num mono">01</span>
+              <h3>Business first, tools second</h3>
+              <p>
+                The conversation starts with your margins, capacity and constraints. Technology
+                choices come after — and only where they change one of those things.
+              </p>
+            </div>
+            <div class="why-cell">
+              <span class="why-num mono">02</span>
+              <h3>Advice we have to deliver</h3>
+              <p>
+                We implement what we recommend. It keeps our proposals honest and keeps timelines
+                grounded in what's actually buildable.
+              </p>
+            </div>
+            <div class="why-cell">
+              <span class="why-num mono">03</span>
+              <h3>Responsible by default</h3>
+              <p>
+                Data handling, disclosure, accuracy and human oversight are part of the design, not
+                a compliance conversation bolted on at the end.
+              </p>
+            </div>
+            <div class="why-cell">
+              <span class="why-num mono">04</span>
+              <h3>We meet you where you are</h3>
+              <p>
+                Whether nothing has started or a dozen tools are already in use without oversight,
+                the first step is the same: understand the position properly.
+              </p>
+            </div>
+            <div class="why-cell">
+              <span class="why-num mono">05</span>
+              <h3>Plain English throughout</h3>
+              <p>
+                No jargon used to create distance. If a recommendation can't be explained to the
+                people who'll live with it, it isn't finished.
+              </p>
+            </div>
+            <div class="why-cell">
+              <span class="why-num mono">06</span>
+              <h3>Close enough to be useful</h3>
+              <p>
+                Based in the North West and working UK-wide. For local organisations, we can be in
+                the room — which still matters when you're changing how people work.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================ TALK -->
+      <section class="section section--surface" id="talk">
+        <div class="wrap cta-grid">
+          <div class="reveal">
+            <p class="eyebrow">Next step</p>
+            <h2 class="h-section" style="margin-top: var(--space-5)">
+              Answer four quick questions and we'll pick it up from there.
+            </h2>
+            <p class="lede" style="margin-top: var(--space-6)">
+              No forms to fill, no waiting on a reply. Tell us roughly where you are and we'll get a
+              clear summary — then you can send it straight to us on WhatsApp and we'll respond with
+              a considered view, usually the same day.
+            </p>
+            <div class="hero-trust" style="border-top-color: var(--color-border)">
+              <div class="trust-item">
+                <b>No obligation</b><span>A conversation, not a pitch</span>
+              </div>
+              <div class="trust-item">
+                <b>Straight answer</b><span>Including if AI isn't the priority yet</span>
+              </div>
+            </div>
+            <p class="muted" style="margin-top: var(--space-8); font-size: var(--text-sm)">
+              Prefer a scheduled call in the diary?
+              <a
+                class="link-arrow"
+                href="https://link.gohighlevel.com/widget/booking/N3VjOqWz4rks3tHK5HRp"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Book a time directly</a
+              >
+            </p>
+          </div>
+
+          <div class="q-card reveal" id="qualifier">
+            <div class="q-progress" id="qProgress" aria-hidden="true">
+              <i class="done"></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div id="qSteps"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== FAQ -->
+      <section class="section section--tight" id="faq">
+        <div class="wrap wrap--default">
+          <p class="eyebrow reveal">Common questions</p>
+          <h2 class="h-section reveal" style="margin: var(--space-5) 0 var(--space-10)">
+            Straight answers before you get in touch.
+          </h2>
+
+          <div class="faq reveal">
+            <details>
+              <summary>We don't know where to start. Is that too early to talk?</summary>
+              <div class="faq-answer">
+                <p>
+                  That's the most common starting point and the one we're built for. The first piece
+                  of work is usually understanding your operations well enough to say where AI would
+                  and wouldn't help — which is a very different exercise to picking a tool.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>Do we need a custom AI system built?</summary>
+              <div class="faq-answer">
+                <p>
+                  Usually not. For most organisations the gain comes from selecting capable
+                  platforms, configuring them properly, redesigning the workflow around them and
+                  training people to use them well. We build bespoke when nothing existing fits the
+                  requirement, and we'll say so either way.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>Is this just automation with an AI label on it?</summary>
+              <div class="faq-answer">
+                <p>
+                  No. Automation is a specialist capability we bring in when there's genuine
+                  repetitive volume to remove. A large share of our work is consulting, solution
+                  design and building internal capability — often with no automation involved at
+                  all.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>How do you handle our data and the risk side?</summary>
+              <div class="faq-answer">
+                <p>
+                  It's part of the design work rather than a separate exercise. We look at what data
+                  a tool would see, where it goes, what should never be shared, where a human has to
+                  stay in the loop, and what your people need to be told in writing. Responsible use
+                  is a practical constraint, not a policy document nobody reads.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>Do you train our staff as well?</summary>
+              <div class="faq-answer">
+                <p>
+                  Yes — building capability is part of how we work rather than a product sold
+                  separately. Sessions are practical and tied to your tools and processes, so people
+                  leave able to do the work rather than able to describe the technology.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>What size of organisation do you work with?</summary>
+              <div class="faq-answer">
+                <p>
+                  Mostly SMEs and established mid-sized organisations — typically from a handful of
+                  people up to a few hundred. What matters more than headcount is whether there's a
+                  decision-maker who wants a straight answer and a team willing to change how
+                  something is done.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>How does an engagement usually start?</summary>
+              <div class="faq-answer">
+                <p>
+                  A short conversation, no charge, to understand your position and whether we're the
+                  right fit. If it makes sense to continue, we'll scope a defined first piece of
+                  work with a fixed price agreed before anything begins.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ FINAL CTA -->
+      <section class="section section--deep" id="final">
+        <canvas class="final-orbit" id="finalCanvas" aria-hidden="true"></canvas>
+        <div class="wrap" style="text-align: left">
+          <p class="eyebrow reveal">Talk to us about AI</p>
+          <h2 class="h-hero reveal" style="margin: var(--space-6) 0; max-width: 24ch; font-size: var(--text-2xl)">
+            One conversation is usually enough to know what to do next.
+          </h2>
+          <p class="lede reveal" style="margin-bottom: var(--space-10)">
+            Tell us where your organisation is and we'll tell you, honestly, what we'd do in your
+            position — whether or not that involves us.
+          </p>
+          <div class="hero-cta reveal" style="margin-top: 0">
+            <a class="btn btn--primary" href="#talk">Start the four questions</a>
+            <a
+              class="btn btn--wa"
+              id="waDirect"
+              href="https://wa.me/447368349702"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm5.8 14.06c-.24.68-1.42 1.31-1.96 1.36-.54.05-1.03.24-3.5-.72-2.98-1.17-4.85-4.25-5-4.45-.14-.2-1.17-1.56-1.17-2.98 0-1.41.73-2.11 1-2.4.26-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2 .89 2.14.07.15.12.32.02.51-.1.2-.15.32-.29.49-.15.17-.31.39-.44.52-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.03 1.12 1 2.06 1.31 2.35 1.46.29.15.46.12.63-.07.17-.2.73-.85.92-1.14.2-.29.39-.24.66-.15.27.1 1.7.8 1.99.95.29.15.49.22.56.34.07.12.07.7-.17 1.38Z"
+                />
+              </svg>
+              Message us on WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================================================================ FOOTER -->
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <a class="brand" href="#top" aria-label="wirral.ai home">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 28 28"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                aria-hidden="true"
+              >
+                <path d="M2 9.5V5a3 3 0 0 1 3-3h4.5" />
+                <path d="M18.5 2H23a3 3 0 0 1 3 3v4.5" />
+                <path d="M26 18.5V23a3 3 0 0 1-3 3h-4.5" />
+                <path d="M9.5 26H5a3 3 0 0 1-3-3v-4.5" />
+                <circle cx="14" cy="14" r="3.4" fill="currentColor" stroke="none" />
+              </svg>
+              <span class="brand-word">wirral<span>.ai</span></span>
+            </a>
+            <p class="footer-blurb">
+              An AI consultancy for UK organisations. Consulting, implementation and solutions,
+              specialist automation, and the capability to use AI responsibly.
+            </p>
+          </div>
+
+          <div>
+            <h4>Capabilities</h4>
+            <ul role="list">
+              <li><a href="/ai-consulting">AI consulting</a></li>
+              <li><a href="/ai-implementation">AI implementation &amp; solutions</a></li>
+              <li><a href="/ai-automation">AI automation</a></li>
+              <li><a href="/ai-training-for-business">AI capability &amp; education</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Where we work</h4>
+            <ul role="list">
+              <li><a href="/ai-consultancy-wirral">AI consultancy Wirral</a></li>
+              <li><a href="/ai-consultancy-liverpool">AI consultancy Liverpool</a></li>
+              <li><a href="/ai-consultancy-manchester">AI consultancy Manchester</a></li>
+              <li><a href="/ai-consultancy-chester">AI consultancy Chester</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Company</h4>
+            <ul role="list">
+              <li><a href="/insights">Insights</a></li>
+              <li><a href="#approach">How we work</a></li>
+              <li><a href="#organisations">Organisations</a></li>
+              <li><a href="#why">Why wirral.ai</a></li>
+              <li><a href="#faq">Questions</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Talk to us</h4>
+            <ul role="list">
+              <li><a href="/build-with-us">Build with us — start your project</a></li>
+              <li><a href="#talk">Discuss your AI requirements</a></li>
+              <li>
+                <a href="https://wa.me/447368349702" target="_blank" rel="noopener noreferrer"
+                  >WhatsApp</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://link.gohighlevel.com/widget/booking/N3VjOqWz4rks3tHK5HRp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Book a consultation</a
+                >
+              </li>
+              <li>
+                <a href="https://www.google.com/maps/search/?api=1&amp;query=wirral.ai%2C%20Widnes" target="_blank" rel="noopener noreferrer"
+                  >Find us</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; <span id="year">2026</span> wirral.ai — AI consulting, implementation &amp; capability.</p>
+          <p>Wirral · Liverpool · Manchester · Chester · UK-wide</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- =========================================================== MOBILE BAR -->
+    <div class="mobile-bar">
+      <a class="btn btn--primary" href="#talk">Book a conversation</a>
+      <a class="btn btn--wa" href="https://wa.me/447368349702" target="_blank" rel="noopener noreferrer">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Z"
+          />
+        </svg>
+        WhatsApp
+      </a>
+    </div>
+
+    <script>
+      window.__API_BASE__ = 'port/8000';
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+    <script src="./app.js" defer></script>
+    <script src="./motion.js" defer></script>
+    <script src="./assistant.js" defer></script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
 </html>

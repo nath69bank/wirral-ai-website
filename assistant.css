@@ -1,0 +1,740 @@
+/* wirral.ai — floating AI adviser + exit-intent layer
+   Uses the same paper/ink/pine/copper tokens as the rest of the site. */
+
+.asst {
+  position: fixed;
+  right: clamp(1rem, 2.2vw, 1.75rem);
+  bottom: clamp(1rem, 2.2vw, 1.75rem);
+  z-index: 220;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+.asst > * {
+  pointer-events: auto;
+}
+
+/* ------------------------------------------------------------------ launcher */
+.asst-fab {
+  position: relative;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 55%, transparent);
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 10px 30px -8px color-mix(in srgb, var(--color-primary) 55%, transparent),
+    0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.32s ease,
+    background 0.24s ease;
+}
+.asst-fab:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 18px 42px -10px color-mix(in srgb, var(--color-primary) 65%, transparent),
+    0 3px 8px rgba(0, 0, 0, 0.16);
+}
+.asst-fab:active {
+  transform: translateY(-1px) scale(0.99);
+}
+.asst-fab:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.asst-fab-icon {
+  display: grid;
+  place-items: center;
+  line-height: 0;
+}
+
+/* Slow breathing ring — signals "live" without shouting */
+.asst-fab-pulse {
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 45%, transparent);
+  animation: asstPulse 3.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+@keyframes asstPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+.asst-fab-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #57d38f;
+  border: 2px solid var(--color-primary);
+  box-shadow: 0 0 0 0 rgba(87, 211, 143, 0.6);
+  animation: asstDot 2.6s ease-in-out infinite;
+}
+@keyframes asstDot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(87, 211, 143, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(87, 211, 143, 0);
+  }
+}
+.asst.is-open .asst-fab-pulse,
+.asst.is-open .asst-fab-dot {
+  display: none;
+}
+.asst.is-listening .asst-fab {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.asst.is-speaking .asst-fab-dot {
+  background: var(--color-accent);
+}
+
+/* --------------------------------------------------------------------- nudge */
+.asst-nudge {
+  position: relative;
+  max-width: 19rem;
+  text-align: left;
+  padding: 1rem 1.05rem 0.95rem;
+  border-radius: 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.28), 0 2px 6px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  animation: asstNudgeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes asstNudgeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.asst-nudge::after {
+  content: '';
+  position: absolute;
+  right: 22px;
+  bottom: -6px;
+  width: 12px;
+  height: 12px;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  transform: rotate(45deg);
+}
+.asst-nudge-t {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.3;
+  margin: 0 1.4rem 0.3rem 0;
+  color: var(--color-text);
+}
+.asst-nudge-b {
+  font-size: 0.83rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin: 0 0 0.55rem;
+}
+.asst-nudge-go {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.asst-nudge-x {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: 8px;
+  opacity: 0.7;
+}
+.asst-nudge-x svg {
+  width: 14px;
+  height: 14px;
+}
+.asst-nudge-x:hover {
+  opacity: 1;
+  background: color-mix(in srgb, var(--color-text) 6%, transparent);
+}
+
+/* --------------------------------------------------------------------- panel */
+.asst-panel {
+  width: min(24.5rem, calc(100vw - 2rem));
+  height: min(34rem, calc(100vh - 8rem));
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 34px 70px -26px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform-origin: bottom right;
+  opacity: 0;
+  transform: translateY(14px) scale(0.965);
+  transition: opacity 0.26s ease, transform 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.asst.is-open .asst-panel {
+  opacity: 1;
+  transform: none;
+}
+
+.asst-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 0.85rem 0.85rem 1rem;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  flex: none;
+}
+.asst-head-id {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+.asst-head h2 {
+  font-family: var(--font-display);
+  font-size: 0.97rem;
+  line-height: 1.2;
+  margin: 0;
+  color: inherit;
+  letter-spacing: -0.01em;
+}
+.asst-status {
+  font-size: 0.72rem;
+  margin: 0.1rem 0 0;
+  opacity: 0.78;
+  letter-spacing: 0.01em;
+}
+.asst-orb {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex: none;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, #ffffff 14%, transparent);
+  position: relative;
+}
+.asst-orb svg {
+  transition: transform 0.6s var(--ease-out);
+}
+.asst.is-listening .asst-orb svg,
+.asst.is-speaking .asst-orb svg {
+  animation: asstOrbSpin 4s linear infinite;
+}
+@keyframes asstOrbSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.asst-orb i {
+  display: none;
+}
+.asst-orb i:nth-child(1) {
+  transform: translate(-7px, 0);
+}
+.asst-orb i:nth-child(2) {
+  animation-delay: 0.22s;
+}
+.asst-orb i:nth-child(3) {
+  transform: translate(7px, 0);
+  animation-delay: 0.44s;
+}
+@keyframes asstOrb {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translate(var(--x, 0), 0) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.asst-orb i:nth-child(1) {
+  --x: -7px;
+}
+.asst-orb i:nth-child(3) {
+  --x: 7px;
+}
+.asst.is-listening .asst-orb i {
+  animation-duration: 0.75s;
+}
+
+.asst-head-tools {
+  display: flex;
+  gap: 0.2rem;
+  flex: none;
+}
+.asst-tool {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+.asst-tool:hover {
+  opacity: 1;
+  background: color-mix(in srgb, #ffffff 14%, transparent);
+}
+.asst-tool[aria-pressed='true'] {
+  opacity: 1;
+  background: color-mix(in srgb, #ffffff 20%, transparent);
+}
+.asst-tool:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+/* ----------------------------------------------------------------------- log */
+.asst-log {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1rem 0.95rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  scrollbar-width: thin;
+}
+.asst-msg {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  animation: asstMsgIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes asstMsgIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.asst-msg--user {
+  flex-direction: row-reverse;
+}
+.asst-av {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  color: var(--color-primary);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 22%, transparent);
+  margin-top: 2px;
+}
+.asst-msg--user .asst-av {
+  background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+  color: var(--color-accent);
+  border-color: color-mix(in srgb, var(--color-accent) 28%, transparent);
+}
+.asst-bub {
+  max-width: 84%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 13px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  font-size: 0.87rem;
+  line-height: 1.58;
+}
+.asst-msg--user .asst-bub {
+  background: color-mix(in srgb, var(--color-primary) 9%, var(--color-bg));
+  border-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+}
+.asst-bub p {
+  margin: 0 0 0.5rem;
+}
+.asst-bub p:last-child {
+  margin-bottom: 0;
+}
+.asst-bub ul {
+  margin: 0.3rem 0 0.5rem;
+  padding-left: 1.05rem;
+}
+.asst-bub li {
+  margin-bottom: 0.25rem;
+}
+.asst-bub strong {
+  font-weight: 600;
+  color: var(--color-text);
+}
+.asst-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+.asst-dots {
+  display: inline-flex;
+  gap: 4px;
+  padding: 3px 0;
+}
+.asst-dots i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  animation: asstDots 1.15s ease-in-out infinite;
+}
+.asst-dots i:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.asst-dots i:nth-child(3) {
+  animation-delay: 0.32s;
+}
+@keyframes asstDots {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+/* --------------------------------------------------------------------- chips */
+.asst-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.35rem 0.95rem 0;
+  flex: none;
+}
+.asst-chip {
+  font: inherit;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  padding: 0.38rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.asst-chip:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-accent) 7%, var(--color-bg));
+}
+
+/* ---------------------------------------------------------------------- form */
+.asst-form {
+  flex: none;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 0.4rem;
+  align-items: end;
+  padding: 0.7rem 0.95rem 0.45rem;
+  border-top: 1px solid var(--color-border);
+  margin-top: 0.7rem;
+}
+.asst-form textarea {
+  font: inherit;
+  font-size: 0.87rem;
+  line-height: 1.5;
+  resize: none;
+  width: 100%;
+  max-height: 120px;
+  padding: 0.55rem 0.7rem;
+  border-radius: 11px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+.asst-form textarea:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--color-primary) 50%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 12%, transparent);
+}
+.asst-mic,
+.asst-send {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.asst-mic:hover,
+.asst-send:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
+}
+.asst-send {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+.asst-send:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+.asst-mic[aria-pressed='true'] {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+  animation: asstMic 1.25s ease-in-out infinite;
+}
+@keyframes asstMic {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 55%, transparent);
+  }
+  60% {
+    box-shadow: 0 0 0 8px color-mix(in srgb, var(--color-accent) 0%, transparent);
+  }
+}
+.asst-mic:focus-visible,
+.asst-send:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+.asst-foot {
+  flex: none;
+  font-size: 0.7rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+  margin: 0;
+  padding: 0 0.95rem 0.7rem;
+}
+.asst-foot a {
+  color: var(--color-accent);
+}
+
+/* ---------------------------------------------------------------- exit layer */
+.exit {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+}
+.exit-scrim {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, #0b0d0b 74%, transparent);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+.exit.is-on .exit-scrim {
+  opacity: 1;
+}
+.exit-card {
+  position: relative;
+  width: min(35rem, 100%);
+  max-height: calc(100vh - 2.5rem);
+  overflow-y: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: clamp(1.5rem, 3.4vw, 2.4rem);
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  transition: opacity 0.3s ease, transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.exit.is-on .exit-card {
+  opacity: 1;
+  transform: none;
+}
+.exit-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  border-radius: 20px 20px 0 0;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+.exit-x {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+.exit-x:hover {
+  background: color-mix(in srgb, var(--color-text) 7%, transparent);
+  color: var(--color-text);
+}
+.exit-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin: 0 0 0.55rem;
+  font-weight: 600;
+}
+.exit-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.85rem;
+  max-width: 22ch;
+}
+.exit-body p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  margin: 0 0 0.7rem;
+  max-width: 46ch;
+}
+.exit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.35rem;
+}
+.exit-note {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin: 0.9rem 0 0;
+}
+.exit-dismiss {
+  font: inherit;
+  font-size: 0.8rem;
+  margin-top: 1.15rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  opacity: 0.75;
+}
+.exit-dismiss:hover {
+  opacity: 1;
+  color: var(--color-text);
+}
+html.exit-locked,
+html.exit-locked body {
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------- responsive */
+@media (max-width: 700px) {
+  .asst {
+    right: 0.85rem;
+    /* clears the sticky mobile action bar */
+    bottom: calc(4.6rem + env(safe-area-inset-bottom, 0px));
+  }
+  .asst-fab {
+    width: 56px;
+    height: 56px;
+  }
+  .asst-panel {
+    width: calc(100vw - 1.7rem);
+    height: min(30rem, calc(100vh - 11rem));
+  }
+  .asst-nudge {
+    max-width: calc(100vw - 1.7rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .asst-fab-pulse,
+  .asst-fab-dot,
+  .asst-orb i,
+  .asst-dots i,
+  .asst-mic[aria-pressed='true'] {
+    animation: none !important;
+  }
+  .asst-panel,
+  .asst-nudge,
+  .asst-msg,
+  .exit-card,
+  .exit-scrim {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   [hidden] must win over the display values above, otherwise these fixed
+   full-viewport layers stay in the hit-test path and swallow every click. */
+.asst-panel[hidden],
+.asst-nudge[hidden],
+.exit[hidden],
+.asst-fab-icon[hidden],
+.asst-tool[hidden],
+.asst-mic[hidden] {
+  display: none !important;
+}
+
+/* The panel opens above the launcher, and the launcher stays put. */
+.asst-panel {
+  order: -1;
+}
+.asst-nudge {
+  order: -2;
+}

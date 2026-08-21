@@ -1,5 +1,150 @@
 {
-  "rewrites": [
-    { "source": "/((?!api/|assets/|sitemap\\.xml|robots\\.txt|favicon\\.png|llms\\.txt|og-image\\.png).*)", "destination": "/index.html" }
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).(css|js)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(robots.txt|sitemap.xml|llms.txt)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "microphone=(self), geolocation=(), camera=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "on"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/ai-training",
+      "destination": "/ai-training-for-business",
+      "permanent": true
+    },
+    {
+      "source": "/ai-education",
+      "destination": "/ai-training-for-business",
+      "permanent": true
+    },
+    {
+      "source": "/ai-capability",
+      "destination": "/ai-training-for-business",
+      "permanent": true
+    },
+    {
+      "source": "/ai-solutions",
+      "destination": "/ai-implementation",
+      "permanent": true
+    },
+    {
+      "source": "/ai-consultancy",
+      "destination": "/ai-consulting",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/ai-consulting",
+      "permanent": true
+    },
+    {
+      "source": "/wirral",
+      "destination": "/ai-consultancy-wirral",
+      "permanent": true
+    },
+    {
+      "source": "/liverpool",
+      "destination": "/ai-consultancy-liverpool",
+      "permanent": true
+    },
+    {
+      "source": "/manchester",
+      "destination": "/ai-consultancy-manchester",
+      "permanent": true
+    },
+    {
+      "source": "/chester",
+      "destination": "/ai-consultancy-chester",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/insights/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/articles",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/#talk",
+      "permanent": true
+    },
+    {
+      "source": "/faq",
+      "destination": "/#faq",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/#why",
+      "permanent": true
+    }
   ]
 }
