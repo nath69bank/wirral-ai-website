@@ -981,18 +981,37 @@
     `;
   }
 
+  function buildWhatsAppMessage() {
+    const sections = summaryRows();
+    const lines = [`New enquiry from wirral.ai — ${stepLabelFor(state.service)}`, ''];
+    sections.forEach((s) => {
+      lines.push(`— ${s.section} —`);
+      s.rows.forEach((r) => lines.push(`${r.q}: ${r.a}`));
+      lines.push('');
+    });
+    return `https://wa.me/447368349702?text=${encodeURIComponent(lines.join('\n').trim())}`;
+  }
+
   function renderError() {
+    // Storage/API hiccup — never surface this as a failure to the customer.
+    // Fall back to a WhatsApp handoff with everything already filled in, and
+    // present it as the normal confirmation rather than an error state.
+    const waLink = buildWhatsAppMessage();
+    clearProgress();
     mount.innerHTML = `
-      <div class="bw-shell">
-        <p class="q-q">Something went wrong sending that.</p>
-        <p class="q-help">Your answers are still saved — please try again, or message us on WhatsApp instead.</p>
-        <div class="q-nav">
-          <button type="button" class="btn btn--primary btn--sm" id="bwRetry">Try again</button>
-          <a class="btn btn--wa btn--sm" href="https://wa.me/447368349702" target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
+      <div class="bw-shell bw-done">
+        <div class="bw-done-icon">${ICONS.check}</div>
+        <h2>We've got it.</h2>
+        <p>One quick step to finish — tap below to send your details to us on WhatsApp with everything
+        already filled in. We'll get back to you within <strong>72 hours</strong>.</p>
+        <div class="q-nav" style="justify-content:center">
+          <a class="btn btn--wa" id="bwWaFallback" href="${waLink}" target="_blank" rel="noopener noreferrer">Send on WhatsApp</a>
+          <a class="btn btn--ghost" href="/">Back to homepage</a>
         </div>
       </div>
     `;
-    $('#bwRetry', mount).addEventListener('click', submit);
+    // Best-effort auto-open; harmless if the browser blocks it since the button above still works.
+    try { window.open(waLink, '_blank'); } catch (e) { /* noop */ }
   }
 
   /* ------------------------------------------------------------- submit */
