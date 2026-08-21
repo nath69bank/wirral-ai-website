@@ -156,8 +156,8 @@
         q: 'Do you already have branding / a logo?', options: YESNO_UNSURE.map((l) => ({ label: l })),
       },
       {
-        key: 'stylePref', type: 'cards', section: 'Design',
-        q: 'Style preference?',
+        key: 'stylePref', type: 'multi', section: 'Design',
+        q: 'Style preference?', help: 'Pick as many as apply.',
         options: ['Modern', 'Minimal', 'Corporate', 'Luxury', 'Bold', 'Creative', 'Not sure — advise me'].map((l) => ({ label: l })),
       },
       {
@@ -755,6 +755,7 @@
 
     if (step.type === 'cards') {
       const selected = a[step.key];
+      const showOther = selected && selected.startsWith('Other');
       body = `
         <div class="q-options">
           ${step.options.map((opt) => `
@@ -763,10 +764,8 @@
             </button>
           `).join('')}
         </div>
-        ${selected && selected.startsWith('Other') ? renderOtherInput(step.key, a[step.key + '_detail']) : ''}
-        <div class="q-nav">
-          ${selected ? '<button type="button" class="btn btn--primary btn--sm" id="bwContinue">Continue</button>' : ''}
-        </div>
+        ${showOther ? renderOtherInput(step.key, a[step.key + '_detail']) : ''}
+        ${showOther ? '<div class="q-nav"><button type="button" class="btn btn--primary btn--sm" id="bwContinue">Continue</button></div>' : ''}
       `;
     } else if (step.type === 'multi') {
       const selArr = Array.isArray(a[step.key]) ? a[step.key] : [];
@@ -846,11 +845,16 @@
       $$('.q-opt', mount).forEach((btn) => {
         btn.addEventListener('click', () => {
           a[step.key] = btn.dataset.opt;
-          render();
+          if (btn.dataset.other === '1') {
+            render();
+          } else {
+            delete a[step.key + '_detail'];
+            goto(1);
+          }
         });
       });
       if (continueBtn) continueBtn.addEventListener('click', () => {
-        if (a[step.key] && a[step.key].startsWith('Other')) a[step.key + '_detail'] = fieldValue(step.key + '_detail');
+        a[step.key + '_detail'] = fieldValue(step.key + '_detail');
         goto(1);
       });
     } else if (step.type === 'multi') {
@@ -875,7 +879,8 @@
         $$('.bw-chip', grp).forEach((chip) => {
           chip.addEventListener('click', () => {
             a[gkey] = chip.dataset.gopt;
-            render();
+            const allAnswered = step.groups.every((g) => a[g.key]);
+            if (allAnswered) goto(1); else render();
           });
         });
       });
@@ -966,8 +971,12 @@
       <div class="bw-shell bw-done">
         <div class="bw-done-icon">${ICONS.check}</div>
         <h2>We've got it.</h2>
-        <p>We'll review what you need and get back to you with the best way forward.</p>
-        <a class="btn btn--primary" href="/">Back to homepage</a>
+        <p>We'll review what you need and get back to you within <strong>72 hours</strong> with the best way forward.</p>
+        <p class="bw-hint">If it's urgent, message us on WhatsApp and we'll get to it sooner.</p>
+        <div class="q-nav" style="justify-content:center">
+          <a class="btn btn--primary" href="/">Back to homepage</a>
+          <a class="btn btn--wa" href="https://wa.me/447368349702" target="_blank" rel="noopener noreferrer">WhatsApp us</a>
+        </div>
       </div>
     `;
   }
