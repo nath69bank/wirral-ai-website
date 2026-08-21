@@ -60,6 +60,7 @@
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./motion.css" />
     <link rel="stylesheet" href="./assistant.css" />
+    <link rel="stylesheet" href="./build-with-us/build-with-us.css" />
 
     <script type="application/ld+json">
       {
@@ -474,71 +475,37 @@
       <span id="top"></span>
 
       <!-- ================================================================ HERO -->
-      <section class="hero">
+      <section class="hero hero--wizard">
         <canvas id="heroCanvas" class="hero-field" aria-hidden="true"></canvas>
-        <div class="wrap hero-grid">
-          <div>
+        <div class="wrap">
+          <div class="hero-intro">
             <p class="eyebrow eyebrow--anim">AI consulting · implementation · capability</p>
-            <h1 class="h-hero js-split">Make AI a capability your business owns.</h1>
+            <h1 class="h-hero js-split">What shall we build?</h1>
             <p class="lede">
-              wirral.ai works with UK organisations to decide where AI genuinely belongs, build the
-              solutions that follow, and give teams the confidence to use it well. Practical work,
-              not predictions.
+              Tell us what you need — website, app, SEO, AI, consultancy or training — and we'll ask
+              a few relevant questions to work out the best way forward. Two minutes, no obligation.
             </p>
-            <div class="hero-cta">
-              <a class="btn btn--primary" href="/build-with-us">Start your project</a>
-              <a class="btn btn--ghost" href="#live">
-                Try our AI adviser
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h13M13 6l6 6-6 6" />
-                </svg>
-              </a>
-            </div>
-            <div class="hero-cue" aria-hidden="true">
-              <span>Scroll</span>
-              <span></span>
-            </div>
           </div>
 
-          <figure class="hero-visual">
-            <div class="hero-plate">
-              <img
-                src="./assets/hero.webp" fetchpriority="high"
-                alt="Precisely cut cream, deep green and copper panels assembled into a layered architectural relief"
-                width="1448"
-                height="1086"
-                decoding="async"
-                fetchpriority="high"
-              />
-            </div>
-            <figcaption class="hero-visual-caption">
-              <span class="pulse" aria-hidden="true"></span>
-              This site runs live AI tools — try them further down the page
-            </figcaption>
-          </figure>
-        </div>
+          <div id="bwApp" class="bw-app bw-app--hero" data-loading>
+            <p class="bw-fallback">Loading the project form…</p>
+          </div>
 
-        <div class="wrap">
+          <div class="hero-cue" aria-hidden="true">
+            <span>Or scroll to explore</span>
+            <span></span>
+          </div>
+
           <div class="hero-trust">
-
-              <div class="trust-item">
-                <b class="mono" data-count>40+</b><span>Organisations supported</span>
-              </div>
-              <div class="trust-item">
-                <b>North West &amp; UK-wide</b><span>Wirral · Liverpool · Manchester · Chester</span>
-              </div>
-              <div class="trust-item">
-                <b>Advice to delivery</b><span>Strategy, build and training in one team</span>
-              </div>
+            <div class="trust-item">
+              <b class="mono" data-count>40+</b><span>Organisations supported</span>
+            </div>
+            <div class="trust-item">
+              <b>North West &amp; UK-wide</b><span>Wirral · Liverpool · Manchester · Chester</span>
+            </div>
+            <div class="trust-item">
+              <b>Advice to delivery</b><span>Strategy, build and training in one team</span>
+            </div>
           </div>
         </div>
       </section>
@@ -1437,6 +1404,7 @@
     <script src="./app.js" defer></script>
     <script src="./motion.js" defer></script>
     <script src="./assistant.js" defer></script>
+    <script src="./build-with-us/build-with-us.js" defer></script>
     <script defer src="/_vercel/insights/script.js"></script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
   <script data-pplx-inline-edit>

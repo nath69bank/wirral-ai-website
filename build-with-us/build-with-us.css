@@ -5,6 +5,36 @@
    additions for the service picker, multi-select chips and the review step.
    ========================================================================== */
 
+/* ------------------------------------------------------------ homepage hero embed */
+
+.hero--wizard {
+  text-align: center;
+}
+
+.hero-intro {
+  max-width: 62ch;
+  margin-inline: auto;
+}
+
+.hero-intro .lede {
+  margin-inline: auto;
+}
+
+.bw-app--hero {
+  max-width: 780px;
+  margin: clamp(var(--space-8), 5vw, var(--space-12)) auto 0;
+  text-align: left;
+}
+
+.hero--wizard .hero-cue {
+  margin-inline: auto;
+}
+
+.hero--wizard .hero-trust {
+  justify-content: center;
+  text-align: left;
+}
+
 .bw-head {
   padding-bottom: var(--space-8);
 }
