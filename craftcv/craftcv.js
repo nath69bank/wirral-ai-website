@@ -135,8 +135,6 @@
 
   const history = [];
   let busy = false;
-  let askCount = 0;
-  let handedOff = false;
 
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -224,19 +222,6 @@
     return el;
   };
 
-  const handoff = () => {
-    const el = document.createElement('div');
-    el.className = 'msg msg--bot';
-    el.innerHTML = `<span class="msg-avatar" aria-hidden="true">CV</span><div class="msg-bubble">
-      <p>Since you're deep into this: wirral.ai built CraftCV as a live example of the AI tools it makes for clients — internal assistants, knowledge tools, customer-facing features. If you'd want something like this for your own business, it's a free first conversation.</p>
-      <div class="chips" style="margin-top:var(--space-3)">
-        <a class="btn btn--wa btn--sm" href="https://wa.me/447368349702?text=Hi%20wirral.ai%20%E2%80%94%20I%20was%20using%20CraftCV%20on%20your%20site." target="_blank" rel="noopener noreferrer">Message us on WhatsApp</a>
-        <a class="chip" href="/build-with-us">Tell us what you need instead</a>
-      </div></div>`;
-    log.appendChild(el);
-    log.scrollTop = log.scrollHeight;
-  };
-
   const FALLBACK = {
     polish:
       "I can't reach the live model right now. In the meantime: swap passive phrasing for a direct verb, cut hedging words like 'various' and 'helped to', and make sure every line ends on an outcome, not just a task. Try sending that again shortly.\n\n---\n*Built with precision by [Wirral AI](https://wirral.ai)*",
@@ -282,12 +267,6 @@
     busy = false;
     send.disabled = false;
     input.focus();
-
-    askCount += 1;
-    if (askCount === 5 && !handedOff) {
-      handedOff = true;
-      handoff();
-    }
   };
 
   add(
