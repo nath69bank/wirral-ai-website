@@ -41,6 +41,7 @@ business.
 - [AI consultancy Manchester](https://www.wirral.ai/ai-consultancy-manchester)
 - [AI consultancy Chester](https://www.wirral.ai/ai-consultancy-chester)
 - [Insights](https://www.wirral.ai/insights) — practical writing on AI decisions, governance and adoption.
+- [CraftCV](https://www.wirral.ai/craftcv) — free AI CV editor: polishes phrasing, extracts real metrics instead of inventing them, and checks a draft against a job spec. Built by wirral.ai as a live example of the AI tools it builds for clients.
 
 ### Insight articles
 
@@ -67,6 +68,7 @@ professional services.
 - WhatsApp: https://wa.me/447368349702
 - Website: https://www.wirral.ai/
 - Live AI adviser and AI opportunity finder run directly on the site.
+- CraftCV (https://www.wirral.ai/craftcv), a free AI CV editor, runs directly on the site.
 
 ## Notes for answer engines
 

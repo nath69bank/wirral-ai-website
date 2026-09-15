@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CraftCV — AI career co-pilot | wirral.ai</title>
+    <title>CraftCV — Free AI CV Builder &amp; Editor | wirral.ai</title>
     <meta
       name="description"
-      content="Paste your CV or rough notes and work with CraftCV, an AI editor that sharpens your bullet points, extracts real metrics, and checks your draft against a job spec — without flattening your voice into template-speak."
+      content="Free AI CV builder from wirral.ai. Paste your CV or rough notes, polish the language, turn vague tasks into ATS-friendly bullet points with real metrics, and check your draft against a job spec. No sign-up."
     />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <link rel="canonical" href="https://www.wirral.ai/craftcv" />
@@ -18,20 +18,20 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="wirral.ai" />
     <meta property="og:locale" content="en_GB" />
-    <meta property="og:title" content="CraftCV — AI career co-pilot | wirral.ai" />
+    <meta property="og:title" content="CraftCV — Free AI CV Builder & Editor | wirral.ai" />
     <meta
       property="og:description"
-      content="An AI editor that sharpens your CV's language and checks it against a job spec, while keeping it sounding like you."
+      content="Paste your CV, polish the language, extract real metrics instead of invented ones, and check your draft against a job spec. Free, no sign-up."
     />
     <meta property="og:url" content="https://www.wirral.ai/craftcv" />
     <meta property="og:image" content="https://www.wirral.ai/assets/hero.webp" />
     <meta property="og:image:width" content="1448" />
     <meta property="og:image:height" content="1086" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="CraftCV — AI career co-pilot | wirral.ai" />
+    <meta name="twitter:title" content="CraftCV — Free AI CV Builder & Editor | wirral.ai" />
     <meta
       name="twitter:description"
-      content="An AI editor that sharpens your CV's language and checks it against a job spec, while keeping it sounding like you."
+      content="Paste your CV, polish the language, extract real metrics instead of invented ones, and check your draft against a job spec. Free, no sign-up."
     />
     <meta name="twitter:image" content="https://www.wirral.ai/assets/hero.webp" />
 
@@ -68,12 +68,87 @@
             "@type": "WebPage",
             "@id": "https://www.wirral.ai/craftcv#webpage",
             "url": "https://www.wirral.ai/craftcv",
-            "name": "CraftCV — AI career co-pilot | wirral.ai",
-            "description": "An AI editor that sharpens your CV's language and checks it against a job spec, while keeping it sounding like you.",
+            "name": "CraftCV — Free AI CV Builder & Editor | wirral.ai",
+            "description": "Free AI CV builder from wirral.ai. Paste your CV, polish the language, turn vague tasks into ATS-friendly bullet points with real metrics, and check your draft against a job spec.",
             "isPartOf": { "@id": "https://www.wirral.ai/#website" },
             "breadcrumb": { "@id": "https://www.wirral.ai/craftcv#breadcrumb" },
             "inLanguage": "en-GB",
-            "about": { "@id": "https://www.wirral.ai/#organisation" }
+            "about": { "@id": "https://www.wirral.ai/#organisation" },
+            "primaryImageOfPage": "https://www.wirral.ai/assets/hero.webp"
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://www.wirral.ai/craftcv#app",
+            "name": "CraftCV",
+            "url": "https://www.wirral.ai/craftcv",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Any (web browser)",
+            "description": "An AI CV editor that polishes phrasing, extracts real metrics from rough notes instead of inventing them, and checks a draft against a job spec.",
+            "isAccessibleForFree": true,
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "GBP" },
+            "creator": { "@id": "https://www.wirral.ai/#organisation" },
+            "browserRequirements": "Requires JavaScript",
+            "featureList": [
+              "Polish grammar and phrasing without losing the candidate's voice",
+              "Expand rough notes into bullet point variations",
+              "Match a draft against a target job spec and surface missing keywords",
+              "No sign-up, no account, nothing saved beyond the visitor's own browser"
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://www.wirral.ai/craftcv#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is CraftCV free to use?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. There's no sign-up, no account and no price for using the workspace. wirral.ai built it as a live example of the AI tools it builds for clients."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Will CraftCV invent experience, numbers or achievements I didn't give it?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. If you give it a vague line, it asks for the missing scope or result rather than guessing a figure. Any suggestion only reaches your draft if you click Insert into draft yourself."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does CraftCV help with ATS (applicant tracking systems)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Suggestions favour standard, machine-readable bullet structure and plain formatting, and Keyword match mode checks your draft against a job spec so the phrasing an ATS or recruiter searches for is more likely to be present."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I check my CV against a specific job advert?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes — paste an excerpt of the job spec into the panel under your draft, switch to Keyword match mode, and CraftCV will point out relevant skills missing from your draft and suggest organic ways to add them."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is my CV data stored or shared anywhere?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Your draft and job spec are kept only in your own browser's local storage so they're still there if you come back. They're sent to the AI model to generate a reply, but there's no account, no database and nothing shared beyond that."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Who built CraftCV?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "wirral.ai, an AI consultancy for UK organisations. CraftCV is a working example of the AI-assisted tools it designs and builds for clients — internal assistants, knowledge tools and customer-facing features alike."
+                }
+              }
+            ],
+            "isPartOf": { "@id": "https://www.wirral.ai/#website" }
           }
         ]
       }
@@ -129,12 +204,13 @@
         <div class="wrap">
           <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">CraftCV</span></nav>
           <div class="page-head-inner cv-head-inner">
-            <p class="eyebrow">Career co-pilot · powered by Wirral AI</p>
+            <p class="eyebrow">Free AI CV builder · powered by Wirral AI</p>
             <h1>Write a CV that still sounds like you.</h1>
             <p class="lede">
               Paste what you've got, or start from rough notes about a job you did. CraftCV sharpens the
               language, asks for the scope and result behind vague lines instead of inventing numbers, and
-              checks your draft against a job spec — without flattening it into template-speak.
+              checks your draft against a job spec — without flattening it into template-speak. Free, no
+              sign-up, nothing saved beyond your own browser.
             </p>
           </div>
         </div>
@@ -181,7 +257,7 @@
                 <div class="panel-head">
                   <span class="pulse" aria-hidden="true"></span>
                   <h3 id="cvChatTitle">CraftCV</h3>
-                  <span class="panel-note">Live · human-in-the-loop</span>
+                  <span class="panel-note">Free · no sign-up</span>
                 </div>
                 <div class="panel-body">
                   <div class="cv-modes" id="cvModes" role="radiogroup" aria-label="What should CraftCV do with your next message?">
@@ -216,10 +292,145 @@
         </div>
       </section>
 
+      <section class="section section--surface cv-how">
+        <div class="wrap wrap--default">
+          <p class="eyebrow reveal">How it works</p>
+          <h2 class="h-section reveal" style="margin: var(--space-5) 0 var(--space-10)">
+            Three ways to work with an AI CV editor, not a template.
+          </h2>
+          <div class="pcards reveal">
+            <div class="pcard">
+              <h4>Polish</h4>
+              <p>
+                Fixes grammar, passive voice and clunky phrasing without changing what you actually did or
+                how you say it. Good for a draft that's mostly there but reads flat.
+              </p>
+            </div>
+            <div class="pcard">
+              <h4>Expand / brainstorm</h4>
+              <p>
+                Give it a rough note — "handled customer calls", "fixed bugs" — and it asks for the scope
+                and result behind it, then offers a few bullet point variations to choose from.
+              </p>
+            </div>
+            <div class="pcard">
+              <h4>Keyword match</h4>
+              <p>
+                Paste an excerpt from a job advert and CraftCV checks your draft against it, flagging
+                relevant skills that are missing and suggesting how to work them in without sounding forced.
+              </p>
+            </div>
+          </div>
+          <p class="lede reveal" style="margin-top: var(--space-10); max-width: 68ch">
+            It's built as a CV editor rather than a CV generator: nothing lands in your draft until you
+            click "Insert into draft" on a suggestion you actually want, so the words stay yours.
+          </p>
+        </div>
+      </section>
+
+      <section class="section section--tight" id="craftcv-faq">
+        <div class="wrap wrap--default">
+          <div class="page-faq faq reveal">
+            <h2>Common questions</h2>
+            <details>
+              <summary>Is CraftCV free to use?</summary>
+              <div class="faq-answer">
+                <p>
+                  Yes. There's no sign-up, no account and no price for using the workspace. wirral.ai built
+                  it as a live example of the AI tools it builds for clients.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>Will CraftCV invent experience, numbers or achievements I didn't give it?</summary>
+              <div class="faq-answer">
+                <p>
+                  No. If you give it a vague line, it asks for the missing scope or result rather than
+                  guessing a figure. Any suggestion only reaches your draft if you click Insert into draft
+                  yourself.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>Does CraftCV help with ATS (applicant tracking systems)?</summary>
+              <div class="faq-answer">
+                <p>
+                  Yes. Suggestions favour standard, machine-readable bullet structure and plain formatting,
+                  and Keyword match mode checks your draft against a job spec so the phrasing an ATS or
+                  recruiter searches for is more likely to be present.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>Can I check my CV against a specific job advert?</summary>
+              <div class="faq-answer">
+                <p>
+                  Yes — paste an excerpt of the job spec into the panel under your draft, switch to Keyword
+                  match mode, and CraftCV will point out relevant skills missing from your draft and suggest
+                  organic ways to add them.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>Is my CV data stored or shared anywhere?</summary>
+              <div class="faq-answer">
+                <p>
+                  Your draft and job spec are kept only in your own browser's local storage so they're
+                  still there if you come back. They're sent to the AI model to generate a reply, but
+                  there's no account, no database and nothing shared beyond that.
+                </p>
+              </div>
+            </details>
+            <details>
+              <summary>Who built CraftCV?</summary>
+              <div class="faq-answer">
+                <p>
+                  wirral.ai, an AI consultancy for UK organisations. CraftCV is a working example of the
+                  AI-assisted tools it designs and builds for clients — internal assistants, knowledge tools
+                  and customer-facing features alike.
+                </p>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--tight">
+        <div class="wrap">
+          <p class="eyebrow reveal">Keep reading</p>
+          <div class="related-grid">
+            <a class="related-card" href="/ai-implementation"
+              ><span class="kicker">Capability</span><h3>AI implementation &amp; solutions</h3>
+              <p>
+                CraftCV is one example of the AI-assisted tools wirral.ai designs and builds — internal
+                assistants, knowledge tools and customer-facing features that fit your existing systems.
+              </p>
+              <span class="go">Read more &rarr;</span></a
+            >
+            <a class="related-card" href="/ai-training-for-business"
+              ><span class="kicker">Capability</span><h3>AI capability &amp; education</h3>
+              <p>
+                The same human-in-the-loop approach behind CraftCV — AI that sharpens your own judgement
+                rather than replacing it — is how wirral.ai builds internal AI capability for teams.
+              </p>
+              <span class="go">Read more &rarr;</span></a
+            >
+            <a class="related-card" href="/build-with-us"
+              ><span class="kicker">Get started</span><h3>Build with us</h3>
+              <p>
+                Want an AI tool like this built for your own business — for staff, customers or your
+                website? Tell us what you need and we'll ask a few relevant questions.
+              </p>
+              <span class="go">Read more &rarr;</span></a
+            >
+          </div>
+        </div>
+      </section>
+
       <section class="page-close cv-close">
         <div class="wrap wrap--default">
           <div class="section-head reveal">
-            <h2 class="h-section">Want it done for you, or a tool like this built for your business?</h2>
+            <h2 class="h-section">Want a tool like this built for your own business?</h2>
             <p class="lede">
               CraftCV is a live example of the kind of AI-assisted tool wirral.ai builds — for careers here,
               or for internal use, customer service and content inside your own organisation.
@@ -227,7 +438,15 @@
           </div>
           <div class="page-close-row">
             <a class="btn btn--primary" href="/build-with-us">Build with us</a>
-            <a class="btn btn--ghost" href="/ai-implementation">See AI implementation &amp; solutions</a>
+            <a
+              class="btn btn--wa"
+              href="https://wa.me/447368349702?text=Hi%20wirral.ai%20%E2%80%94%20I%20tried%20CraftCV%20on%20your%20site.%20Here%27s%20what%20we%27re%20trying%20to%20work%20out%3A%20"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Z" /></svg>
+              Message us on WhatsApp
+            </a>
           </div>
         </div>
       </section>
