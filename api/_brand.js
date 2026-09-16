@@ -1,5 +1,8 @@
 // Shared briefing for the wirral.ai site AI features.
 
+import Anthropic from '@anthropic-ai/sdk';
+import { betaZodOutputFormat } from '@anthropic-ai/sdk/helpers/beta/zod';
+
 export const BRAND = `You are the AI adviser embedded on the wirral.ai website.
 
 ABOUT WIRRAL.AI
@@ -50,36 +53,71 @@ once every few replies — never sales-heavy, never pushy.
 If asked something outside AI and business (politics, personal advice, unrelated topics), decline
 briefly and steer back to what you can help with.`;
 
-export async function callModel({ messages, temperature = 0.5, maxTokens = 500, json = false }) {
-  const key = process.env.OPENAI_API_KEY;
+const MODEL = process.env.ANTHROPIC_MODEL || 'claude-opus-5';
+
+function getClient() {
+  const key = process.env.ANTHROPIC_API_KEY;
   if (!key) {
     const err = new Error('no_key');
     err.code = 'no_key';
     throw err;
   }
-  const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
-  const body = {
-    model,
-    messages,
-    temperature,
-    max_tokens: maxTokens,
-  };
-  if (json) body.response_format = { type: 'json_object' };
+  return new Anthropic({ apiKey: key });
+}
 
-  const r = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${key}`,
-    },
-    body: JSON.stringify(body),
-  });
-  if (!r.ok) {
-    const text = await r.text();
-    throw new Error(`model_error ${r.status} ${text.slice(0, 200)}`);
+// The rest of this file speaks in OpenAI-style {role, content}[] messages
+// (including a `system` role entry) for minimal diff at call sites; this
+// splits that into the Claude Messages API shape (top-level `system` +
+// user/assistant-only `messages`).
+function splitSystemAndMessages(messages) {
+  const system = messages
+    .filter((m) => m.role === 'system')
+    .map((m) => m.content)
+    .join('\n\n');
+  const rest = messages.filter((m) => m.role === 'user' || m.role === 'assistant');
+  return { system, messages: rest };
+}
+
+export async function callModel({ messages, temperature = 0.5, maxTokens = 500, effort = 'low' }) {
+  const client = getClient();
+  const { system, messages: rest } = splitSystemAndMessages(messages);
+  try {
+    const response = await client.messages.create({
+      model: MODEL,
+      max_tokens: maxTokens,
+      temperature,
+      system,
+      messages: rest,
+      output_config: { effort },
+    });
+    const textBlock = response.content.find((b) => b.type === 'text');
+    return textBlock ? textBlock.text.trim() : '';
+  } catch (e) {
+    throw new Error(`model_error ${e && e.message}`);
   }
-  const d = await r.json();
-  return d?.choices?.[0]?.message?.content?.trim() || '';
+}
+
+// Structured JSON output via Claude's native structured outputs (Zod schema),
+// used where the caller needs a guaranteed-shape response (e.g. opportunities).
+export async function callModelJSON({ messages, temperature = 0.4, maxTokens = 700, effort = 'medium', schema }) {
+  const client = getClient();
+  const { system, messages: rest } = splitSystemAndMessages(messages);
+  let response;
+  try {
+    response = await client.beta.messages.parse({
+      model: MODEL,
+      max_tokens: maxTokens,
+      temperature,
+      system,
+      messages: rest,
+      output_config: { effort },
+      output_format: betaZodOutputFormat(schema),
+    });
+  } catch (e) {
+    throw new Error(`model_error ${e && e.message}`);
+  }
+  if (!response.parsed_output) throw new Error('model_error empty_or_unparsable');
+  return response.parsed_output;
 }
 
 export function readBody(req) {

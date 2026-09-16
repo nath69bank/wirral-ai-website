@@ -1,4 +1,16 @@
-import { BRAND, callModel, readBody } from './_brand.js';
+import { z } from 'zod';
+import { BRAND, callModelJSON, readBody } from './_brand.js';
+
+const OpportunitiesSchema = z.object({
+  opportunities: z.array(
+    z.object({
+      title: z.string(),
+      why: z.string(),
+      area: z.string(),
+      effort: z.string(),
+    })
+  ),
+});
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -35,16 +47,15 @@ Return JSON only, exactly this shape:
 {"opportunities":[{"title":"...","why":"...","area":"...","effort":"..."}]}`;
 
   try {
-    const raw = await callModel({
+    const parsed = await callModelJSON({
       messages: [
         { role: 'system', content: `${BRAND}\n\nYou are now acting as a structured analysis engine. Output JSON only.` },
         { role: 'user', content: instruction },
       ],
       temperature: 0.4,
       maxTokens: 700,
-      json: true,
+      schema: OpportunitiesSchema,
     });
-    const parsed = JSON.parse(raw);
     const ops = (parsed.opportunities || [])
       .filter((o) => o && o.title && o.why)
       .slice(0, 3)

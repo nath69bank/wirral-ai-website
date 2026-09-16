@@ -8,6 +8,8 @@
     "node": "24.x"
   },
   "dependencies": {
-    "@vercel/blob": "^2.8.0"
+    "@anthropic-ai/sdk": "^0.70.0",
+    "@vercel/blob": "^2.8.0",
+    "zod": "^4.0.0"
   }
 }
