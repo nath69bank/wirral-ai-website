@@ -1210,7 +1210,7 @@ h3 {
   border: none;
   background: none;
   resize: none;
-  font-size: var(--text-sm);
+  font-size: 16px; /* iOS Safari auto-zooms on focus for any input under 16px */
   line-height: 1.5;
   padding: var(--space-2);
   max-height: 120px;
@@ -1262,7 +1262,7 @@ h3 {
   background: var(--color-surface);
   color: var(--color-text);
   font-family: var(--font-body);
-  font-size: var(--text-sm);
+  font-size: 16px; /* iOS Safari auto-zooms on focus for any input under 16px */
   line-height: 1.5;
   outline: none;
 }
