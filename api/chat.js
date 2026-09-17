@@ -31,7 +31,8 @@ export default async function handler(req, res) {
     const reply = await callModel({
       messages: [{ role: 'system', content: system }, ...history],
       temperature: 0.55,
-      maxTokens: 480,
+      maxTokens: 700,
+      effort: 'medium',
     });
     if (!reply) return res.status(502).json({ error: 'empty' });
     return res.status(200).json({ reply });

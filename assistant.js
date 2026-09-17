@@ -429,6 +429,7 @@
       answer =
         "That one really needs a look at how your organisation runs. The quickest route is a short conversation — send us a message and we'll give you a straight read.";
     }
+    answer = extractLead(answer);
 
     t.remove();
     add('bot', answer);
@@ -439,8 +440,63 @@
     status(speakReplies ? 'Voice on · replies read aloud' : 'Live · answers in seconds');
 
     const n = history.filter((m) => m.role === 'user').length;
-    if (n === 2 || n === 5) nextStep();
+    if (n === 4 || n === 8) nextStep();
     chips(STARTERS.filter((s) => !history.some((m) => m.content === s)));
+  };
+
+  /* The AI adviser can end a reply with a hidden <!--LEAD:{...}--> tag once it has
+     enough from the conversation for a human to follow up and quote. Strip it from
+     what's shown/spoken and log it as an enquiry so it reaches the dashboard even if
+     the visitor never fills in the separate form. Never blocks or alters the visible
+     reply if anything here fails. */
+  const LEAD_RE = /<!--LEAD:([\s\S]*?)-->\s*$/;
+  let leadSent = false;
+  const extractLead = (text) => {
+    const m = String(text).match(LEAD_RE);
+    if (!m) return text;
+    const clean = text.slice(0, m.index).trim();
+    if (!leadSent) {
+      try {
+        const lead = JSON.parse(m[1]);
+        if (lead && lead.name && lead.need) {
+          leadSent = true;
+          submitChatLead(lead);
+        }
+      } catch (e) {
+        /* malformed tag — drop it silently, still show the clean reply */
+      }
+    }
+    return clean;
+  };
+  const submitChatLead = (lead) => {
+    fetch(API() + '/api/enquiries', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        service: 'chat',
+        serviceLabel: 'AI adviser chat',
+        answers: {
+          contactName: lead.name || '',
+          contactCompany: lead.company || '',
+          contactEmail: lead.email || '',
+          contactPhone: lead.phone || '',
+          sector: lead.sector || '',
+          need: lead.need || '',
+          notes: lead.notes || '',
+        },
+        summary: [
+          {
+            section: 'Chat lead',
+            rows: [
+              { q: 'Need', a: lead.need || '' },
+              { q: 'Sector', a: lead.sector || '' },
+              { q: 'Notes', a: lead.notes || '' },
+            ],
+          },
+        ],
+        page: location.pathname,
+      }),
+    }).catch(() => {});
   };
 
   const autosize = () => {
