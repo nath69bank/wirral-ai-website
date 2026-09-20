@@ -421,6 +421,132 @@
     requestAnimationFrame(tick);
   })();
 
+  /* --------------------------------------------------- journey (pinned, scrubbed) */
+  /* The one section on the site that pins and scrubs off scroll progress rather
+     than reacting to time/pointer — a short cinematic beat between the hero and
+     "reality" that resolves into that section's own opening line. Desktop and
+     motion-enabled only: below 768px, or under prefers-reduced-motion, this is
+     a plain in-flow section with a simple stagger reveal, no pin, no scrub. */
+  (() => {
+    const section = $('#journey');
+    const lines = $$('[data-journey-line]', section || document);
+    if (!section || !lines.length) return;
+
+    const canPin = !reduced && window.innerWidth >= 768 && window.gsap && window.ScrollTrigger;
+
+    if (!canPin) {
+      if (reduced || !('IntersectionObserver' in window)) {
+        lines.forEach((el) => el.classList.add('is-in'));
+        return;
+      }
+      const io = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            lines.forEach((el, i) => setTimeout(() => el.classList.add('is-in'), i * 140));
+            io.disconnect();
+          }),
+        { threshold: 0.3 }
+      );
+      io.observe(section);
+      return;
+    }
+
+    section.classList.add('is-pinned');
+
+    /* Generative background, adapted from the hero's woven field: lines start
+       loose and quiet, and settle/brighten as scroll progress through the pin
+       advances, with copper nodes arriving as "the signal". */
+    const cv = $('#journeyCanvas');
+    const ctx = cv.getContext('2d');
+    let w = 0;
+    let h = 0;
+    let t = 0;
+    let progress = 0;
+
+    const resize = () => {
+      const r = cv.getBoundingClientRect();
+      if (!r.width) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = r.width;
+      h = r.height;
+      cv.width = Math.round(w * dpr);
+      cv.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    const draw = () => {
+      if (!w) return;
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const ink = dark ? '124,199,163' : '160,215,190';
+      const cop = '211,147,106';
+      ctx.clearRect(0, 0, w, h);
+
+      const rows = 7;
+      const gap = h / rows;
+      const settle = 1 - progress;
+      for (let r = 0; r < rows; r++) {
+        const y0 = r * gap + gap / 2;
+        ctx.beginPath();
+        for (let x = 0; x <= w; x += 8) {
+          const wave = Math.sin(x * 0.01 + t * 0.6 + r * 0.5) * (10 + settle * 26);
+          const y = y0 + wave * (0.4 + progress * 0.6);
+          if (x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = `rgba(${ink},${0.05 + progress * 0.22})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      const nodeCount = Math.round(progress * 40);
+      for (let i = 0; i < nodeCount; i++) {
+        const x = (i * 137.5) % w;
+        const y = (i * 97.3) % h;
+        ctx.fillStyle = `rgba(${cop},${0.3 + 0.3 * Math.sin(t + i)})`;
+        ctx.beginPath();
+        ctx.arc(x, y, 1.4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
+
+    const tick = () => {
+      t += 0.01;
+      draw();
+      requestAnimationFrame(tick);
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+    requestAnimationFrame(tick);
+
+    /* One timeline drives both the pin and the line reveal. Splitting a pin
+       and its content reveal across two separate ScrollTrigger instances on
+       the same trigger element measures the second one against the post-pin
+       layout and it never progresses — keep both on one trigger. */
+    const gsap = window.gsap;
+    const ST = window.ScrollTrigger;
+    gsap.set(lines, { opacity: 0, y: 24 });
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: '+=250%',
+        pin: true,
+        scrub: true,
+        onUpdate: (self) => {
+          progress = self.progress;
+        },
+      },
+    });
+    lines.forEach((line, i) => {
+      tl.to(line, { opacity: 1, y: 0, duration: 1, ease: 'none' }, i * 1.2);
+    });
+    tl.to({}, { duration: 1 });
+
+    ST.refresh();
+  })();
+
   /* ------------------------------------------------------------- final CTA orbit */
   (() => {
     const cv = $('#finalCanvas');
