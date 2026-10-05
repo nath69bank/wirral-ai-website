@@ -565,16 +565,6 @@
       cv.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
-    // How far this section has arrived into view: 0 while it's still below
-    // the fold, 1 once it's reached the top. Makes the orbit feel like it
-    // arrives with the section on scroll rather than always sitting at full
-    // weight, without pinning anything — the CTA buttons are untouched.
-    const arrival = () => {
-      const rect = cv.getBoundingClientRect();
-      const p = 1 - rect.top / window.innerHeight;
-      return Math.max(0, Math.min(1, p));
-    };
-
     const tick = () => {
       if (!w) {
         resize();
@@ -583,20 +573,19 @@
       }
       ctx.clearRect(0, 0, w, h);
       t += 0.0025;
-      const p = arrival();
       const cx = w * 0.78;
       const cy = h * 0.5;
       for (let i = 0; i < 5; i++) {
-        const rr = Math.min(w, h) * (0.22 + i * 0.14) * (0.72 + p * 0.28);
+        const rr = Math.min(w, h) * (0.22 + i * 0.14);
         ctx.beginPath();
         ctx.ellipse(cx, cy, rr, rr * 0.42, t * (0.6 + i * 0.12), 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(${i % 2 ? '211,147,106' : '160,215,190'},${(0.22 - i * 0.03) * p})`;
+        ctx.strokeStyle = `rgba(${i % 2 ? '211,147,106' : '160,215,190'},${0.22 - i * 0.03})`;
         ctx.lineWidth = 1;
         ctx.stroke();
         const ang = t * (1.1 + i * 0.3) + i;
         const px = cx + Math.cos(ang) * rr;
         const py = cy + Math.sin(ang) * rr * 0.42;
-        ctx.fillStyle = `rgba(${i % 2 ? '211,147,106' : '160,215,190'},${(i % 2 ? 0.6 : 0.55) * p})`;
+        ctx.fillStyle = i % 2 ? 'rgba(211,147,106,0.6)' : 'rgba(160,215,190,0.55)';
         ctx.beginPath();
         ctx.arc(px, py, 2, 0, Math.PI * 2);
         ctx.fill();
