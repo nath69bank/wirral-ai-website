@@ -1,0 +1,47 @@
+name: Portfolio screenshots
+
+# Keeps the /work gallery showing what each client site looks like today.
+on:
+  schedule:
+    - cron: '17 5 * * 1' # Mondays, 05:17 UTC
+  workflow_dispatch:
+  push:
+    paths:
+      - work/sites.json
+      - scripts/screenshot-portfolio.mjs
+      - .github/workflows/portfolio-screenshots.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: portfolio-screenshots-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install capture tools
+        # --no-save: leaves package.json and the lockfile untouched
+        run: npm install --no-save --no-audit --no-fund playwright@1 sharp@0.33
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Capture screenshots
+        run: node scripts/screenshot-portfolio.mjs
+      - name: Commit updated screenshots
+        run: |
+          git add work/shots
+          if git diff --cached --quiet; then
+            echo "Screenshots unchanged."
+            exit 0
+          fi
+          git config user.name "wirral.ai bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Refresh portfolio screenshots"
+          git push
