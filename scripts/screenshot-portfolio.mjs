@@ -26,6 +26,11 @@ for (const site of sites) {
     await page.goto(site.url, { waitUntil: 'networkidle', timeout: 45_000 }).catch(async () => {
       await page.goto(site.url, { waitUntil: 'load', timeout: 45_000 });
     });
+    // Optional click to get past an entry screen (e.g. an age gate) — set "click" in sites.json.
+    if (site.click) {
+      await page.locator(site.click).first().click({ timeout: 8_000 });
+      await page.waitForLoadState('networkidle', { timeout: 15_000 }).catch(() => {});
+    }
     // Let entrance animations and lazy images settle, then hide common cookie banners.
     await page.waitForTimeout(2500);
     await page.addStyleTag({
