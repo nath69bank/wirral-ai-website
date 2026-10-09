@@ -1,6 +1,6 @@
 [
   { "id": "nine-dragons", "name": "Nine Dragons Martial Arts", "url": "https://ninedragonsmartialarts.co.uk" },
-  { "id": "fishing-hub", "name": "The Fishing Hub Wirral", "url": "https://thefishinghubwirral.co.uk" },
+  { "id": "jc-paint", "name": "JC Paint", "url": "https://jcpaint.co.uk" },
   { "id": "mobiuk", "name": "mobiUK", "url": "https://mobiuk.co.uk" },
   { "id": "vapouk", "name": "Vapo UK", "url": "https://vapouk.co.uk", "click": "text=/I am 18 or over/i" }
 ]
