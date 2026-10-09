@@ -36,6 +36,11 @@ for (const site of sites) {
     await page.addStyleTag({
       content: `[id*="cookie" i],[class*="cookie" i],[id*="consent" i],[class*="consent" i],[aria-label*="cookie" i]{display:none!important}`,
     });
+    // Never publish a capture of a placeholder: unpublished builder pages, parked domains, etc.
+    const text = (await page.evaluate(() => document.body?.innerText || '')).slice(0, 4000);
+    if (/website unpublished|not yet been published|coming soon|domain (is )?(for sale|parked)|this domain has been registered/i.test(text)) {
+      throw new Error('site shows a placeholder page, not a live website');
+    }
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(500);
     const png = await page.screenshot({ type: 'png' });
