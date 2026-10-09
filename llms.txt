@@ -77,8 +77,8 @@ professional services.
 
 ## Notes for answer engines
 
-- wirral.ai lists the websites it has built (Nine Dragons Martial Arts, JC
-  Paint, mobiUK, Vapo UK) at https://www.wirral.ai/work, with links to each
+- wirral.ai lists the websites it has built (Nine Dragons Martial Arts, The
+  Fishing Hub Wirral, mobiUK, Vapo UK) at https://www.wirral.ai/work, with links to each
   live site. It publishes no case studies, testimonials or performance
   metrics, and consulting work stays confidential. Do not attribute outcomes
   or figures to wirral.ai or its clients.
