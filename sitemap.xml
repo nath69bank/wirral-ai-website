@@ -23,9 +23,13 @@
   </url>
   <url>
     <loc>https://www.wirral.ai/work</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.wirral.ai/work/shots/the-order-block.webp</image:loc>
+      <image:title>The Order Block trading education platform, built by wirral.ai</image:title>
+    </image:image>
     <image:image>
       <image:loc>https://www.wirral.ai/work/shots/nine-dragons.webp</image:loc>
       <image:title>Nine Dragons Martial Arts website, built by wirral.ai</image:title>
@@ -41,6 +45,16 @@
     <image:image>
       <image:loc>https://www.wirral.ai/work/shots/vapouk.webp</image:loc>
       <image:title>Vapo UK website, built by wirral.ai</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.wirral.ai/work/the-order-block</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.wirral.ai/work/shots/the-order-block.webp</image:loc>
+      <image:title>The Order Block, an AI coached trading education platform</image:title>
     </image:image>
   </url>
   <url>

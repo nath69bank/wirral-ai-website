@@ -44,7 +44,7 @@ business.
 - [AI consultancy Widnes](https://www.wirral.ai/ai-consultancy-widnes) — where wirral.ai is based.
 - [AI consultancy Warrington](https://www.wirral.ai/ai-consultancy-warrington)
 - [AI consultancy North Wales](https://www.wirral.ai/ai-consultancy-north-wales)
-- [Our work](https://www.wirral.ai/work) — live websites wirral.ai has designed and built, with links to each.
+- [Our work](https://www.wirral.ai/work) — live websites and platforms wirral.ai has designed and built, with links to each.
 - [Insights](https://www.wirral.ai/insights) — practical writing on AI decisions, governance and adoption.
 
 ### Insight articles
@@ -55,6 +55,11 @@ business.
 - [An AI policy for UK SMEs](https://www.wirral.ai/insights/ai-policy-uk-smes) — what a short, usable policy needs to cover.
 - [Staff pasting company data into ChatGPT](https://www.wirral.ai/insights/staff-pasting-data-into-chatgpt) — the real exposure, and why bans fail.
 - [An AI readiness checklist](https://www.wirral.ai/insights/ai-readiness-checklist) — the honest prerequisites before a first project.
+
+## Our work
+
+- [Portfolio](https://www.wirral.ai/work) — live websites and platforms built by wirral.ai, with screenshots refreshed weekly.
+- [The Order Block case study](https://www.wirral.ai/work/the-order-block) — an AI coached trading education platform: an AI coach that interviews traders about each trade, a deterministic rules engine that reads real GBPUSD prices every day, and a learning loop that shares lessons from reviewed trades. Live at [theorderblock.app](https://theorderblock.app).
 
 ## How engagements work
 
