@@ -237,4 +237,14 @@
       <image:title>Build or Buy AI: A Practical Decision Guide</image:title>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.wirral.ai/social-content-hub</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.wirral.ai/assets/automation.webp</image:loc>
+      <image:title>Social Content Hub: free social media post writer for UK businesses</image:title>
+    </image:image>
+  </url>
 </urlset>
