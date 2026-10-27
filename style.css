@@ -320,6 +320,18 @@ h3 {
   flex: none;
 }
 
+/* The WA monogram sits on a small white tile so it reads in light and dark themes alike. */
+.brand-logo {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  padding: 3px;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgb(27 58 107 / 0.12);
+  object-fit: contain;
+}
+
 .brand-word {
   font-family: var(--font-display);
   font-size: 1.0625rem;
