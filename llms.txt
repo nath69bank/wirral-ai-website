@@ -1,35 +1,46 @@
 # wirral.ai
 
-> AI consultancy for UK organisations. We help businesses decide where AI
-> genuinely fits, implement the solutions that follow, automate work where the
-> volume warrants it, and build the internal capability to use AI responsibly.
+> Let us automate the boring tasks so you can focus on the fun stuff. wirral.ai
+> uses AI to increase efficiency and decrease workload for UK businesses:
+> assistants that answer and book enquiries by chat and voice, admin that runs
+> itself, and social content written in the business's own voice.
 
 Based in Widnes, in the North West of England, working on site across Wirral,
-Liverpool, Manchester, Chester, Warrington and North Wales, and with
-organisations UK-wide. More than forty organisations supported.
+Liverpool, Manchester, Chester, Warrington and North Wales, and remotely
+UK-wide. More than forty organisations supported.
 
 ## Positioning
 
-wirral.ai is not an AI automation agency, not a training provider, and not a
-generic AI consultancy. Automation is one specialist capability inside a wider
-offering that spans strategy, delivery and organisational capability.
+wirral.ai takes repetitive work off small and medium businesses. It finds the
+jobs that eat the most hours each week and hands them to AI, built around the
+tools the business already uses, with a person kept in the loop wherever it
+matters. Every piece of work is priced and agreed before it starts.
 
-## Capabilities
+## What wirral.ai automates
 
-- **AI consulting** — opportunity assessment across real workflows, readiness,
-  data and risk review, tool and vendor selection judgement, a staged and
-  prioritised AI roadmap, and responsible-use groundwork.
-- **AI implementation and solutions** — building, configuring and integrating AI
-  into existing systems and workflows, including bespoke internal assistants and
-  knowledge tools where nothing off the shelf fits.
-- **AI automation** — specialist workflow automation, applied only where there is
-  genuine repetitive volume to remove.
-- **AI capability and education** — practical training tied to the organisation's
-  own tools and processes, written internal standards, and support while new
-  habits settle.
+- **AI assistants**: chat and voice assistants on a business's website,
+  trained on its services, prices and FAQs, that qualify enquiries and book
+  calls into WhatsApp or a calendar, saving every lead with full details.
+- **Admin automation**: connecting systems so data stops being retyped, and
+  automating quotes, confirmations, reminders, follow ups and reports.
+- **Content and marketing**: social posts, campaigns and monthly calendars in
+  the business's own voice, scheduled across channels.
+- **Websites and training**: fast, AI ready websites with the assistant built
+  in, plus plain English training so teams are confident with what is set up.
 
-AI-enabled websites and digital tooling are a delivery capability, not the
-business.
+## Worked example: Content Hub
+
+[Content Hub](https://socialapp.wirral.ai) is wirral.ai's own app and an example
+of what it builds for clients. It learns a business and its voice, interviews
+the owner for real stories, and writes and schedules posts for Facebook,
+Instagram, LinkedIn, TikTok, X, YouTube Shorts and Google. Free to start;
+Starter is £9 a month, Pro £19 a month (both with a 14 day free trial, no card),
+and Done for you, where the wirral.ai team runs the content, is £149 a month.
+
+## Getting in touch
+
+Ask the AI assistant on www.wirral.ai (type or talk) and it books a call on
+WhatsApp, or message +44 7368 349702 on WhatsApp directly.
 
 ## Pages
 

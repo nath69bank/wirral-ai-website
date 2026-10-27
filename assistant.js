@@ -9,6 +9,29 @@
   const WA = () => bridge().waNumber || '447368349702';
   const API = () => (bridge().apiBase !== undefined ? bridge().apiBase : window.__API_BASE__ || '');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Which site this is on: 'wirral' (www.wirral.ai) or 'contenthub' (socialapp.wirral.ai, which loads
+  // this file from www.wirral.ai and sets window.wirralAI = { site: 'contenthub', apiBase: ... }).
+  const IS_HUB = bridge().site === 'contenthub';
+  const SITE_HOME = 'https://www.wirral.ai';
+
+  /* Where the visitor came from (an ad or a link), kept for the visit so leads show their source. */
+  const SOURCE = (() => {
+    const KEY = 'wai-src';
+    try {
+      const q = new URLSearchParams(location.search);
+      const bits = [q.get('utm_source'), q.get('utm_medium'), q.get('utm_campaign')].filter(Boolean);
+      if (q.get('gclid')) bits.push('Google Ads');
+      if (q.get('fbclid') && !bits.length) bits.push('Facebook');
+      if (bits.length) {
+        sessionStorage.setItem(KEY, bits.join(' / ').slice(0, 120));
+      } else if (!sessionStorage.getItem(KEY) && document.referrer && !document.referrer.includes(location.host)) {
+        sessionStorage.setItem(KEY, new URL(document.referrer).hostname);
+      }
+      return sessionStorage.getItem(KEY) || '';
+    } catch (e) {
+      return '';
+    }
+  })();
 
   /* ===================================================================== */
   /* Reliable in-page navigation                                            */
@@ -17,6 +40,7 @@
   /* the position once layout has stopped moving.                           */
   /* ===================================================================== */
   (() => {
+    if (IS_HUB) return; // the app has its own smooth scrolling
     const headerOffset = () => {
       const h = document.getElementById('siteHeader');
       return (h ? h.offsetHeight : 0) + 20;
@@ -84,12 +108,9 @@
   const ICON_MUTE =
     '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3l4-3.2v11.4l-4-3.2H4z"/><path d="M15.5 9.5l4 5M19.5 9.5l-4 5"/></svg>';
 
-  const STARTERS = [
-    'Where would AI actually help us?',
-    'What would working with you involve?',
-    'Is our data safe with AI tools?',
-    'How much does a first project cost?',
-  ];
+  const STARTERS = IS_HUB
+    ? ['Which plan is right for me?', 'Can it post for me automatically?', 'Could you automate other jobs in my business?', 'Book me a free call']
+    : ['What could you automate for my business?', 'Can you build an assistant like you for my site?', 'How does it work and what does it cost?', 'Book me a free call'];
 
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -137,13 +158,13 @@
     wrap.innerHTML = `
       <div class="asst-nudge" id="asstNudge" hidden>
         <button class="asst-nudge-x" type="button" aria-label="Dismiss">${ICON_CLOSE}</button>
-        <p class="asst-nudge-t">Not sure where AI fits in your business?</p>
-        <p class="asst-nudge-b">Ask our adviser — type or talk. No email, no form.</p>
+        <p class="asst-nudge-t">${IS_HUB ? 'Questions about Content Hub?' : 'Fed up of the boring bits?'}</p>
+        <p class="asst-nudge-b">${IS_HUB ? 'Ask me anything, type or talk. I can book you a free call too.' : 'Ask what we could automate for you. Type or talk, and I can book your free call.'}</p>
         <span class="asst-nudge-go">Start a conversation &rarr;</span>
       </div>
 
       <button class="asst-fab" id="asstFab" type="button" aria-expanded="false" aria-controls="asstPanel"
-              aria-label="Open the wirral.ai AI adviser">
+              aria-label="Open the AI assistant">
         <span class="asst-fab-icon" data-open>${ICON_BOT}</span>
         <span class="asst-fab-icon" data-close hidden>${ICON_CLOSE}</span>
         <span class="asst-fab-pulse" aria-hidden="true"></span>
@@ -153,18 +174,18 @@
       <section class="asst-panel" id="asstPanel" role="dialog" aria-modal="false" aria-labelledby="asstHeading" hidden>
         <header class="asst-head">
           <div class="asst-head-id">
-            <span class="asst-orb" aria-hidden="true">
-              <svg viewBox="0 0 32 32" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M7 12.5V9a2 2 0 0 1 2-2h3.5"/><path d="M19.5 7H23a2 2 0 0 1 2 2v3.5"/><path d="M25 19.5V23a2 2 0 0 1-2 2h-3.5"/><path d="M12.5 25H9a2 2 0 0 1-2-2v-3.5"/><circle cx="16" cy="16" r="3.4" fill="currentColor" stroke="none"/></svg>
+            <span class="asst-orb asst-orb--logo" aria-hidden="true">
+              <img src="${IS_HUB ? SITE_HOME : ''}/assets/logo-mark-96.png" width="22" height="22" alt="" />
             </span>
             <div>
-              <h2 id="asstHeading">wirral.ai adviser</h2>
-              <p class="asst-status" id="asstStatus">Live &middot; answers in seconds</p>
+              <h2 id="asstHeading">${IS_HUB ? 'Content Hub assistant' : 'wirral.ai assistant'}</h2>
+              <p class="asst-status" id="asstStatus">Live &middot; type or talk</p>
             </div>
           </div>
           <div class="asst-head-tools">
             <button class="asst-tool" id="asstVoiceOut" type="button" aria-pressed="false"
                     aria-label="Read replies aloud" title="Read replies aloud">${ICON_SPEAK}</button>
-            <button class="asst-tool" id="asstMin" type="button" aria-label="Close the adviser" title="Close">${ICON_CLOSE}</button>
+            <button class="asst-tool" id="asstMin" type="button" aria-label="Close the assistant" title="Close">${ICON_CLOSE}</button>
           </div>
         </header>
 
@@ -179,9 +200,8 @@
           <button class="asst-send" id="asstSend" type="submit" aria-label="Send">${ICON_SEND}</button>
         </form>
         <p class="asst-foot">
-          Answers are indicative. For anything specific,
-          <a href="#talk">send us four quick answers</a> or
-          <a href="https://wa.me/${WA()}" target="_blank" rel="noopener noreferrer">message us on WhatsApp</a>.
+          AI answers can be wrong now and then. Prefer a person?
+          <a href="https://wa.me/${WA()}" target="_blank" rel="noopener noreferrer">Message us on WhatsApp</a>.
         </p>
       </section>`;
     document.body.appendChild(wrap);
@@ -201,6 +221,7 @@
   const statusEl = $('#asstStatus');
   const nudge = $('#asstNudge');
 
+  const localCtx = { asked: [] };
   const history = [];
   let busy = false;
   let opened = false;
@@ -236,17 +257,18 @@
   };
 
   const waLink = (extra) => {
-    const ctx = bridge().ctx || { asked: [] };
+    const ctx = bridge().ctx || localCtx;
     const asked = (ctx.asked || []).slice(-4);
-    const parts = ['Hi wirral.ai — enquiry from your website.'];
+    const parts = ['Hi wirral.ai, enquiry from ' + (IS_HUB ? 'Content Hub.' : 'your website.')];
     if (asked.length) {
-      parts.push('', 'I was talking to the adviser on your site about:');
+      parts.push('', 'I was talking to the AI assistant on your site about:');
       asked.forEach((q) => parts.push('• ' + q));
     }
     if (ctx.sector) parts.push('', 'Sector: ' + ctx.sector);
     if (ctx.size) parts.push('Team size: ' + ctx.size);
     if (ctx.drain) parts.push('Where time goes: ' + ctx.drain);
     if (extra) parts.push('', extra);
+    if (SOURCE) parts.push('', 'Found you via: ' + SOURCE);
     parts.push('', 'Could we have a short conversation about this?');
     return 'https://wa.me/' + WA() + '?text=' + encodeURIComponent(parts.join('\n'));
   };
@@ -255,11 +277,47 @@
     const el = document.createElement('div');
     el.className = 'asst-msg asst-msg--bot';
     el.innerHTML = `<span class="asst-av" aria-hidden="true">AI</span><div class="asst-bub">
-      <p>That's about as far as a general answer takes it. The useful version depends on how your organisation actually runs — which is a twenty minute conversation, not a longer chat with me.</p>
+      <p>Want the version that fits your business exactly? A free twenty minute call with the team usually sorts it. I can book it for you now.</p>
       <div class="asst-actions">
-        <a class="btn btn--wa btn--sm" href="${waLink()}" target="_blank" rel="noopener noreferrer" data-lead="whatsapp">Send this to the team</a>
-        <a class="asst-chip" href="#talk" data-lead="qualifier">Answer 4 quick questions</a>
+        <button class="asst-chip" type="button" data-book>Book my free call</button>
+        <a class="btn btn--wa btn--sm" href="${waLink()}" target="_blank" rel="noopener noreferrer" data-lead="whatsapp">Message the team instead</a>
       </div></div>`;
+    el.querySelector('[data-book]').addEventListener('click', () => ask("Yes please, I'd like to book a free call."));
+    log.appendChild(el);
+    log.scrollTop = log.scrollHeight;
+  };
+
+  /* The booking card: one tap opens WhatsApp with everything the team needs, already written. */
+  const bookingText = (l) => {
+    const line = (k, v) => (v ? k + ': ' + v : null);
+    return [
+      "Hi wirral.ai, I'd like to book a free call.",
+      '',
+      line('Name', l.name),
+      line('Business', [l.company, l.sector].filter(Boolean).join(', ')),
+      line('What I would like automated', l.need),
+      line('Team size', l.teamSize),
+      line('Tools we use', l.tools),
+      line('How soon', l.timeline),
+      line('Best time for a call', l.preferredTime),
+      line('Email', l.email),
+      line('Notes', l.notes),
+      '',
+      'Booked through the AI assistant on ' + (IS_HUB ? 'Content Hub' : 'www.wirral.ai') + (SOURCE ? ' (found you via ' + SOURCE + ')' : '') + '.',
+    ]
+      .filter((x) => x !== null)
+      .join('\n');
+  };
+  const bookingHref = (l) => 'https://wa.me/' + WA() + '?text=' + encodeURIComponent(bookingText(l));
+  const bookingCard = (l) => {
+    const href = bookingHref(l);
+    const el = document.createElement('div');
+    el.className = 'asst-msg asst-msg--bot';
+    el.innerHTML = `<span class="asst-av" aria-hidden="true">AI</span><div class="asst-bub asst-book">
+      <p><strong>Your free call</strong>${l.preferredTime ? ' · ' + esc(l.preferredTime) : ''}</p>
+      <p class="asst-book-sub">Tap below and WhatsApp opens with your details already written. Just press send and the team will confirm.</p>
+      <a class="btn btn--wa btn--sm asst-book-go" href="${href}" target="_blank" rel="noopener noreferrer" data-lead="book-whatsapp">Book on WhatsApp</a>
+    </div>`;
     log.appendChild(el);
     log.scrollTop = log.scrollHeight;
   };
@@ -403,7 +461,7 @@
     if (busy || !q) return;
     busy = true;
     sendBtn.disabled = true;
-    const ctx = bridge().ctx;
+    const ctx = bridge().ctx || localCtx;
     if (ctx && ctx.asked) ctx.asked.push(q);
     add('user', q);
     history.push({ role: 'user', content: q });
@@ -415,7 +473,7 @@
       const r = await fetch(API() + '/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: history.slice(-10), context: ctx || {} }),
+        body: JSON.stringify({ messages: history.slice(-16), context: Object.assign({}, ctx || {}, { site: IS_HUB ? 'contenthub' : 'wirral', source: SOURCE }) }),
       });
       if (r.ok) {
         const d = await r.json();
@@ -429,10 +487,12 @@
       answer =
         "That one really needs a look at how your organisation runs. The quickest route is a short conversation — send us a message and we'll give you a straight read.";
     }
-    answer = extractLead(answer);
+    const lead = takeLead(answer);
+    answer = lead.text;
 
     t.remove();
     add('bot', answer);
+    if (lead.lead) bookingCard(lead.lead);
     history.push({ role: 'assistant', content: answer });
     speak(answer);
     busy = false;
@@ -440,7 +500,7 @@
     status(speakReplies ? 'Voice on · replies read aloud' : 'Live · answers in seconds');
 
     const n = history.filter((m) => m.role === 'user').length;
-    if (n === 4 || n === 8) nextStep();
+    if ((n === 4 || n === 8) && !lastLead) nextStep();
     chips(STARTERS.filter((s) => !history.some((m) => m.content === s)));
   };
 
@@ -450,23 +510,23 @@
      the visitor never fills in the separate form. Never blocks or alters the visible
      reply if anything here fails. */
   const LEAD_RE = /<!--LEAD:([\s\S]*?)-->\s*$/;
-  let leadSent = false;
-  const extractLead = (text) => {
+  let lastLead = null;
+  const takeLead = (text) => {
     const m = String(text).match(LEAD_RE);
-    if (!m) return text;
+    if (!m) return { text, lead: null };
     const clean = text.slice(0, m.index).trim();
-    if (!leadSent) {
-      try {
-        const lead = JSON.parse(m[1]);
-        if (lead && lead.name && lead.need) {
-          leadSent = true;
-          submitChatLead(lead);
-        }
-      } catch (e) {
-        /* malformed tag — drop it silently, still show the clean reply */
+    try {
+      const lead = JSON.parse(m[1]);
+      if (lead && lead.name && lead.need) {
+        const changed = !lastLead || lastLead.preferredTime !== lead.preferredTime || lastLead.name !== lead.name;
+        lastLead = lead;
+        if (changed) submitChatLead(lead);
+        return { text: clean, lead };
       }
+    } catch (e) {
+      /* malformed tag: drop it silently, still show the clean reply */
     }
-    return clean;
+    return { text: clean, lead: null };
   };
   const submitChatLead = (lead) => {
     fetch(API() + '/api/enquiries', {
@@ -474,7 +534,7 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         service: 'chat',
-        serviceLabel: 'AI adviser chat',
+        serviceLabel: IS_HUB ? 'Booked via Content Hub assistant' : 'Booked via website assistant',
         answers: {
           contactName: lead.name || '',
           contactCompany: lead.company || '',
@@ -482,6 +542,13 @@
           contactPhone: lead.phone || '',
           sector: lead.sector || '',
           need: lead.need || '',
+          teamSize: lead.teamSize || '',
+          tools: lead.tools || '',
+          timeline: lead.timeline || '',
+          preferredTime: lead.preferredTime || '',
+          interest: lead.interest || '',
+          source: SOURCE,
+          site: IS_HUB ? 'socialapp.wirral.ai' : 'www.wirral.ai',
           notes: lead.notes || '',
         },
         summary: [
@@ -489,12 +556,16 @@
             section: 'Chat lead',
             rows: [
               { q: 'Need', a: lead.need || '' },
+              { q: 'Best time for a call', a: lead.preferredTime || '' },
+              { q: 'Team size', a: lead.teamSize || '' },
+              { q: 'How soon', a: lead.timeline || '' },
+              { q: 'Source', a: SOURCE || 'direct' },
               { q: 'Sector', a: lead.sector || '' },
               { q: 'Notes', a: lead.notes || '' },
             ],
           },
         ],
-        page: location.pathname,
+        page: location.host + location.pathname,
       }),
     }).catch(() => {});
   };
@@ -523,7 +594,9 @@
   const greet = () => {
     add(
       'bot',
-      "Hello — I'm the AI adviser built into this site. You can type, or press the microphone and just talk to me.\n\nAsk me where AI would genuinely fit in your organisation, what to be careful with, or how we'd approach a first project. I'll be straight with you, including when the answer is that AI isn't your priority."
+      IS_HUB
+        ? "Hi, I'm the Content Hub assistant. Type, or tap the microphone and just talk to me.\n\nAsk me anything about the app or the plans. And if there are other boring jobs eating your week, I can tell you what wirral.ai could automate and book you a free call."
+        : "Hi, I'm the wirral.ai assistant. Type, or tap the microphone and just talk to me.\n\nTell me what eats your week and I'll tell you what we could automate. When you're ready, I can book you a free call on WhatsApp in a few seconds."
     );
     chips(STARTERS);
   };
@@ -535,7 +608,7 @@
     fab.setAttribute('aria-expanded', 'true');
     fab.querySelector('[data-open]').hidden = true;
     fab.querySelector('[data-close]').hidden = false;
-    fab.setAttribute('aria-label', 'Close the wirral.ai AI adviser');
+    fab.setAttribute('aria-label', 'Close the AI assistant');
     fab.classList.remove('has-nudge');
     if (!opened) {
       opened = true;
@@ -550,7 +623,7 @@
     fab.setAttribute('aria-expanded', 'false');
     fab.querySelector('[data-open]').hidden = false;
     fab.querySelector('[data-close]').hidden = true;
-    fab.setAttribute('aria-label', 'Open the wirral.ai AI adviser');
+    fab.setAttribute('aria-label', 'Open the AI assistant');
     if (synth) synth.cancel();
     if (rec && listening) {
       try {
@@ -573,7 +646,8 @@
     if (e.target.closest('a[href^="#"]')) close();
   });
 
-  window.wirralAssistant = { open, close, ask };
+  // The homepage's inline chat panel shares the booking logic, so a lead is saved once.
+  window.wirralAssistant = { open, close, ask, takeLead, bookingHref };
   document.querySelectorAll('[data-open-assistant]').forEach((el) =>
     el.addEventListener('click', (e) => {
       e.preventDefault();
@@ -631,6 +705,7 @@
   /* Mobile: a decisive upward scroll after real engagement, or backgrounding.*/
   /* ===================================================================== */
   (() => {
+    if (IS_HUB) return;
     const modal = document.createElement('div');
     modal.className = 'exit';
     modal.id = 'exitLayer';
@@ -640,14 +715,14 @@
       <div class="exit-card" role="dialog" aria-modal="true" aria-labelledby="exitTitle" aria-describedby="exitBody">
         <button class="exit-x" type="button" aria-label="Close" data-exit-close>${ICON_CLOSE}</button>
         <p class="exit-eyebrow">Before you go</p>
-        <h2 class="exit-title" id="exitTitle">Wait &mdash; take the useful bit with you.</h2>
+        <h2 class="exit-title" id="exitTitle">Before you go, one quick idea.</h2>
         <div class="exit-body" id="exitBody">
           <p>Most people leave a page like this no clearer than when they arrived. You don't have to.</p>
-          <p>Tell us one sentence about your organisation and we'll come back with an honest read on where AI would genuinely earn its place &mdash; and where it wouldn't. No pitch deck, no mailing list, no obligation.</p>
+          <p>Tell us one boring job that eats your week and we'll come back with an honest read on whether we could automate it. No pitch, no mailing list, no obligation.</p>
         </div>
         <div class="exit-actions">
           <a class="btn btn--wa" id="exitWa" href="#" target="_blank" rel="noopener noreferrer" data-lead="exit-whatsapp">Message us on WhatsApp</a>
-          <button class="btn btn--ghost" type="button" id="exitAsk" data-lead="exit-adviser">Ask the AI adviser first</button>
+          <button class="btn btn--ghost" type="button" id="exitAsk" data-lead="exit-adviser">Ask the AI assistant</button>
         </div>
         <p class="exit-note">Replies come from the person who would do the work, usually the same day.</p>
         <button class="exit-dismiss" type="button" data-exit-close>No thanks, I'm just looking</button>

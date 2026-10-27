@@ -82,10 +82,10 @@
     let busy = false;
 
     const STARTERS = [
-      'Where would AI actually help a 30-person firm?',
-      'How do we stop staff pasting client data into AI tools?',
-      'Is automation worth it for us?',
-      'What does working with you look like?',
+      'What could you automate for my business?',
+      'Can you answer and book my enquiries for me?',
+      'How does it work and what does it cost?',
+      'Book me a free call',
     ];
 
     const esc = (s) =>
@@ -142,20 +142,21 @@
       const el = document.createElement('div');
       el.className = 'msg msg--bot';
       el.innerHTML = `<span class="msg-avatar" aria-hidden="true">AI</span><div class="msg-bubble">
-        <p>Want a human view on this? Send the thread of what you've asked straight to the team on WhatsApp — no form, no waiting.</p>
+        <p>Want the version that fits your business exactly? Ask me to book you a free call, or message the team on WhatsApp.</p>
         <div class="chips" style="margin-top:var(--space-3)">
-          <a class="btn btn--wa btn--sm" href="${waLink()}" target="_blank" rel="noopener noreferrer">Send this to wirral.ai</a>
-          <a class="chip" href="#talk">Answer 4 quick questions instead</a>
+          <button class="chip" type="button" data-book>Book my free call</button>
+          <a class="btn btn--wa btn--sm" href="${waLink()}" target="_blank" rel="noopener noreferrer">Message the team</a>
         </div></div>`;
+      el.querySelector('[data-book]').addEventListener('click', () => ask("Yes please, I'd like to book a free call."));
       log.appendChild(el);
       log.scrollTop = log.scrollHeight;
     };
 
     const waLink = () => {
       const parts = [
-        'Hi wirral.ai — enquiry from your website.',
+        'Hi wirral.ai, enquiry from your website.',
         '',
-        'I was using the AI adviser on your site and asked about:',
+        'I was using the AI assistant on your site and asked about:',
         ...ctxStore.asked.slice(-4).map((q) => `• ${q}`),
       ];
       if (ctxStore.sector) parts.push('', `Sector: ${ctxStore.sector}`);
@@ -183,52 +184,52 @@
     /* Local knowledge fallback — keeps the adviser useful without a model key */
     const LOCAL = [
       {
-        k: ['start', 'begin', 'first step', 'where do we', 'no idea', 'dont know', "don't know"],
-        a: "The honest first step isn't choosing a tool — it's mapping where your time and margin actually go. We usually spend a short piece of work in your operations, then come back with a ranked view of where AI would earn its place and where it wouldn't.\n\nMost organisations find two or three genuine opportunities and a longer list worth ignoring. That clarity is normally worth more than any single tool.\n\nIf you tell me your sector and where the time goes, I can give you a rough read.",
+        k: ["start", "begin", "first step", "where do we", "no idea", "dont know", "don't know"],
+        a: "Easiest place to start is your week. Which jobs come round again and again and take time you would rather spend elsewhere? Replying to enquiries, quotes, reminders, admin and social posts are the usual suspects.\n\nTell me what your business does and what eats your time, and I'll tell you what we would automate first.",
       },
       {
-        k: ['automat', 'workflow', 'repetitive', 'zapier', 'make.com', 'n8n'],
-        a: "Automation is a specialism of ours, but we only recommend it where there's real repetitive volume to remove. The test is simple: is the process well-understood, high-frequency, and does it currently cost real hours?\n\nWhere it fits, the gains show up as hours returned to the team, fewer handoffs between systems, and faster response to customers. Where the process itself is broken, automating it just makes the mess faster — so we'd fix the process first.\n\nWhat's the work you'd most like off your team's plate?",
+        k: ["automat", "workflow", "repetitive", "zapier", "make.com", "n8n", "admin", "boring"],
+        a: "That's exactly what we do. If a job follows the same steps most of the time, it can usually run on its own: quotes, confirmations, reminders, follow ups, moving details between systems and monthly reports.\n\nA person still checks anything that matters. What's the job you'd most like off your plate?",
       },
       {
-        k: ['train', 'staff', 'team', 'literacy', 'educat', 'upskill', 'confiden'],
-        a: 'Building capability runs through everything we deliver rather than sitting in a separate course catalogue. In practice that means practical sessions tied to your actual tools and processes, written standards your people will realistically follow, and support while the new habits settle.\n\nThe aim is that your team can use what we build without waiting on us — technology only one supplier understands is a liability.',
+        k: ["train", "staff", "team", "literacy", "educat", "upskill", "confiden", "techy"],
+        a: "You don't need to be techy. We set everything up around the tools you already use, then show you and your team how it works in plain English with a short written guide.\n\nAnd we look after it once it's live, so you're never stuck.",
       },
       {
-        k: ['data', 'secur', 'gdpr', 'privacy', 'risk', 'confidential', 'safe', 'complian'],
-        a: "Responsible use is a design constraint for us, not a policy document written afterwards. We look at what data a tool would see, where it travels, what should never be pasted in, where a human has to stay in the loop, and what your people need told in writing.\n\nIf staff are already using AI tools without guidance — which is extremely common — that's usually the most urgent thing to address, and it's inexpensive to fix compared to the exposure.",
+        k: ["data", "secur", "gdpr", "privacy", "risk", "confidential", "safe", "complian"],
+        a: "We handle data carefully as part of the design. We look at what a tool would see, where it goes, what should never be shared, and where a person needs to stay in the loop.\n\nYou'll always know exactly what is running and why.",
       },
       {
-        k: ['cost', 'price', 'pricing', 'budget', 'how much', 'fee', 'expensive'],
-        a: "It depends entirely on scope, so we don't publish a price list — but we don't do hourly billing or open-ended retainers either. We scope a defined first piece of work, agree a fixed price before anything starts, and stick to it.\n\nThe opening conversation is free, and if AI genuinely isn't your priority right now we'll say so.",
+        k: ["cost", "price", "pricing", "budget", "how much", "fee", "expensive", "plan"],
+        a: "Custom work is a fixed price agreed after a short free chat, so there are no surprises and no hourly billing.\n\nIf you'd like to see what AI can do first, our Content Hub app is free to start, with Starter at £9 and Pro at £19 a month.",
       },
       {
-        k: ['consult', 'strategy', 'roadmap', 'advice', 'assessment'],
-        a: 'Consulting is where most engagements start: understanding your operations, sizing the opportunities, testing them against effort and risk, and producing a short prioritised plan — including the ideas we recommend dropping.\n\nWhat separates it from most AI advice is that we then have to deliver it, which keeps the recommendations grounded in what is actually buildable.',
+        k: ["content", "social", "post", "instagram", "facebook", "tiktok", "linkedin", "content hub"],
+        a: "Content Hub is our own app for exactly that. It learns your business and your voice and writes and schedules your posts. It's free to start at socialapp.wirral.ai.\n\nOr our Done for you plan has our team run it with you each month.",
       },
       {
-        k: ['build', 'implement', 'custom', 'bespoke', 'develop', 'integrat', 'solution'],
-        a: "We stay for delivery rather than stopping at the recommendation. Often the right answer is configuring capable platforms properly and redesigning the workflow around them — bespoke builds are an option, not a default.\n\nWhere something genuinely doesn't exist off the shelf, we build it: internal assistants, knowledge tools, integrations with the systems you already run. Then we document it and hand it over properly.",
+        k: ["build", "implement", "custom", "bespoke", "develop", "integrat", "solution", "website"],
+        a: "We build around the tools you already use, test it on real work, and hand it over properly. That can be an assistant on your website, connected systems, or a fast AI ready website with the assistant built in.\n\nWhat would you most like to get running?",
       },
       {
-        k: ['who do you work', 'client', 'sector', 'experience', 'case stud', 'reference'],
-        a: "We've supported more than forty organisations across the North West and beyond — retail, clinical, hospitality, trades, membership and professional services among them.\n\nWe don't publish the detail of individual engagements; client work stays between us and the client. On a call we're happy to talk through relevant experience directly.",
+        k: ["who do you work", "client", "sector", "experience", "case stud", "reference"],
+        a: "We've supported more than forty organisations across the North West and beyond, in retail, clinical, hospitality, trades, membership and professional services.\n\nClient work stays private, but we're happy to talk through relevant experience on a call.",
       },
       {
-        k: ['who are you', 'what is wirral', 'about you', 'what do you do'],
-        a: "wirral.ai is an AI consultancy for UK organisations. Four capabilities: consulting (deciding where AI fits), implementation and solutions (building it), automation as a specialist area where the volume warrants it, and AI capability and education so your people can use it well.\n\nWe're based in the North West and work UK-wide. The short version: we help organisations own AI as a capability rather than experiment with it indefinitely.",
+        k: ["who are you", "what is wirral", "about you", "what do you do"],
+        a: "wirral.ai automates the boring tasks for UK businesses so you can focus on the fun stuff. AI assistants that answer and book your enquiries, admin that runs itself, and content written in your voice.\n\nWe're based in Widnes and work across the North West and UK wide.",
       },
       {
-        k: ['call', 'book', 'meet', 'contact', 'speak', 'talk to'],
-        a: "Easiest route is WhatsApp — you'll get a considered reply, usually the same day. Or answer the four short questions further down this page and we'll have your context before we speak.\n\nIf you'd rather put something in the diary, there's a direct booking link in the next-step section.",
+        k: ["call", "book", "meet", "contact", "speak", "talk to"],
+        a: "Happy to book you a free call. Message us on WhatsApp on +44 7368 349702 with your name, your business and the best time to talk, and the team will confirm.",
       },
       {
-        k: ['chatbot', 'agent', 'assistant', 'receptionist', 'answer enquir'],
-        a: 'Customer-facing assistants work well where enquiries are high-volume and answers are genuinely knowable — opening hours, availability, product questions, triage before a human takes over.\n\nThey work badly as a substitute for a person on anything sensitive or unusual. We design them with a clear boundary and a clean handoff, so the experience improves rather than frustrates.',
+        k: ["chatbot", "agent", "assistant", "receptionist", "answer enquir", "voice"],
+        a: "Yes, we build assistants like me for your website. Trained on your services and prices, they answer by chat and voice day or night, ask the right questions, and book the good enquiries straight into your WhatsApp or diary.\n\nWhat kind of enquiries do you get most?",
       },
       {
-        k: ['small', 'sme', 'size', 'too small', 'employees', 'headcount'],
-        a: "Most of our work is with SMEs and established mid-sized organisations — from a handful of people up to a few hundred. Size matters less than whether there's a decision-maker who wants a straight answer and a team willing to change how something is done.\n\nSmaller organisations often move faster, because there are fewer people to convince.",
+        k: ["small", "sme", "size", "too small", "employees", "headcount", "sole trader"],
+        a: "No business is too small. Sole traders often get the most out of it, because every hour saved is your own.\n\nWhat does your business do?",
       },
     ];
 
@@ -244,7 +245,7 @@
         }
       }
       if (best) return best.a;
-      return "That's a fair question, and the useful answer depends on how your organisation actually runs — which is exactly the kind of thing worth twenty minutes on a call rather than a generic reply here.\n\nWhat I can tell you: we help organisations work out where AI genuinely fits, implement what makes sense, automate where the volume justifies it, and get their people confident using it.\n\nIf you tell me your sector and where the time currently goes, I'll give you a more specific read.";
+      return "Good question. The honest answer depends on how your business runs, which is what a free twenty minute call is for.\n\nWhat I can tell you: we take repetitive work off your plate, from answering and booking enquiries to admin and social posts. Tell me what eats your week and I'll give you a more specific idea.";
     };
 
     const ask = async (q) => {
@@ -261,7 +262,7 @@
         const r = await fetch(`${API_BASE}/api/chat`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: history.slice(-10), context: ctxStore }),
+          body: JSON.stringify({ messages: history.slice(-16), context: Object.assign({}, ctxStore, { site: 'wirral', source: (() => { try { return sessionStorage.getItem('wai-src') || ''; } catch (e) { return ''; } })() }) }),
         });
         if (r.ok) {
           const d = await r.json();
@@ -271,21 +272,28 @@
         /* fall through to local */
       }
       if (!answer) answer = localAnswer(q);
+      // The hidden booking line: strip it, save the lead, and show the WhatsApp booking button.
+      const wa = window.wirralAssistant;
+      const booked = wa && wa.takeLead ? wa.takeLead(answer) : { text: answer.replace(/<!--LEAD:[\s\S]*?-->\s*$/, '').trim(), lead: null };
+      answer = booked.text;
 
       t.remove();
       add('bot', answer);
+      if (booked.lead && wa.bookingHref) {
+        add('bot', `<p><strong>Your free call</strong>${booked.lead.preferredTime ? ' · ' + esc(booked.lead.preferredTime) : ''}</p><p>Tap below and WhatsApp opens with your details already written. Just press send.</p><a class="btn btn--wa btn--sm" href="${wa.bookingHref(booked.lead)}" target="_blank" rel="noopener noreferrer">Book on WhatsApp</a>`, { raw: true });
+      }
       history.push({ role: 'assistant', content: answer });
       busy = false;
       send.disabled = false;
       input.focus();
 
-      if (ctxStore.asked.length === 2 || ctxStore.asked.length === 5) handoff();
+      if (ctxStore.asked.length === 4 || ctxStore.asked.length === 8) handoff();
       chips(STARTERS.filter((s) => !ctxStore.asked.includes(s)).slice(0, 3));
     };
 
     add(
       'bot',
-      "I'm the adviser on the wirral.ai site. Ask me anything about using AI in your organisation — where it fits, what to be careful with, or how we'd approach it.\n\nI'll give you a straight answer, and I'll tell you when something really needs a conversation with the team."
+      "I'm the wirral.ai assistant, the same kind we build for businesses. Tell me what eats your week and I'll tell you what we could automate.\n\nWhen you're ready, I can book you a free call on WhatsApp in a few seconds."
     );
     chips(STARTERS.slice(0, 3));
 
@@ -323,7 +331,7 @@
     const LIB = [
       {
         title: 'Enquiry triage and first response',
-        why: 'Inbound enquiries are answered instantly, qualified against your criteria, and routed to the right person with context attached — so nothing sits over a weekend.',
+        why: 'Inbound enquiries are answered instantly, qualified against your criteria, and routed to the right person with context attached, so nothing sits over a weekend.',
         effort: 'Low effort',
         area: 'Automation',
         m: ['enquir', 'lead', 'email', 'phone', 'call', 'miss', 'respond', 'weekend', 'inbox', 'message'],
@@ -337,7 +345,7 @@
       },
       {
         title: 'An internal answer engine over your own documents',
-        why: 'Staff ask a question in plain English and get an answer drawn from your procedures, contracts and past projects — with the source shown, so it can be checked.',
+        why: 'Staff ask a question in plain English and get an answer drawn from your procedures, contracts and past projects, with the source shown, so it can be checked.',
         effort: 'Medium effort',
         area: 'Implementation',
         m: ['find', 'document', 'knowledge', 'polic', 'procedure', 'contract', 'search', 'file', 'sharepoint', 'ask', 'informat'],
@@ -372,7 +380,7 @@
       },
       {
         title: 'A written standard for safe AI use',
-        why: 'Your people are almost certainly using AI tools already. A short, practical standard — what to use, what never to paste in, when a human must check — removes most of the exposure quickly.',
+        why: 'Your people are almost certainly using AI tools already. A short, practical standard, what to use, what never to paste in, when a human must check, removes most of the exposure quickly.',
         effort: 'Low effort',
         area: 'Capability',
         m: ['safe', 'risk', 'data', 'gdpr', 'confidential', 'polic', 'complian', 'secur', 'legal', 'clinical', 'patient', 'client data'],
@@ -386,7 +394,7 @@
       },
       {
         title: 'Stock, orders and supplier admin',
-        why: 'Order and supplier paperwork is read, checked against your records and flagged only when something looks wrong — instead of every line being read by a person.',
+        why: 'Order and supplier paperwork is read, checked against your records and flagged only when something looks wrong, instead of every line being read by a person.',
         effort: 'Medium effort',
         area: 'Automation',
         m: ['stock', 'order', 'supplier', 'invoice', 'purchase', 'delivery', 'retail', 'inventory', 'account'],
@@ -412,7 +420,7 @@
 
     const waLink = () => {
       const parts = [
-        'Hi wirral.ai — enquiry from your website.',
+        'Hi wirral.ai, enquiry from your website.',
         '',
         'I used the AI opportunity finder and got this:',
         '',
@@ -442,7 +450,7 @@
       const cta = document.createElement('div');
       cta.style.cssText = 'display:grid;gap:var(--space-3);margin-top:var(--space-2)';
       cta.innerHTML = `<a class="btn btn--wa btn--block" href="${waLink()}" target="_blank" rel="noopener noreferrer">Send this to wirral.ai on WhatsApp</a>
-        <p class="notice">A first read, not a recommendation — the real answer depends on your systems, data and appetite for change. Sending it over means we start the conversation already knowing your position.</p>`;
+        <p class="notice">A first read, not a recommendation, the real answer depends on your systems, data and appetite for change. Sending it over means we start the conversation already knowing your position.</p>`;
       out.appendChild(cta);
     };
 
@@ -540,7 +548,7 @@
 
     const waLink = () => {
       const parts = [
-        'Hi wirral.ai — enquiry from your website.',
+        'Hi wirral.ai, enquiry from your website.',
         '',
         `Name: ${answers.name || '(not given)'}`,
         `Organisation: ${answers.org || '(not given)'}`,
@@ -599,7 +607,7 @@
         }
       } else {
         wrap.innerHTML = `
-          <p class="q-q">Last bit — who are we speaking to?</p>
+          <p class="q-q">Last bit, who are we speaking to?</p>
           <p class="q-help">Your answers are attached to the message so we can respond properly first time.</p>
           <div class="field-row">
             <div class="field"><label for="qName">Your name</label><input id="qName" autocomplete="name" placeholder="Alex Doyle" /></div>
@@ -614,7 +622,7 @@
             <button type="button" class="q-back" id="qBack">Back</button>
             <a class="q-back" href="https://link.gohighlevel.com/widget/booking/N3VjOqWz4rks3tHK5HRp" target="_blank" rel="noopener noreferrer">Rather book a time in the diary</a>
           </div>
-          <p class="notice">Opens WhatsApp with your summary already written. You send it — nothing is submitted before that.</p>`;
+          <p class="notice">Opens WhatsApp with your summary already written. You send it, nothing is submitted before that.</p>`;
         host.appendChild(wrap);
 
         const sum = $('#qSummary');

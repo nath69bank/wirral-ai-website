@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 
   const history = incoming
     .filter((m) => m && typeof m.content === 'string' && ['user', 'assistant'].includes(m.role))
-    .slice(-10)
+    .slice(-16)
     .map((m) => ({ role: m.role, content: String(m.content).slice(0, 2000) }));
 
   if (!history.length) return res.status(400).json({ error: 'no_messages' });
@@ -22,6 +22,12 @@ export default async function handler(req, res) {
   if (context.sector) hints.push(`Sector: ${String(context.sector).slice(0, 120)}`);
   if (context.size) hints.push(`Team size: ${String(context.size).slice(0, 40)}`);
   if (context.drain) hints.push(`Where their time goes: ${String(context.drain).slice(0, 400)}`);
+  if (context.site === 'contenthub') {
+    hints.push('Site: they are on Content Hub (socialapp.wirral.ai), our social content app. Help with Content Hub first, and when they talk about other boring jobs in their business, show how wirral.ai could automate those too and book the call.');
+  } else {
+    hints.push('Site: they are on www.wirral.ai.');
+  }
+  if (context.source) hints.push(`They arrived from: ${String(context.source).slice(0, 120)} (an ad or link). Do not mention this unless they do.`);
 
   const system = hints.length
     ? `${BRAND}\n\nWHAT THIS VISITOR HAS ALREADY TOLD THE SITE (use it to be specific):\n${hints.join('\n')}`

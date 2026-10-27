@@ -738,3 +738,29 @@ html.exit-locked body {
 .asst-nudge {
   order: -2;
 }
+
+/* The wirral.ai logo in the assistant's header. */
+.asst-orb--logo {
+  background: #fff;
+  padding: 3px;
+}
+.asst-orb--logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* The booking card: one tap opens WhatsApp with the details written. */
+.asst-book {
+  border: 1px solid color-mix(in oklab, #25d366 45%, transparent);
+  background: color-mix(in oklab, #25d366 8%, var(--color-surface, #fff));
+}
+.asst-book-sub {
+  font-size: 0.85em;
+  color: var(--color-text-muted, #5b6170);
+}
+.asst-book-go {
+  margin-top: 0.4rem;
+  display: inline-flex;
+}
